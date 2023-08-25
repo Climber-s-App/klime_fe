@@ -1,23 +1,30 @@
-version: 2.1
-
+version: '2.1'
 orbs:
-  node: circleci/node@4.7
-
+  cypress: cypress-io/cypress@3
 jobs:
-  build_and_test:
-    executor: node/default
+  install-and-persist:
+    executor: cypress/default
     steps:
-      - checkout
-      - node/install-packages: #If you are using Yarn change this to Yarn
-          pkg-manager: npm
-      - run:
-          name: Run tests
-          command: npm test # If you are using Yarn, change this to Yarn - Hence if you are testing your project with Cypress you need to add a new run for that depends on how you've defined that script in your project. 
-      - run : 
-          name : Run build
-          command: npm run build #If you are using Yarn change this to Yarn
+      - cypress/install
       - persist_to_workspace:
-          root: ~/project
           paths:
-            - .
-            
+            - .cache/Cypress
+            - project
+          root: ~/
+  run-tests-in-parallel:
+    executor: cypress/default
+    parallelism: 8
+    steps:
+      - attach_workspace:
+          at: ~/
+      - cypress/run-tests:
+          cypress-command: npx cypress run --component --parallel --record
+workflows:
+  use-my-orb:
+    jobs:
+      - install-and-persist:
+          name: Install & Persist To Workspace
+      - run-tests-in-parallel:
+          name: Run Tests in Parallel
+          requires:
+            - Install & Persist To Workspace
