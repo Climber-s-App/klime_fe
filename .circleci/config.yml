@@ -1,30 +1,16 @@
-version: '2.1'
-orbs:
-  cypress: cypress-io/cypress@3
+version: 2.1
 jobs:
-  install-and-persist:
-    executor: cypress/default
+  build:
+    working_directory: ~/repo
+    docker:
+      - image: cimg/node:18.10.0
     steps:
-      - cypress/install
-      - persist_to_workspace:
-          paths:
-            - .cache/Cypress
-            - project
-          root: ~/
-  run-tests-in-parallel:
-    executor: cypress/default
-    parallelism: 8
-    steps:
-      - attach_workspace:
-          at: ~/
-      - cypress/run-tests:
-          cypress-command: npx cypress run --component --parallel --record
-workflows:
-  use-my-orb:
-    jobs:
-      - install-and-persist:
-          name: Install & Persist To Workspace
-      - run-tests-in-parallel:
-          name: Run Tests in Parallel
-          requires:
-            - Install & Persist To Workspace
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install Dependencies
+          command: npm install
+      - run:
+          name: Run tests
+          command: npm run test
