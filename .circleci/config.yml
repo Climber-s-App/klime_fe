@@ -2,6 +2,7 @@ version: 2.1
 
 orbs:
   node: circleci/node@4.7
+  cypress: cypress-io/cypress@3.1.3
 
 jobs:
   build_and_test:
@@ -12,7 +13,9 @@ jobs:
           pkg-manager: npm
       - run:
           name: Run tests
-          command: npm test # If you are using Yarn, change this to Yarn - Hence if you are testing your project with Cypress you need to add a new run for that depends on how you've defined that script in your project. 
+          command: npm test # If you are using Yarn, change this to Yarn - Hence if you are testing your project with Cypress you need to add a new run for that depends on how you've defined that script in your project.
+      - cypress/run # "run" job comes from "cypress" orb
+          start-command: 'npm run cypress' 
       - run : 
           name : Run build
           command: npm run build #If you are using Yarn change this to Yarn
