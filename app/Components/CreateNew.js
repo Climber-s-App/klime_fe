@@ -1,4 +1,4 @@
-import { Text, View, Image, StyleSheet } from 'react-native';
+import { View, Image, StyleSheet } from 'react-native';
 
 export default function CreateNew() {
   return (
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: 400,
     borderRadius: 10,
-    padding: 10,
+    padding: 8,
     marginBottom: 30,
   }
 });
