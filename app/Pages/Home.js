@@ -6,7 +6,7 @@ export default function Home() {
     <View style={{
       display: 'flex',
       alignItems: 'center',
-      backgroundColor: 'lightgray',
+      backgroundColor: '#d7dbdb',
       height: '100%',
       width: '100%',
     }}>
