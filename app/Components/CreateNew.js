@@ -13,16 +13,16 @@ export default function CreateNew() {
 
 const styles = StyleSheet.create({
   image: {
-    width: 60,
-    height: 60,
+    width: 55,
+    height: 55,
   },
   container: {
     backgroundColor: 'rgba(0, 0, 0, 0.2)',
     display: 'flex',
     alignItems: 'center',
-    width: 400,
+    width: 370,
     borderRadius: 10,
-    padding: 8,
-    marginBottom: 30,
+    marginBottom: 12,
+    padding: 6,
   }
 });

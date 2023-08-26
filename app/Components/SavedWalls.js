@@ -41,11 +41,11 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.4,
     shadowRadius: 4,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    margin: 18,
   },
   scrollViewContainer: {
     display: 'flex',
-    marginTop: 20,
   },
   text : {
     marginBottom: 10
