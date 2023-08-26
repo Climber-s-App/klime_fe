@@ -7,21 +7,21 @@ import { Text, View, Image, ScrollView, StyleSheet } from 'react-native';
 
 export default function SavedWalls() {
   return (
-    <ScrollView style={styles.scrollViewContainer}>
-      <ScrollView contentContainerStyle={styles.scrollView}>
+    <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+      <View style={styles.view}>
         <Image
           source={require('../assets/stockImages/climbingWall1.jpeg')}
           style={styles.image}
         />
         <Text style={styles.text}>Gravity Center</Text>
-      </ScrollView>
-      <ScrollView contentContainerStyle={styles.scrollView}>
+      </View>
+      <View style={styles.view}>
         <Image
           source={require('../assets/stockImages/climbingWall2.jpeg')}
           style={styles.image}
         />
         <Text style={styles.text}>Send Zone</Text>
-      </ScrollView>
+      </View>
     </ScrollView>
   )
 }
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     width: 250,
     height: 200,
   },
-  scrollView: {
+  view: {
     display: 'flex',
     backgroundColor: 'white',
     shadowColor: '#171717',

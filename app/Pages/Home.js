@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, Image } from 'react-native';
 import SavedWalls from '../Components/SavedWalls'
+import CreateNew from '../Components/CreateNew'
 
 export default function Home() {
   return (
@@ -26,11 +27,11 @@ export default function Home() {
           }}
         />
       </View>
+      <SavedWalls />
       <View>
-        <SavedWalls />
+        <CreateNew />
       </View>
     </View>
-
   )
 }
 
