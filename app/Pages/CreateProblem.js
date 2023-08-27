@@ -1,19 +1,20 @@
-import { useRef, useState } from "react";
-import { ImageBackground, StyleSheet, TouchableOpacity, Animated } from "react-native";
+import { useState } from "react";
+import { ImageBackground, StyleSheet, Pressable, Animated } from "react-native";
 import AddVectors from "../Components/AddVectors";
 
 
-const CreateProblem = () => {
-  const [newVectors, setNewVectors] = useState([])
+const CreateProblem = ({vectorColor}) => {
+  const [newVectors, setNewVectors] = useState([{ x: 125, y: 650 }])
   
   const handlePress = (event) => {
     const { locationX, locationY } = event.nativeEvent;
-    const addVector = { x: locationX - 15, y: locationY - 15 };
+    const addVector = { color: `#${vectorColor}`, x: locationX - 15, y: locationY - 15 };
+    
     setNewVectors((prevVectors) => [...prevVectors, addVector])
   };
 
-  const addedVecors = newVectors.map((vector) => {
-    const {x, y} = vector;
+  const savedVectors = newVectors.map((vector) => {
+    const {color, x, y} = vector;
     const vectorStyle = {
       transform: [{ translateX: x }, { translateY: y }],
       position: 'absolute',
@@ -21,16 +22,16 @@ const CreateProblem = () => {
 
     return (
       <Animated.View style={vectorStyle}>
-        <AddVectors />
+        <AddVectors vectorColor={color} />
       </Animated.View>
     );
   }) 
 
   return (
     <ImageBackground source={require('../assets/pexels-allan-mas-5383501.jpg')} resizeMode="cover" style={styles.image} >
-      <TouchableOpacity onPress={handlePress} style={styles.viewContainer}>
-        {addedVecors}
-      </TouchableOpacity>
+      <Pressable onPress={handlePress} style={styles.viewContainer}>
+        {savedVectors}
+      </Pressable>
     </ImageBackground>
   );
 }
@@ -41,7 +42,7 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     width: '100%',
-    height: "100%"
+    height: "100%",
   },
   viewContainer: {
     flex: 1, 
