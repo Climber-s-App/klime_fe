@@ -1,10 +1,10 @@
-import { StyleSheet, View, Image } from 'react-native';
+import { StyleSheet, View, Image, SafeAreaView } from 'react-native';
 import SavedWalls from '../Components/SavedWalls'
 import MenuBar from '../Components/MenuBar'
 
 export default function Home() {
   return (
-    <View style={styles.viewContainer}>
+    <SafeAreaView style={styles.viewContainer}>
       <View style={styles.imageContainer}>
         <Image
           source={require('../assets/Klime.png')}
@@ -15,15 +15,15 @@ export default function Home() {
       <View>
         <MenuBar />
       </View>
-    </View>
+    </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
   image: {
-    marginTop: 30,
-    width: 200,
-    height: 200,
+    margin: 10,
+    width: 125,
+    height: 125,
   },
   imageContainer: {
     borderBottomColor: 'black',
