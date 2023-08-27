@@ -1,0 +1,26 @@
+version: 2.1
+orbs:
+  node: circleci/node@5.1.0
+jobs:
+  build and test: # this can be any name you choose
+    executor: node/default # use the default executor defined within the orb
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: npm 
+      - run:
+          command: npm install
+          name: install dependencies 
+      - run:
+          command: npm test
+          name: run jest tests
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - .
+
+workflows:
+  test_my_app:
+    jobs:
+      - build and test
+     
