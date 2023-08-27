@@ -1,14 +1,21 @@
 import { StatusBar } from 'expo-status-bar';
+import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import ViewProblems from './app/Pages/ViewProblems';
+import ViewProblem from './app/Pages/ViewProblem';
+import CreateProblem from './app/Pages/CreateProblem';
+import { SafeAreaView } from 'react-native';
+
 
 export default function App() {
+  const [savedWalls, setSavedWalls] = useState([])
+
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text>Open up App.js to start working on your app!</Text>
-      <ViewProblems />
+      {/* <ViewProblem /> */}
+      <CreateProblem />
       <StatusBar style="auto" />
-    </View>
+    </SafeAreaView>
   );
 }
 

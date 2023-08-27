@@ -3,17 +3,8 @@ import { ImageBackground, StyleSheet, TouchableOpacity, Animated } from "react-n
 import AddVectors from "../Components/AddVectors";
 
 
-const ViewProblems = () => {
-  const [vectors, setVectors] = useState([{x: 40, y: 25}, {x: 120, y: 220}])
-  
-  // const handlePress = (event) => {
-  //   const { locationX, locationY } = event.nativeEvent;
-
-  //   Animated.spring(translate, {
-  //     toValue: { x: locationX - 15, y: locationY - 15 },
-  //     useNativeDriver: true,
-  //   }).start();
-  // };
+const ViewProblem = () => {
+  const [vectors, setVectors] = useState([{x: 40, y: 37}, {x: 155, y: 190}])
 
   const addedVecors = vectors.map((vector) => {
     const {x, y} = vector;
@@ -27,18 +18,16 @@ const ViewProblems = () => {
         <AddVectors  x={x} y={y}/>
       </Animated.View>
     );
-  }) 
+  });
 
   return (
     <ImageBackground source={require('../assets/pexels-allan-mas-5383501.jpg')} resizeMode="cover" style={styles.image} >
-      {/* <TouchableOpacity onPress={handlePress} style={styles.viewContainer}> */}
       {addedVecors}
-      {/* </TouchableOpacity> */}
     </ImageBackground>
   );
 }
 
-export default ViewProblems;
+export default ViewProblem;
 
 const styles = StyleSheet.create({
   image: {
