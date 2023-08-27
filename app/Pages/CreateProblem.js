@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { ImageBackground, StyleSheet, TouchableOpacity, Animated } from "react-native";
-import Svg, {  Path } from 'react-native-svg';
+import AddVectors from "../Components/AddVectors";
 
 
 const CreateProblem = () => {
@@ -19,16 +19,13 @@ const CreateProblem = () => {
     transform: [{ translateX: translate.x }, { translateY: translate.y }],
   };
 
-  const vector = <Animated.View style={vectorStyle}>
-                   <Svg width="30" height="30" viewBox="0 0 71 72" fill="none" >
-                    <Path d="M66 36C66 53.187 52.279 67 35.5 67C18.721 67 5 53.187 5 36C5 18.813 18.721 5 35.5 5C52.279 5 66 18.813 66 36Z" stroke="#60FF46" strokeWidth="10"/>
-                   </Svg>
-                 </Animated.View>;
-
-  return(
+  return (
     <ImageBackground source={require('../assets/pexels-allan-mas-5383501.jpg')} resizeMode="cover" style={styles.image} >
       <TouchableOpacity onPress={handlePress} style={styles.viewContainer}>
-        {vector}
+      <Animated.View style={vectorStyle}>
+        {/* {vector} */}
+        <AddVectors />
+        </Animated.View>
       </TouchableOpacity>
     </ImageBackground>
   );
