@@ -1,6 +1,6 @@
 import { StyleSheet, View, Image } from 'react-native';
 import SavedWalls from '../Components/SavedWalls'
-import CreateNew from '../Components/CreateNew'
+import MenuBar from '../Components/MenuBar'
 
 export default function Home() {
   return (
@@ -13,7 +13,7 @@ export default function Home() {
       </View>
       <SavedWalls />
       <View>
-        <CreateNew />
+        <MenuBar />
       </View>
     </View>
   )
@@ -28,12 +28,10 @@ const styles = StyleSheet.create({
   imageContainer: {
     borderBottomColor: 'black',
     width: '90%',
-    display: 'flex',
     alignItems: 'center',
     borderBottomWidth: 5,
   },
   viewContainer: {
-    display: 'flex',
     alignItems: 'center',
     backgroundColor: '#d7dbdb',
     height: '100%',

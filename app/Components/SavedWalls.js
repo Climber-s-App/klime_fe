@@ -33,7 +33,6 @@ const styles = StyleSheet.create({
     height: 200,
   },
   view: {
-    display: 'flex',
     backgroundColor: 'white',
     shadowColor: '#171717',
     margin: 10,
@@ -44,9 +43,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     margin: 18,
   },
-  scrollViewContainer: {
-    display: 'flex',
-  },
+  // scrollViewContainer: {
+  //   display: 'flex',
+  // },
   text : {
     marginBottom: 10
   },

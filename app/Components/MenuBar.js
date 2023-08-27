@@ -1,6 +1,6 @@
 import { View, Image, StyleSheet } from 'react-native';
 
-export default function CreateNew() {
+export default function MenuBar() {
   return (
     <View style={styles.container}>
       <Image
@@ -18,7 +18,6 @@ const styles = StyleSheet.create({
   },
   container: {
     backgroundColor: 'rgba(0, 0, 0, 0.2)',
-    display: 'flex',
     alignItems: 'center',
     width: 370,
     borderRadius: 10,
