@@ -1,5 +1,6 @@
 import Svg, {  Path } from 'react-native-svg';
 
+
 const AddVectors = ({vectorColor}) => {
   return (
     <Svg width="30" height="30" viewBox="0 0 71 72" fill="none" >
