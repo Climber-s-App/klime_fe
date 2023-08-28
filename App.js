@@ -7,7 +7,7 @@ import MenuBar from './app/Components/MenuBar';
 import { getUserWalls } from './app/Components/apiCalls';
 
 export default function App() {
-  const [savedWalls, setSavedWalls] = useState([]) // we can use this in the future when completing our fetch request
+  const [savedWalls, setSavedWalls] = useState([]) 
   const [vectorColor, setVectorColor] = useState('60FF46')
 
   useEffect(() => {
@@ -53,7 +53,6 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: '#fff',
     alignItems: 'center',
-    // justifyContent: 'center',
   }, 
   contentContainer: {
     flex: 1,

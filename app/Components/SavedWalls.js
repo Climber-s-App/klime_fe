@@ -1,10 +1,5 @@
 import { Text, View, Image, ScrollView, StyleSheet } from 'react-native';
 
-// this function would take in a prop and then it would look through and place images. I
-// am just gonna keep the stock images for now and we can refactor for this later !! So there would only be one
-// <Image/> and it would just be looping through and creating as many as the user has saved. But i'll just leave it 
-// as two-permanent walls rn.
-
 export default function SavedWalls({savedWalls}) {
   
   const userWalls = savedWalls.map((wall) => {
@@ -13,7 +8,7 @@ export default function SavedWalls({savedWalls}) {
     return (
       <View style={styles.view} key={id} id={id}>
         <Image
-          source={{uri: {photo_url}}}
+          source={{uri: photo_url}}
           style={styles.image}
         />
         <Text style={styles.text}>{title}</Text>
@@ -33,24 +28,24 @@ const styles = StyleSheet.create({
     margin: 15,
     width: 250,
     height: 200,
+    alignSelf: 'center',
   },
   view: {
     backgroundColor: 'white',
     shadowColor: '#171717',
-    margin: 10,
     shadowOffset: {width: -2, height: 4},
     shadowOpacity: 0.4,
     shadowRadius: 4,
-    alignItems: 'center',
-    justifyContent: 'center',
-    // width: '100%',
+    alignSelf: 'center',
     margin: 18,
+    width: '70%'
   },
-  // scrollViewContainer: {
-  //   display: 'flex',
-  // },
+  scrollViewContainer: {
+    width: '100%',
+  },
   text : {
-    marginBottom: 10
+    marginBottom: 10,
+    alignSelf: 'center',
   },
 });
 
