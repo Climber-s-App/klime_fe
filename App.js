@@ -7,7 +7,7 @@ import { SafeAreaView } from 'react-native';
 
 
 export default function App() {
-  const [savedWalls, setSavedWalls] = useState([])
+  const [savedWalls, setSavedWalls] = useState([]) // we can use this in the future when completing our fetch request
   const [vectorColor, setVectorColor] = useState('60FF46')
 
   const styles = StyleSheet.create({
@@ -46,7 +46,7 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       <Text>Open up App.js to start working on your app!</Text>
-      {/* <ViewProblem /> */}
+      <ViewProblem />
       <CreateProblem vectorColor={vectorColor} />
       <StatusBar style="auto" />
       <Pressable onPress={() => handleVectorColor(vectorColor)} style={styles.vectorColor} />
