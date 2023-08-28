@@ -22,15 +22,15 @@ export default function App() {
         setVectorColor('60FF46');
         break;
     }
-  }
+  };
 
   return (
    <SafeAreaView style={{ ...styles.container, ...styles.androidSafeArea }}> 
       <StatusBar/>
       <View style={styles.contentContainer}>
-        {/* <Home setCurrentScreen={setCurrentScreen}/> */}
+        <Home setCurrentScreen={setCurrentScreen}/>
         {/* <ViewProblem setCurrentScreen={setCurrentScreen}/> */}
-        <CreateProblem vectorColor={vectorColor} setCurrentScreen={setCurrentScreen}/> 
+        {/* <CreateProblem vectorColor={vectorColor} setCurrentScreen={setCurrentScreen}/>  */}
       </View>
       <View style={styles.menuContainer}>
         <MenuBar 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ImageBackground, StyleSheet, Pressable, Animated } from "react-native";
 import AddVectors from "../Components/AddVectors";
 import { v4 as uuid } from 'uuid';
@@ -6,7 +6,9 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const CreateProblem = ({vectorColor, setCurrentScreen}) => {
   const [newVectors, setNewVectors] = useState([]);
-  setCurrentScreen('CreateProblem');
+  useEffect(() => {
+    setCurrentScreen('CreateProblem')
+  }, []);
 
   const handlePress = (event) => {
     const { locationX, locationY } = event.nativeEvent;

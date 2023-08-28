@@ -1,8 +1,11 @@
 import { StyleSheet, View, Image, SafeAreaView } from 'react-native';
 import SavedWalls from '../Components/SavedWalls'
+import { useEffect } from 'react';
 
 export default function Home({setCurrentScreen}) {
-  setCurrentScreen('Home');
+  useEffect(() => {
+    setCurrentScreen('Home');
+  }, []);
   
   return (
     <View style={styles.viewContainer}>
