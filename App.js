@@ -28,8 +28,8 @@ export default function App() {
       <StatusBar/>
       <View style={styles.contentContainer}>
         {/* <Home /> */}
-        <ViewProblem />
-        {/* <CreateProblem vectorColor={vectorColor} />  */}
+        {/* <ViewProblem /> */}
+        <CreateProblem vectorColor={vectorColor} /> 
       </View>
       <View style={styles.menuContainer}>
         <MenuBar vectorColor={vectorColor} handleVectorColor={handleVectorColor} />

@@ -4,18 +4,17 @@ import AddVectors from "../Components/AddVectors";
 
 
 const ViewProblem = () => {
-  const [vectors, setVectors] = useState([{color: '#16e8f7', x: 40, y: 37}, {color: '#60FF46', x: 155, y: 190}])
+  const [vectors, setVectors] = useState([{color: '#16e8f7', x: 40, y: 37, id: 1}, {color: '#60FF46', x: 155, y: 190, id: 2}])
 
-  const addedVecors = vectors.map((vector, index) => {
-    const {x, y} = vector;
-    const translate = useRef(new Animated.ValueXY({x: x, y: y})).current;
+  const addedVecors = vectors.map((vector) => {
+    const {color, x, y, id} = vector;
     const vectorStyle = {
-      transform: [{ translateX: translate.x }, { translateY: translate.y }],
+      transform: [{ translateX: x }, { translateY: y }],
     };
 
     return (
-      <Animated.View style={vectorStyle} key={index}>
-        <AddVectors  vectorColor={vector.color}/>
+      <Animated.View style={vectorStyle} key={id}>
+        <AddVectors  vectorColor={color}/>
       </Animated.View>
     );
   });

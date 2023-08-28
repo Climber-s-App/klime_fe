@@ -1,26 +1,27 @@
 import { useState } from "react";
 import { ImageBackground, StyleSheet, Pressable, Animated } from "react-native";
 import AddVectors from "../Components/AddVectors";
+import { v4 as uuid } from 'uuid';
 
 const CreateProblem = ({vectorColor}) => {
-  const [newVectors, setNewVectors] = useState([{ x: 125, y: 650 }])
+  const [newVectors, setNewVectors] = useState([])
   
   const handlePress = (event) => {
     const { locationX, locationY } = event.nativeEvent;
-    const addVector = { color: `#${vectorColor}`, x: locationX - 15, y: locationY - 15 };
+    const addVector = { color: `#${vectorColor}`, x: locationX - 15, y: locationY - 15, id: uuid() };
     
     setNewVectors((prevVectors) => [...prevVectors, addVector])
   };
 
-  const savedVectors = newVectors.map((vector, index) => {
-    const {color, x, y} = vector;
+  const savedVectors = newVectors.map((vector) => {
+    const {color, x, y, id} = vector;
     const vectorStyle = {
       transform: [{ translateX: x }, { translateY: y }],
       position: 'absolute',
     };
 
     return (
-      <Animated.View style={vectorStyle} key={index}>
+      <Animated.View style={vectorStyle} key={id}>
         <AddVectors vectorColor={color} />
       </Animated.View>
     );
