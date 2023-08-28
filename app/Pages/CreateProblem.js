@@ -2,7 +2,6 @@ import { useState } from "react";
 import { ImageBackground, StyleSheet, Pressable, Animated } from "react-native";
 import AddVectors from "../Components/AddVectors";
 
-
 const CreateProblem = ({vectorColor}) => {
   const [newVectors, setNewVectors] = useState([{ x: 125, y: 650 }])
   
@@ -13,7 +12,7 @@ const CreateProblem = ({vectorColor}) => {
     setNewVectors((prevVectors) => [...prevVectors, addVector])
   };
 
-  const savedVectors = newVectors.map((vector) => {
+  const savedVectors = newVectors.map((vector, index) => {
     const {color, x, y} = vector;
     const vectorStyle = {
       transform: [{ translateX: x }, { translateY: y }],
@@ -21,7 +20,7 @@ const CreateProblem = ({vectorColor}) => {
     };
 
     return (
-      <Animated.View style={vectorStyle}>
+      <Animated.View style={vectorStyle} key={index}>
         <AddVectors vectorColor={color} />
       </Animated.View>
     );
@@ -44,7 +43,7 @@ const styles = StyleSheet.create({
     width: '100%',
     // height: "100%",
   },
-  // viewContainer: {
-  //   flex: 1, 
-  // }
+  viewContainer: {
+    flex: 1, 
+  }
 })

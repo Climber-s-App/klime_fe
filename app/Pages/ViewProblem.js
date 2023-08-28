@@ -4,9 +4,9 @@ import AddVectors from "../Components/AddVectors";
 
 
 const ViewProblem = () => {
-  const [vectors, setVectors] = useState([{x: 40, y: 37}, {x: 155, y: 190}])
+  const [vectors, setVectors] = useState([{color: '#16e8f7', x: 40, y: 37}, {color: '#60FF46', x: 155, y: 190}])
 
-  const addedVecors = vectors.map((vector) => {
+  const addedVecors = vectors.map((vector, index) => {
     const {x, y} = vector;
     const translate = useRef(new Animated.ValueXY({x: x, y: y})).current;
     const vectorStyle = {
@@ -14,8 +14,8 @@ const ViewProblem = () => {
     };
 
     return (
-      <Animated.View style={vectorStyle}>
-        <AddVectors  x={x} y={y}/>
+      <Animated.View style={vectorStyle} key={index}>
+        <AddVectors  vectorColor={vector.color}/>
       </Animated.View>
     );
   });
