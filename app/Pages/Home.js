@@ -1,7 +1,8 @@
-import { StyleSheet, View, Image, SafeAreaView } from 'react-native';
-import SavedWalls from '../Components/SavedWalls'
+import { StyleSheet, View, Image } from 'react-native';
+import SavedWalls from '../Components/SavedWalls';
 
-export default function Home() {
+
+export default function Home({savedWalls}) {
   return (
     <View style={styles.viewContainer}>
       <View style={styles.imageContainer}>
@@ -10,31 +11,28 @@ export default function Home() {
           style={styles.image}
         />
       </View>
-      <SavedWalls />
+      <SavedWalls savedWalls={savedWalls}/>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   image: {
-    // margin: 5,
     width: 125,
     height: 125,
+    alignSelf: 'center'
   },
   imageContainer: {
     borderBottomColor: 'black',
-    // width: '100%',
-    // alignItems: 'center',
     borderBottomWidth: 5,
-    // marginBottom: 5
+    marginLeft: 60,
+    marginRight: 60,
+    marginBottom: 8
   },
   viewContainer: {
     flex: 1,
-    alignItems: 'center',
     backgroundColor: '#d7dbdb',
-    // height: '100%',
-    // width: '100%',
-    // marginBottom: 50,
+    width: '100%',
   },
 })
 

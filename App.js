@@ -1,13 +1,22 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { StyleSheet, SafeAreaView, View, StatusBar } from 'react-native';
 import ViewProblem from './app/Pages/ViewProblem';
 import CreateProblem from './app/Pages/CreateProblem';
 import Home from './app/Pages/Home';
-import MenuBar from './app/Components/MenuBar'
+import MenuBar from './app/Components/MenuBar';
+import { getUserWalls } from './app/Components/apiCalls';
 
 export default function App() {
-  const [savedWalls, setSavedWalls] = useState([]) // we can use this in the future when completing our fetch request
+  const [savedWalls, setSavedWalls] = useState([]) 
   const [vectorColor, setVectorColor] = useState('60FF46')
+
+  useEffect(() => {
+    (async () => {
+      const data = await getUserWalls();
+      const modifiedData = data.data.map((data) => ({ id: data.id, ...data.attributes}))
+      setSavedWalls(modifiedData)
+    })();
+  }, [])
 
   const handleVectorColor = (color) => {
     switch (color) {
@@ -27,9 +36,9 @@ export default function App() {
    <SafeAreaView style={{ ...styles.container, ...styles.androidSafeArea }}> 
       <StatusBar/>
       <View style={styles.contentContainer}>
-        {/* <Home /> */}
+        <Home savedWalls={savedWalls}/>
         {/* <ViewProblem /> */}
-        <CreateProblem vectorColor={vectorColor} /> 
+        {/* <CreateProblem vectorColor={vectorColor} />  */}
       </View>
       <View style={styles.menuContainer}>
         <MenuBar vectorColor={vectorColor} handleVectorColor={handleVectorColor} />
@@ -44,7 +53,6 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: '#fff',
     alignItems: 'center',
-    // justifyContent: 'center',
   }, 
   contentContainer: {
     flex: 1,

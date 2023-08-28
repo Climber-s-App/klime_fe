@@ -11,15 +11,9 @@ export default function MenuBar({vectorColor, handleVectorColor}) {
     },
     menuContainer: {
       backgroundColor: 'rgba(0, 0, 0, 0.2)',
-      // backgroundColor: 'red',
       flexDirection: 'row',
-      // flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
-      // width: 370,
-      // width: '100%',
-      // borderRadius: 10,
-      // marginBottom: 12,
       padding: 6,
     },
     vectorColor: { 
