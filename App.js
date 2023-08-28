@@ -1,9 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, SafeAreaView } from 'react-native';
 import ViewProblem from './app/Pages/ViewProblem';
 import CreateProblem from './app/Pages/CreateProblem';
-import { SafeAreaView } from 'react-native';
+import { } from 'react-native';
+import Home from './app/Pages/Home';
+
 
 
 export default function App() {
@@ -45,7 +47,7 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Home />
       <ViewProblem />
       <CreateProblem vectorColor={vectorColor} />
       <StatusBar style="auto" />
