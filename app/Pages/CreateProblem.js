@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ImageBackground, StyleSheet, Pressable, Animated } from "react-native";
+import { ImageBackground, StyleSheet, Pressable, Animated, PanResponder } from "react-native";
 import AddVectors from "../Components/AddVectors";
 import { v4 as uuid } from 'uuid';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -29,7 +29,10 @@ const CreateProblem = ({vectorColor, setCurrentScreen}) => {
         <AddVectors vectorColor={color} />
       </Animated.View>
     );
-  }) 
+  });
+
+  const pan = useState(new Animated.ValueXY()).current;
+  console.log('pan: ', pan)
 
   return (
     <ImageBackground source={require('../assets/pexels-allan-mas-5383501.jpg')} resizeMode="cover" style={styles.image} >
