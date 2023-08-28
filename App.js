@@ -13,7 +13,8 @@ export default function App() {
   useEffect(() => {
     (async () => {
       const data = await getUserWalls();
-      setSavedWalls(data.data)
+      const modifiedData = data.data.map((data) => ({ id: data.id, ...data.attributes}))
+      setSavedWalls(modifiedData)
     })();
   }, [])
 

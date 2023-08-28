@@ -5,37 +5,25 @@ import { Text, View, Image, ScrollView, StyleSheet } from 'react-native';
 // <Image/> and it would just be looping through and creating as many as the user has saved. But i'll just leave it 
 // as two-permanent walls rn.
 
-export default function SavedWalls() {
+export default function SavedWalls({savedWalls}) {
+  
+  const userWalls = savedWalls.map((wall) => {
+    const {id, title, photo_url} = wall;
+
+    return (
+      <View style={styles.view} key={id} id={id}>
+        <Image
+          source={{uri: {photo_url}}}
+          style={styles.image}
+        />
+        <Text style={styles.text}>{title}</Text>
+      </View>
+    );
+  })
+
   return (
     <ScrollView contentContainerStyle={styles.scrollViewContainer}>
-      <View style={styles.view}>
-        <Image
-          source={require('../assets/stockImages/climbingWall1.jpeg')}
-          style={styles.image}
-        />
-        <Text style={styles.text}>Gravity Center</Text>
-      </View>
-      <View style={styles.view}>
-        <Image
-          source={require('../assets/stockImages/climbingWall2.jpeg')}
-          style={styles.image}
-        />
-        <Text style={styles.text}>Send Zone</Text>
-      </View>
-      <View style={styles.view}>
-        <Image
-          source={require('../assets/stockImages/climbingWall2.jpeg')}
-          style={styles.image}
-        />
-        <Text style={styles.text}>Send Zone</Text>
-      </View>
-      <View style={styles.view}>
-        <Image
-          source={require('../assets/stockImages/climbingWall2.jpeg')}
-          style={styles.image}
-        />
-        <Text style={styles.text}>Send Zone</Text>
-      </View>
+      {userWalls}
     </ScrollView>
   )
 }

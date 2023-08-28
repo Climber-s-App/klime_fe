@@ -3,7 +3,6 @@ import SavedWalls from '../Components/SavedWalls';
 
 
 export default function Home({savedWalls}) {
-  
   return (
     <View style={styles.viewContainer}>
       <View style={styles.imageContainer}>
@@ -12,7 +11,7 @@ export default function Home({savedWalls}) {
           style={styles.image}
         />
       </View>
-      <SavedWalls />
+      <SavedWalls savedWalls={savedWalls}/>
     </View>
   )
 }
