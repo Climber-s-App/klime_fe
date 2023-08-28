@@ -42,9 +42,9 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     width: '100%',
-    height: "100%",
+    // height: "100%",
   },
-  viewContainer: {
-    flex: 1, 
-  }
+  // viewContainer: {
+  //   flex: 1, 
+  // }
 })
