@@ -2,7 +2,7 @@ import { StyleSheet, View, Image, SafeAreaView } from 'react-native';
 import SavedWalls from '../Components/SavedWalls';
 
 
-export default function Home() {
+export default function Home({savedWalls}) {
   
   return (
     <View style={styles.viewContainer}>
