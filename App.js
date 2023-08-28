@@ -3,12 +3,14 @@ import { StyleSheet, SafeAreaView, View, StatusBar } from 'react-native';
 import ViewProblem from './app/Pages/ViewProblem';
 import CreateProblem from './app/Pages/CreateProblem';
 import Home from './app/Pages/Home';
-import MenuBar from './app/Components/MenuBar'
+import MenuBar from './app/Components/MenuBar';
+import { getUserWalls } from './app/Components/apiCalls';
 
 export default function App() {
   const [savedWalls, setSavedWalls] = useState([]) // we can use this in the future when completing our fetch request
   const [vectorColor, setVectorColor] = useState('60FF46')
 
+  console.log(getUserWalls());
   const handleVectorColor = (color) => {
     switch (color) {
       case '60FF46':
@@ -27,9 +29,9 @@ export default function App() {
    <SafeAreaView style={{ ...styles.container, ...styles.androidSafeArea }}> 
       <StatusBar/>
       <View style={styles.contentContainer}>
-        {/* <Home /> */}
+        <Home />
         {/* <ViewProblem /> */}
-        <CreateProblem vectorColor={vectorColor} /> 
+        {/* <CreateProblem vectorColor={vectorColor} />  */}
       </View>
       <View style={styles.menuContainer}>
         <MenuBar vectorColor={vectorColor} handleVectorColor={handleVectorColor} />
