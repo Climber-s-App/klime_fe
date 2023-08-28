@@ -22,6 +22,20 @@ export default function SavedWalls() {
         />
         <Text style={styles.text}>Send Zone</Text>
       </View>
+      <View style={styles.view}>
+        <Image
+          source={require('../assets/stockImages/climbingWall2.jpeg')}
+          style={styles.image}
+        />
+        <Text style={styles.text}>Send Zone</Text>
+      </View>
+      <View style={styles.view}>
+        <Image
+          source={require('../assets/stockImages/climbingWall2.jpeg')}
+          style={styles.image}
+        />
+        <Text style={styles.text}>Send Zone</Text>
+      </View>
     </ScrollView>
   )
 }
@@ -41,6 +55,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     alignItems: 'center',
     justifyContent: 'center',
+    // width: '100%',
     margin: 18,
   },
   // scrollViewContainer: {
