@@ -2,10 +2,12 @@ import { useState } from "react";
 import { ImageBackground, StyleSheet, Pressable, Animated } from "react-native";
 import AddVectors from "../Components/AddVectors";
 import { v4 as uuid } from 'uuid';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
-const CreateProblem = ({vectorColor}) => {
-  const [newVectors, setNewVectors] = useState([])
-  
+const CreateProblem = ({vectorColor, setCurrentScreen}) => {
+  const [newVectors, setNewVectors] = useState([]);
+  setCurrentScreen('CreateProblem');
+
   const handlePress = (event) => {
     const { locationX, locationY } = event.nativeEvent;
     const addVector = { color: `#${vectorColor}`, x: locationX - 15, y: locationY - 15, id: uuid() };

@@ -8,6 +8,7 @@ import MenuBar from './app/Components/MenuBar'
 export default function App() {
   const [savedWalls, setSavedWalls] = useState([]) // we can use this in the future when completing our fetch request
   const [vectorColor, setVectorColor] = useState('60FF46')
+  const [currentScreen, setCurrentScreen] = useState('home');
 
   const handleVectorColor = (color) => {
     switch (color) {
@@ -27,12 +28,16 @@ export default function App() {
    <SafeAreaView style={{ ...styles.container, ...styles.androidSafeArea }}> 
       <StatusBar/>
       <View style={styles.contentContainer}>
-        {/* <Home /> */}
-        {/* <ViewProblem /> */}
-        <CreateProblem vectorColor={vectorColor} /> 
+        {/* <Home setCurrentScreen={setCurrentScreen}/> */}
+        {/* <ViewProblem setCurrentScreen={setCurrentScreen}/> */}
+        <CreateProblem vectorColor={vectorColor} setCurrentScreen={setCurrentScreen}/> 
       </View>
       <View style={styles.menuContainer}>
-        <MenuBar vectorColor={vectorColor} handleVectorColor={handleVectorColor} />
+        <MenuBar 
+          vectorColor={vectorColor} 
+          handleVectorColor={handleVectorColor} 
+          currentScreen={currentScreen}
+        />
       </View>
      </SafeAreaView>
   );

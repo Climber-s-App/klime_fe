@@ -1,7 +1,8 @@
-import { View, Image, StyleSheet } from 'react-native';
+import { View, Image, StyleSheet, Text } from 'react-native';
 import { Pressable } from 'react-native';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
-export default function MenuBar({vectorColor, handleVectorColor}) {
+export default function MenuBar({vectorColor, handleVectorColor, currentScreen}) {
 
   const styles = StyleSheet.create({
     image: {
@@ -34,13 +35,32 @@ export default function MenuBar({vectorColor, handleVectorColor}) {
     }
   });
 
-  return (
-    <View style={styles.menuContainer}>
+  const homeBar = (
+    <View>
       <Image
         source={require('../assets/add-sign.png')}
         style={styles.image}
       />
       <Pressable onPress={() => handleVectorColor(vectorColor)} style={styles.vectorColor} />
+    </View> 
+  );
+
+  const problemBar =  (
+    <View>
+      <Pressable>
+        <MaterialIcons name='add' size={38} color='#25292e'/>
+      </Pressable>
+      <Pressable>
+        <MaterialIcons name='save-alt' label='Save' size={24} color='#fff'/>
+      </Pressable>
+    </View>
+  );
+  
+  return (
+    <View style={styles.menuContainer}>
+      { currentScreen === 'Home' ? homeBar
+      : currentScreen === 'CreateProblem' ? problemBar 
+      : <Text>Other Menu Bar To Be Implemented</Text>}
     </View>
   )
 }
