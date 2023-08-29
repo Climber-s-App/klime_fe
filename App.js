@@ -4,7 +4,7 @@ import ViewProblem from "./app/Pages/ViewProblem";
 import CreateProblem from "./app/Pages/CreateProblem";
 import Home from "./app/Pages/Home";
 import MenuBar from "./app/Components/MenuBar";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
+// import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function App() {
   const [savedWalls, setSavedWalls] = useState([]); // we can use this in the future when completing our fetch request
@@ -26,7 +26,7 @@ export default function App() {
   };
 
   return (
-    <GestureHandlerRootView style={styles.container}>
+    // <GestureHandlerRootView style={styles.container}>
       <SafeAreaView style={{ ...styles.container, ...styles.androidSafeArea }}>
         <StatusBar />
         <View style={styles.contentContainer}>
@@ -45,7 +45,7 @@ export default function App() {
           />
         </View>
       </SafeAreaView>
-    </GestureHandlerRootView>
+    // </GestureHandlerRootView>
   );
 }
 
