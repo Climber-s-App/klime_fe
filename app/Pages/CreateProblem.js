@@ -52,10 +52,13 @@ const CreateProblem = ({ vectorColor }) => {
       //   numberOfTaps={1}
       //   style={styles.viewContainer}
       // >
+      <TapGestureHandler
+        onHandlerStateChange={onSingleTapCircle}
+      >
         <Animated.View key={id} style={vectorStyle}>
           <AddVectors vectorColor={color} />
         </Animated.View>
-      // </TapGestureHandler>
+      </TapGestureHandler>
     );
   });
 
@@ -71,7 +74,7 @@ const CreateProblem = ({ vectorColor }) => {
     }
   };
 
-  const onSingleTapEvent = (event) => {
+  const onSingleTapCircle = (event) => {
     if (event.nativeEvent.state === State.ACTIVE) {
       alert("Hey single tap!");
     }
