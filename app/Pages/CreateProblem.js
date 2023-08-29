@@ -64,6 +64,7 @@ const CreateProblem = ({ vectorColor }) => {
 
   const onDoubleTapEvent = (event) => {
     if (event.nativeEvent.state === State.ACTIVE) {
+      alert('double tapped!')
       likeColour === "#28b5b5"
         ? setLikeColour("red")
         : setLikeColour("#28b5b5");
