@@ -16,7 +16,7 @@ const CreateProblem = ({ vectorColor }) => {
   const [newVectors, setNewVectors] = useState([]);
 
   const onSingleTap = (event) => {
-    alert("hi");
+    // alert("hi");
     if (event.nativeEvent.state === State.ACTIVE) {
       // alert("tap!");
       console.log("here");
@@ -29,13 +29,14 @@ const CreateProblem = ({ vectorColor }) => {
       };
   
       setNewVectors((prevVectors) => [...prevVectors, addVector]);
+      alert('newVectors')
     }
   };
 
   const savedVectors = newVectors.map((vector) => {
     const { color, x, y, id } = vector;
     const vectorStyle = {
-      transform: [{ translateX: x }, { translateY: y }],
+      transform: [{ translateX: 0 }, { translateY: 0 }],
       position: "absolute",
     };
 
@@ -117,7 +118,7 @@ const CreateProblem = ({ vectorColor }) => {
                 resizeMode="cover"
                 style={styles.image}
               />
-              {/* {savedVectors} */}
+              {savedVectors}
             </View>
           </TapGestureHandler>
         </TapGestureHandler>
