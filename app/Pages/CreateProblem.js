@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import AddVectors from "../Components/AddVectors";
 import { v4 as uuid } from "uuid";
-import { State, TapGestureHandler } from "react-native-gesture-handler";
+import { State, TapGestureHandler, PanGestureHandler } from "react-native-gesture-handler";
 
 const CreateProblem = ({ vectorColor }) => {
   const [newVectors, setNewVectors] = useState([]);
@@ -39,6 +39,22 @@ const CreateProblem = ({ vectorColor }) => {
     }
   };
 
+  onPanGestureEvent = (event, vector) => {
+    const { translationX, translationY } = event.nativeEvent;
+
+    const updatedVector = {
+      ...vector, 
+      x: vector.x + translationX,
+      y: vector.y + translationY
+    };
+
+    const updatedVectors = newVectors.map(v => 
+      v.id === updatedVector.id ? updatedVector : v
+    );
+
+    setNewVectors(updatedVectors);
+  }
+
   const savedVectors = newVectors.map((vector) => {
     const { color, x, y, id } = vector;
     const vectorStyle = {
@@ -52,13 +68,14 @@ const CreateProblem = ({ vectorColor }) => {
       //   numberOfTaps={1}
       //   style={styles.viewContainer}
       // >
-      <TapGestureHandler
-        onHandlerStateChange={onSingleTapCircle}
+      <PanGestureHandler
+        key={id}
+        onGestureEvent={(event) => onPanGestureEvent(event, vector)}
       >
         <Animated.View key={id} style={vectorStyle}>
           <AddVectors vectorColor={color} />
         </Animated.View>
-      </TapGestureHandler>
+      </PanGestureHandler>
     );
   });
 
@@ -74,9 +91,9 @@ const CreateProblem = ({ vectorColor }) => {
     }
   };
 
-  const onSingleTapCircle = (event) => {
+  const onLongPress = (event) => {
     if (event.nativeEvent.state === State.ACTIVE) {
-      alert("Hey single tap!");
+      alert("Hey long press!");
     }
   };
 
