@@ -5,11 +5,6 @@ import { useNavigation, useCallback } from '@react-navigation/native';
 
 export default function ViewAllProblems({route}) {
   const [problems, setSavedProblems] = useState([])
-  // const [newId, setNewId] = useState()
-
-// useEffect(() => {
-//     setNewId(route.params.id)
-//   }, [newId])
 
 function getProblemsAll() {
   getAllProblems(route.params.id).then(
@@ -30,7 +25,9 @@ function getProblemsAll() {
     return (
       <Pressable onPress={() => navigation.navigate('View Problem', {
         id: problem.id,
-        image: route.params.image
+        image: route.params.image,
+        grade: problem.grade,
+        name: problem.name
       })}>
         <View styles={styles.problemView} key={problem.wall_id} id={problem.wall_id}>
           <Text>{problem.name}</Text>
