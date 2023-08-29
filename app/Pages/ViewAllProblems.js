@@ -6,14 +6,13 @@ import { useNavigation, useCallback } from '@react-navigation/native';
 export default function ViewAllProblems({route}) {
   const [problems, setSavedProblems] = useState([])
   // const [newId, setNewId] = useState()
-  // const { id } = route.params.id
 
 // useEffect(() => {
 //     setNewId(route.params.id)
 //   }, [newId])
 
 function getProblemsAll() {
-  getAllProblems().then(
+  getAllProblems(route.params.id).then(
     data => {
       const modifiedData = data.data.map((data) => ({ id: data.id, ...data.attributes }))
       setSavedProblems(modifiedData)
@@ -23,23 +22,17 @@ function getProblemsAll() {
 
   useEffect(() => {
     getProblemsAll()
-    // (async () => {
-    //   const data = await getAllProblems()
-    //   console.log(data)
-    //   const modifiedData = data.data.map((data) => ({ id: data.id, ...data.attributes }))
-    //   setSavedProblems(modifiedData)
-    // })();
   }, [])
 
   const userProblem = problems.map((problem) => {
-    console.log(problem)
     const navigation = useNavigation();
 
     return (
       <Pressable onPress={() => navigation.navigate('View Problem', {
-        //enter props for passing down
+        id: problem.id,
+        image: route.params.image
       })}>
-        <View  key={problem.wall_id} id={problem.wall_id}>
+        <View styles={styles.problemView} key={problem.wall_id} id={problem.wall_id}>
           <Text>{problem.name}</Text>
           <Text>{problem.grade}</Text>
         </View>
@@ -53,3 +46,9 @@ function getProblemsAll() {
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  problemView: {
+    flexDirection: 'row'
+  },
+})

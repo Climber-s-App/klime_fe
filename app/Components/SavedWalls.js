@@ -9,7 +9,8 @@ export default function SavedWalls({ savedWalls }) {
 
     return (
       <Pressable onPress={() => navigation.navigate('View All Problems', {
-        id: id
+        id: id,
+        image: photo_url
       })}>
         <View style={styles.view} key={Date.now() + savedWalls.indexOf(wall)} id={id}>
           <Image

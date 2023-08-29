@@ -3,7 +3,8 @@ import { ImageBackground, StyleSheet, TouchableOpacity, Animated } from "react-n
 import AddVectors from "../Components/AddVectors";
 
 
-const ViewProblem = () => {
+const ViewProblem = ({route}) => {
+  const newImage = route.params.image
   const [vectors, setVectors] = useState([{color: '#16e8f7', x: 40, y: 37, id: 1}, {color: '#60FF46', x: 155, y: 190, id: 2}])
 
   const addedVectors = vectors.map((vector) => {
@@ -20,7 +21,7 @@ const ViewProblem = () => {
   });
 
   return (
-    <ImageBackground source={require('../assets/pexels-allan-mas-5383501.jpg')} resizeMode="cover" style={styles.image} >
+    <ImageBackground source={{uri: newImage}} resizeMode="cover" style={styles.image} >
       {addedVectors}
     </ImageBackground>
   );
