@@ -1,6 +1,6 @@
 import { StyleSheet, View, Image } from 'react-native';
 import SavedWalls from '../Components/SavedWalls';
-
+import { NativeRouter, Route, Link } from "react-router-native";
 
 export default function Home({savedWalls}) {
   return (

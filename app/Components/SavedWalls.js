@@ -1,18 +1,24 @@
-import { Text, View, Image, ScrollView, StyleSheet } from 'react-native';
+import { Text, View, Image, ScrollView, StyleSheet, Pressable } from 'react-native';
 
-export default function SavedWalls({savedWalls}) {
-  
+export default function SavedWalls({ savedWalls }, { navigation }) {
+
   const userWalls = savedWalls.map((wall) => {
-    const {id, title, photo_url} = wall;
+    const { id, title, photo_url } = wall;
 
     return (
-      <View style={styles.view} key={id} id={id}>
-        <Image
-          source={{uri: photo_url}}
-          style={styles.image}
-        />
-        <Text style={styles.text}>{title}</Text>
-      </View>
+      <Pressable onPress={() => {
+        navigation.navigate('View All Problems', {
+          id: id
+        });
+      }}>
+        <View style={styles.view} key={id} id={id}>
+          <Image
+            source={{ uri: photo_url }}
+            style={styles.image}
+          />
+          <Text style={styles.text}>{title}</Text>
+        </View>
+      </Pressable>
     );
   })
 
@@ -33,7 +39,7 @@ const styles = StyleSheet.create({
   view: {
     backgroundColor: 'white',
     shadowColor: '#171717',
-    shadowOffset: {width: -2, height: 4},
+    shadowOffset: { width: -2, height: 4 },
     shadowOpacity: 0.4,
     shadowRadius: 4,
     alignSelf: 'center',
@@ -43,7 +49,7 @@ const styles = StyleSheet.create({
   scrollViewContainer: {
     width: '100%',
   },
-  text : {
+  text: {
     marginBottom: 10,
     alignSelf: 'center',
   },
