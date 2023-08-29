@@ -11,7 +11,7 @@ export default function SavedWalls({ savedWalls }) {
       <Pressable onPress={() => navigation.navigate('View All Problems', {
         id: id
       })}>
-        <View style={styles.view} key={id} id={id}>
+        <View style={styles.view} key={Date.now() + savedWalls.indexOf(wall)} id={id}>
           <Image
             source={{ uri: photo_url }}
             style={styles.image}

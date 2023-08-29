@@ -12,8 +12,14 @@ const handleErrors = (response) => {
   }
 }
 
-export const getAllProblems = async (id) => {
-  const response = await fetch(`https://23065c27-5c81-4a37-9fb7-59f7742c76cb.mock.pstmn.io/api/v0/users/1/walls/${id}/problems`);
+// export const getAllProblems = async (id) => {
+//   const response = await fetch(`https://23065c27-5c81-4a37-9fb7-59f7742c76cb.mock.pstmn.io/api/v0/users/1/walls/${id}/problems`);
+//   const data = await handleErrors(response);
+//   return data;
+// };
+
+export const getAllProblems = async () => {
+  const response = await fetch(`https://23065c27-5c81-4a37-9fb7-59f7742c76cb.mock.pstmn.io/api/v0/users/1/walls/1/problems`);
   const data = await handleErrors(response);
   return data;
 };
