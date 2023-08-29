@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import {
   Text,
   View,
@@ -23,12 +23,8 @@ const CreateProblem = ({ vectorColor }) => {
   }, [newVectors]);
 
   const onSingleTap = (event) => {
-    // alert("hi");
     if (event.nativeEvent.state === State.ACTIVE) {
-      // alert("tap!");
-      console.log("here");
       const { x, y } = event.nativeEvent;
-      console.log("native event: ", event.nativeEvent);
       const addVector = {
         color: `#${vectorColor}`,
         x: x - 15,
@@ -37,25 +33,33 @@ const CreateProblem = ({ vectorColor }) => {
       };
 
       setNewVectors((prevVectors) => [...prevVectors, addVector]);
-      console.log(newVectors);
-      alert("newVectors");
     }
   };
 
-  onPanGestureEvent = (event, vector) => {
-    const { translationX, translationY } = event.nativeEvent;
+  const panState = useRef(new Animated.Value(State.UNDETERMINED)).current;
+  const panValue = useRef(new Animated.ValueXY()).current;
 
-    const updatedVector = {
-      ...vector,
-      x: vector.x + translationX,
-      y: vector.y + translationY,
-    };
+  const onPanGestureEvent = Animated.event(
+    [{ nativeEvent: { translationX: panValue.x, translationY: panValue.y } }],
+    { useNativeDriver: false }
+  );
 
-    const updatedVectors = newVectors.map((v) =>
-      v.id === updatedVector.id ? updatedVector : v
-    );
+  const onPanHandlerStateChange = (event, vector) => {
+    if (event.nativeEvent.oldState === State.ACTIVE) {
+      const { translationX, translationY } = event.nativeEvent;
+      const updatedVector = {
+        ...vector,
+        x: vector.x + translationX,
+        y: vector.y + translationY,
+      };
 
-    setNewVectors(updatedVectors);
+      const updatedVectors = newVectors.map((v) =>
+        v.id === updatedVector.id ? updatedVector : v
+      );
+
+      setNewVectors(updatedVectors);
+      panValue.setValue({ x: 0, y: 0 });
+    }
   };
 
   const savedVectors = newVectors.map((vector) => {
@@ -69,6 +73,9 @@ const CreateProblem = ({ vectorColor }) => {
       <PanGestureHandler
         key={id}
         onGestureEvent={(event) => onPanGestureEvent(event, vector)}
+        onHandlerStateChange={(event) =>
+          onPanHandlerStateChange(event, vector)
+        }
       >
         <Animated.View key={id} style={vectorStyle}>
           <AddVectors vectorColor={color} />
@@ -94,8 +101,6 @@ const CreateProblem = ({ vectorColor }) => {
       flex: 1,
     },
   });
-
-  
 
   return (
     <>
