@@ -19,7 +19,7 @@ const CreateProblem = ({ vectorColor }) => {
   const [newVectors, setNewVectors] = useState([]);
 
   useEffect(() => {
-    console.log("newVectors: ", newVectors);
+    // console.log("newVectors: ", newVectors);
   }, [newVectors]);
     
 
@@ -37,34 +37,30 @@ const CreateProblem = ({ vectorColor }) => {
         initialPositionX: x - 15,
         initialPositionY: y - 15,
         id: uuid(),
-        animatedStartingPoint: new Animated.ValueXY({x, y})
+        // animatedStartingPoint: new Animated.ValueXY({x, y})
       };
 
       // console.log('animated starting point: ', addVector.animatedStartingPoint)
 
       setNewVectors((prevVectors) => [...prevVectors, addVector]);
-      console.log(newVectors);
+      // console.log(newVectors);
       alert("newVectors");
     }
   };
 
   onPanGestureEvent = (event, vector) => {
+    // console.log(typeof event.nativeEvent.state)
+    if (event.nativeEvent.state === State.END) {
+      alert('end!')
+    }
     const { translationX, translationY } = event.nativeEvent;
-    console.log('native event on pan guesture: ', event.nativeEvent)
-    // console.log('pan anim start: ', vector.animatedStartingPoint)
     console.log('translationX, translationY', translationX, translationY)
-    // const startX = vector.animatedStartingPoint.x;
-    // const startY = vector.animatedStartingPoint.y;
-
-    // console.log('startX, StartY: ', startX, startY)
+  
     const updatedVector = {
       ...vector,
       x: vector.initialPositionX + translationX,
       y: vector.initialPositionY + translationY,
     };
-
-    // console.log('updatedVector: ', updatedVector.x, updatedVector.y)
-    // console.log('__________________')
 
     const updatedVectors = newVectors.map((v) =>
       v.id === updatedVector.id ? updatedVector : v
@@ -85,7 +81,9 @@ const CreateProblem = ({ vectorColor }) => {
         key={id}
         onGestureEvent={(event) => onPanGestureEvent(event, vector)}
         onPanHandlerStateChange={(event) => {
-          if (event.nativeEvent.state === State.BEGAN) {
+          console.log(event.nativeEvent.state)
+          if (event.nativeEvent.state === State.ACTIVE) {
+            console.log('come here')
             const { x, y } = vector;
             const updatedVector = {
               ...vector,
