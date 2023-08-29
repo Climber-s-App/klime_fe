@@ -111,11 +111,14 @@ const CreateProblem = ({ vectorColor }) => {
             numberOfTaps={2}
           >
             {/* <View style={styles.square} /> */}
-            <Image
-              source={require("../assets/pexels-allan-mas-5383501.jpg")}
-              resizeMode="cover"
-              style={styles.image}
-            />
+            <View style={{height: '100%', width: '100%'}}>
+              <Image
+                source={require("../assets/pexels-allan-mas-5383501.jpg")}
+                resizeMode="cover"
+                style={styles.image}
+              />
+              {/* {savedVectors} */}
+            </View>
           </TapGestureHandler>
         </TapGestureHandler>
       </>
