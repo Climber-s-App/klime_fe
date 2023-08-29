@@ -5,6 +5,7 @@ import CreateProblem from './app/Pages/CreateProblem';
 import Home from './app/Pages/Home';
 import MenuBar from './app/Components/MenuBar';
 import { getUserWalls } from './app/Components/apiCalls';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 export default function App() {
   const [savedWalls, setSavedWalls] = useState([]) 
@@ -33,17 +34,19 @@ export default function App() {
   }
 
   return (
-   <SafeAreaView style={{ ...styles.container, ...styles.androidSafeArea }}> 
-      <StatusBar/>
-      <View style={styles.contentContainer}>
-        <Home savedWalls={savedWalls}/>
-        {/* <ViewProblem /> */}
-        {/* <CreateProblem vectorColor={vectorColor} />  */}
-      </View>
-      <View style={styles.menuContainer}>
-        <MenuBar vectorColor={vectorColor} handleVectorColor={handleVectorColor} />
-      </View>
-     </SafeAreaView>
+    <GestureHandlerRootView>
+    <SafeAreaView style={{ ...styles.container, ...styles.androidSafeArea }}> 
+        <StatusBar/>
+        <View style={styles.contentContainer}>
+          {/* <Home savedWalls={savedWalls}/> */}
+          {/* <ViewProblem /> */}
+          <CreateProblem vectorColor={vectorColor} /> 
+        </View>
+        <View style={styles.menuContainer}>
+          <MenuBar vectorColor={vectorColor} handleVectorColor={handleVectorColor} />
+        </View>
+      </SafeAreaView>
+     </GestureHandlerRootView>
   );
 }
 
