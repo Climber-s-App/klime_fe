@@ -18,7 +18,7 @@ const CreateProblem = ({ vectorColor }) => {
   const onSingleTap = (event) => {
     alert("hi");
     if (event.nativeEvent.state === State.ACTIVE) {
-      alert("tap!");
+      // alert("tap!");
       console.log("here");
       const { locationX, locationY } = event.nativeEvent;
       const addVector = {
@@ -111,8 +111,10 @@ const CreateProblem = ({ vectorColor }) => {
             numberOfTaps={2}
           >
             {/* <View style={styles.square} /> */}
-            <Image 
+            <Image
               source={require("../assets/pexels-allan-mas-5383501.jpg")}
+              resizeMode="cover"
+              style={styles.image}
             />
           </TapGestureHandler>
         </TapGestureHandler>
