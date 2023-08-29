@@ -52,12 +52,9 @@ const CreateProblem = ({ vectorColor }) => {
       //   numberOfTaps={1}
       //   style={styles.viewContainer}
       // >
-    
-         <TapGestureHandler
-            ref={doubleTapRef}
-            onHandlerStateChange={onDoubleTapEvent}
-            numberOfTaps={2}
-          >
+      <TapGestureHandler
+        onHandlerStateChange={onSingleTapCircle}
+      >
         <Animated.View key={id} style={vectorStyle}>
           <AddVectors vectorColor={color} />
         </Animated.View>
@@ -118,7 +115,11 @@ const CreateProblem = ({ vectorColor }) => {
           onHandlerStateChange={onSingleTap}
           waitFor={doubleTapRef}
         >
-         
+          <TapGestureHandler
+            ref={doubleTapRef}
+            onHandlerStateChange={onDoubleTapEvent}
+            numberOfTaps={2}
+          >
             {/* <View style={styles.square} /> */}
             <View style={{height: '100%', width: '100%'}}>
               <Image
@@ -129,6 +130,7 @@ const CreateProblem = ({ vectorColor }) => {
               {savedVectors}
             </View>
           </TapGestureHandler>
+        </TapGestureHandler>
       </>
   );
 };
