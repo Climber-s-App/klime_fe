@@ -1,11 +1,12 @@
-import { useState } from "react";
-import { View, ImageBackground, StyleSheet, Pressable, Animated } from "react-native";
+import { useState, useRef } from "react";
+import { Text, View, ImageBackground, StyleSheet, Pressable, Animated } from "react-native";
 import AddVectors from "../Components/AddVectors";
 import { v4 as uuid } from "uuid";
 import { State, TapGestureHandler } from "react-native-gesture-handler";
 
 const CreateProblem = ({ vectorColor }) => {
   const [newVectors, setNewVectors] = useState([]);
+  
 
   const onSingleTap = (event) => {
     if (event.nativeEvent.state === State.Active) {
@@ -43,6 +44,42 @@ const CreateProblem = ({ vectorColor }) => {
     );
   });
 
+  const [likeColour, setLikeColour] = useState('#28b5b5');
+  const doubleTapRef = useRef(null);
+
+  const onDoubleTapEvent = (event) => {
+    if (event.nativeEvent.state === State.ACTIVE) {
+      likeColour === '#28b5b5'
+        ? setLikeColour('red')
+        : setLikeColour('#28b5b5');
+    }
+  };
+
+  const onSingleTapEvent = (event) => {
+    if (event.nativeEvent.state === State.ACTIVE) {
+      alert('Hey single tap!');
+    }
+  };
+
+  const styles = StyleSheet.create({
+    image: {
+      flex: 1,
+      width: "100%",
+      // height: "100%",
+    },
+    viewContainer: {
+      flex: 1,
+    },
+    square: {
+      width: 150,
+      height: 150,
+      backgroundColor: `${likeColour}`,
+      marginTop: 22,
+      marginBottom: 22,
+    },
+  });
+
+
   return (
     // <ImageBackground
     //   source={require("../assets/pexels-allan-mas-5383501.jpg")}
@@ -51,6 +88,21 @@ const CreateProblem = ({ vectorColor }) => {
     // >
     <View>
       {savedVectors}
+      <>
+      <Text>Double and Single Tap Gesture Handler</Text>
+      <TapGestureHandler
+        onHandlerStateChange={onSingleTapEvent}
+        waitFor={doubleTapRef}
+      >
+        <TapGestureHandler
+          ref={doubleTapRef}
+          onHandlerStateChange={onDoubleTapEvent}
+          numberOfTaps={2}
+        >
+          <View style={styles.square} />
+        </TapGestureHandler>
+      </TapGestureHandler>
+    </>
     </View>
     // </ImageBackground>
   );
@@ -58,13 +110,4 @@ const CreateProblem = ({ vectorColor }) => {
 
 export default CreateProblem;
 
-const styles = StyleSheet.create({
-  image: {
-    flex: 1,
-    width: "100%",
-    // height: "100%",
-  },
-  viewContainer: {
-    flex: 1,
-  },
-});
+
