@@ -1,27 +1,35 @@
 import { useState, useRef } from "react";
-import { Text, View, ImageBackground, StyleSheet, Pressable, Animated } from "react-native";
+import {
+  Text,
+  View,
+  ImageBackground,
+  StyleSheet,
+  Pressable,
+  Animated,
+  Image
+} from "react-native";
 import AddVectors from "../Components/AddVectors";
 import { v4 as uuid } from "uuid";
 import { State, TapGestureHandler } from "react-native-gesture-handler";
 
 const CreateProblem = ({ vectorColor }) => {
   const [newVectors, setNewVectors] = useState([]);
-  
 
   const onSingleTap = (event) => {
-    if (event.nativeEvent.state === State.Active) {
+    alert("hi");
+    if (event.nativeEvent.state === State.ACTIVE) {
       alert("tap!");
       console.log("here");
+      const { locationX, locationY } = event.nativeEvent;
+      const addVector = {
+        color: `#${vectorColor}`,
+        x: locationX - 15,
+        y: locationY - 15,
+        id: uuid(),
+      };
+  
+      setNewVectors((prevVectors) => [...prevVectors, addVector]);
     }
-    const { locationX, locationY } = event.nativeEvent;
-    const addVector = {
-      color: `#${vectorColor}`,
-      x: locationX - 15,
-      y: locationY - 15,
-      id: uuid(),
-    };
-
-    setNewVectors((prevVectors) => [...prevVectors, addVector]);
   };
 
   const savedVectors = newVectors.map((vector) => {
@@ -32,32 +40,32 @@ const CreateProblem = ({ vectorColor }) => {
     };
 
     return (
-      <TapGestureHandler
-        onHandlerStateChange={onSingleTap}
-        numberOfTaps={1}
-        style={styles.viewContainer}
-      >
+      // <TapGestureHandler
+      //   onHandlerStateChange={onSingleTap}
+      //   numberOfTaps={1}
+      //   style={styles.viewContainer}
+      // >
         <Animated.View key={id} style={vectorStyle}>
           <AddVectors vectorColor={color} />
         </Animated.View>
-      </TapGestureHandler>
+      // </TapGestureHandler>
     );
   });
 
-  const [likeColour, setLikeColour] = useState('#28b5b5');
+  const [likeColour, setLikeColour] = useState("#28b5b5");
   const doubleTapRef = useRef(null);
 
   const onDoubleTapEvent = (event) => {
     if (event.nativeEvent.state === State.ACTIVE) {
-      likeColour === '#28b5b5'
-        ? setLikeColour('red')
-        : setLikeColour('#28b5b5');
+      likeColour === "#28b5b5"
+        ? setLikeColour("red")
+        : setLikeColour("#28b5b5");
     }
   };
 
   const onSingleTapEvent = (event) => {
     if (event.nativeEvent.state === State.ACTIVE) {
-      alert('Hey single tap!');
+      alert("Hey single tap!");
     }
   };
 
@@ -79,35 +87,38 @@ const CreateProblem = ({ vectorColor }) => {
     },
   });
 
+  const backgroundImage = (
+    <ImageBackground
+      source={require("../assets/pexels-allan-mas-5383501.jpg")}
+      resizeMode="cover"
+      style={styles.image}
+    >
+      <View>{savedVectors}</View>
+    </ImageBackground>
+  );
 
   return (
-    // <ImageBackground
-    //   source={require("../assets/pexels-allan-mas-5383501.jpg")}
-    //   resizeMode="cover"
-    //   style={styles.image}
-    // >
-    <View>
-      {savedVectors}
+    <TapGestureHandler onHandlerStateChange={onSingleTap}>
       <>
-      <Text>Double and Single Tap Gesture Handler</Text>
-      <TapGestureHandler
-        onHandlerStateChange={onSingleTapEvent}
-        waitFor={doubleTapRef}
-      >
+        <Text>Double and Single Tap Gesture Handler</Text>
         <TapGestureHandler
-          ref={doubleTapRef}
-          onHandlerStateChange={onDoubleTapEvent}
-          numberOfTaps={2}
+          onHandlerStateChange={onSingleTap}
+          waitFor={doubleTapRef}
         >
-          <View style={styles.square} />
+          <TapGestureHandler
+            ref={doubleTapRef}
+            onHandlerStateChange={onDoubleTapEvent}
+            numberOfTaps={2}
+          >
+            {/* <View style={styles.square} /> */}
+            <Image 
+              source={require("../assets/pexels-allan-mas-5383501.jpg")}
+            />
+          </TapGestureHandler>
         </TapGestureHandler>
-      </TapGestureHandler>
-    </>
-    </View>
-    // </ImageBackground>
+      </>
+    </TapGestureHandler>
   );
 };
 
 export default CreateProblem;
-
-
