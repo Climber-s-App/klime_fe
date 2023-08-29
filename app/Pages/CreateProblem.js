@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { ImageBackground, StyleSheet, Pressable, Animated } from "react-native";
+import { View, ImageBackground, StyleSheet, Pressable, Animated } from "react-native";
 import AddVectors from "../Components/AddVectors";
 import { v4 as uuid } from "uuid";
-import { TapGestureHandler } from "react-native-gesture-handler";
+import { State, TapGestureHandler } from "react-native-gesture-handler";
 
 const CreateProblem = ({ vectorColor }) => {
   const [newVectors, setNewVectors] = useState([]);
@@ -36,21 +36,23 @@ const CreateProblem = ({ vectorColor }) => {
         numberOfTaps={1}
         style={styles.viewContainer}
       >
-        {/* <Animated.View key={id}> */}
-        <AddVectors vectorColor={color} />
-        {/* </Animated.View> */}
+        <Animated.View key={id} style={vectorStyle}>
+          <AddVectors vectorColor={color} />
+        </Animated.View>
       </TapGestureHandler>
     );
   });
 
   return (
-    <ImageBackground
-      source={require("../assets/pexels-allan-mas-5383501.jpg")}
-      resizeMode="cover"
-      style={styles.image}
-    >
+    // <ImageBackground
+    //   source={require("../assets/pexels-allan-mas-5383501.jpg")}
+    //   resizeMode="cover"
+    //   style={styles.image}
+    // >
+    <View>
       {savedVectors}
-    </ImageBackground>
+    </View>
+    // </ImageBackground>
   );
 };
 
