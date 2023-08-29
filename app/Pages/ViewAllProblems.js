@@ -1,7 +1,7 @@
 import { Text, StyleSheet, View, Pressable } from 'react-native';
 import {getAllProblems} from '../Components/apiCalls'
 import { useState, useEffect } from 'react';
-import { useNavigation, useCallback } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 export default function ViewAllProblems({route}) {
   const [problems, setSavedProblems] = useState([])
@@ -29,9 +29,9 @@ function getProblemsAll() {
         grade: problem.grade,
         name: problem.name
       })}>
-        <View styles={styles.problemView} key={problem.wall_id} id={problem.wall_id}>
-          <Text>{problem.name}</Text>
-          <Text>{problem.grade}</Text>
+        <View style={styles.problemView} key={problem.wall_id} id={problem.wall_id}>
+          <Text style={styles.routeInformation}>{problem.name}</Text>
+          <Text style={styles.routeInformation}>{problem.grade}</Text>
         </View>
       </Pressable>
     );
@@ -46,6 +46,17 @@ function getProblemsAll() {
 
 const styles = StyleSheet.create({
   problemView: {
-    flexDirection: 'row'
+    borderColor: "black",
+    borderWidth: 1,
+    justifyContent: "space-between",
+    flexDirection: 'row',
+    margin: 5,
+    backgroundColor: "white",
+    padding: 10
   },
+  routeInformation: {
+    fontSize: 25,
+    textAlign: 'center', 
+    margin: 10
+  }
 })

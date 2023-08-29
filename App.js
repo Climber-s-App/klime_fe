@@ -14,14 +14,6 @@ export default function App() {
   // const [savedWalls, setSavedWalls] = useState([])
   const [vectorColor, setVectorColor] = useState('60FF46')
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const data = await getUserWalls();
-  //     const modifiedData = data.data.map((data) => ({ id: data.id, ...data.attributes }))
-  //     setSavedWalls(modifiedData)
-  //   })();
-  // }, [])
-
   const handleVectorColor = (color) => {
     switch (color) {
       case '60FF46':
@@ -37,19 +29,17 @@ export default function App() {
   }
   const Stack = createNativeStackNavigator()
 
-
   return (
     <NavigationContainer style={{ ...styles.container, ...styles.androidSafeArea }}>
       <Stack.Navigator>
           <Stack.Screen name='Home' component={Home} />
           <Stack.Screen name='View All Problems' component={ViewAllProblems} />
           <Stack.Screen name='View Problem' component={ViewProblem} />
+          <Stack.Screen name='Create Problem' component={CreateProblem} />
         </Stack.Navigator>
       <SafeAreaView>
         <StatusBar />
         <View style={styles.contentContainer}>
-          {/* <ViewProblem /> */}
-          {/* <CreateProblem vectorColor={vectorColor} />  */}
         </View>
         <View style={styles.menuContainer}>
           <MenuBar vectorColor={vectorColor} handleVectorColor={handleVectorColor} />
