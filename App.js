@@ -34,7 +34,7 @@ export default function App() {
   }
 
   return (
-    <GestureHandlerRootView>
+    <GestureHandlerRootView style={{ ...styles.container, ...styles.androidSafeArea }}>
     <SafeAreaView style={{ ...styles.container, ...styles.androidSafeArea }}> 
         <StatusBar/>
         <View style={styles.contentContainer}>
