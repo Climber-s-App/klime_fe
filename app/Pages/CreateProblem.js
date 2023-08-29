@@ -35,7 +35,7 @@ const CreateProblem = ({ vectorColor, setCurrentScreen }) => {
       position: "absolute",
     };
 
-    return <Marker style={vectorStyle} key={id} vectorColor={color} />;
+    return <Marker style={vectorStyle} key={id} vector={vector} />;
   });
 
   return (
