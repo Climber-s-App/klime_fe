@@ -1,16 +1,14 @@
 import { Text, View, Image, ScrollView, StyleSheet, Pressable } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-export default function SavedWalls({ savedWalls }, { navigation }) {
+export default function SavedWalls({ savedWalls }) {
 
   const userWalls = savedWalls.map((wall) => {
     const { id, title, photo_url } = wall;
+    // const navigation = useNavigation();
 
     return (
-      <Pressable onPress={() => {
-        navigation.navigate('View All Problems', {
-          id: id
-        });
-      }}>
+      <Pressable>
         <View style={styles.view} key={id} id={id}>
           <Image
             source={{ uri: photo_url }}

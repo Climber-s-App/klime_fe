@@ -1,6 +1,8 @@
-import { Text, View, Image, ScrollView, StyleSheet } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
 
-export default function ViewAllProblems() {
+export default function ViewAllProblems({route}) {
+  // const { id } = route.params
+
   return (
     <Text>Here are all wall specific problems</Text>
   )

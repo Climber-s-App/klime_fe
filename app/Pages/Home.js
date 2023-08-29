@@ -1,8 +1,20 @@
 import { StyleSheet, View, Image } from 'react-native';
 import SavedWalls from '../Components/SavedWalls';
-import { NativeRouter, Route, Link } from "react-router-native";
+import { getUserWalls } from '../Components/apiCalls';
+import { useState, useEffect } from 'react';
 
-export default function Home({savedWalls}) {
+
+export default function Home() {
+  const [savedWalls, setSavedWalls] = useState([])
+
+  useEffect(() => {
+    (async () => {
+      const data = await getUserWalls();
+      const modifiedData = data.data.map((data) => ({ id: data.id, ...data.attributes }))
+      setSavedWalls(modifiedData)
+    })();
+  }, [])
+
   return (
     <View style={styles.viewContainer}>
       <View style={styles.imageContainer}>
