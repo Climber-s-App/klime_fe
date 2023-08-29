@@ -3,12 +3,23 @@ import {
   ImageBackground,
   StyleSheet,
   Pressable,
-  Animated,
   PanResponder,
 } from "react-native";
 import { v4 as uuid } from "uuid";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Marker from "../Components/Marker";
+import AddVectors from "../Components/AddVectors";
+import { TapGestureHandler, PanGestureHandler } from 'react-native-gesture-handler';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  useAnimatedGestureHandler,
+  withSpring,
+} from 'react-native-reanimated';
+import Svg, {  Path } from 'react-native-svg';
+import { View } from 'react-native';
+
+
 
 const CreateProblem = ({ vectorColor, setCurrentScreen }) => {
   const [newVectors, setNewVectors] = useState([]);
@@ -34,9 +45,28 @@ const CreateProblem = ({ vectorColor, setCurrentScreen }) => {
       transform: [{ translateX: x }, { translateY: y }],
       position: "absolute",
     };
+    const translateX = useSharedValue(vector.x);
+    const translateY = useSharedValue(vector.y);
+    
+    const onDrag = useAnimatedGestureHandler({
+      onStart: (event, context) => {
+        context.translateX = translateX.value;
+        context.translateY = translateY.value;
+      },
+      onActive: (event, context) => {
+        translateX.value = event.translationX + context.translationX;
+        translateY.value = event.translationY + context.translationY;
+      }
+    });
 
-    return <Marker size={30} style={vectorStyle} key={id} vector={vector} />;
+    return (
+      <Pressable onPress={handlePress} onLongPress={onDrag} style={styles.viewContainer}>
+        <Marker size={30} style={vectorStyle} key={id} vector={vector} />
+      </Pressable>
+    )
   });
+
+  
 
   return (
     <ImageBackground
@@ -44,9 +74,7 @@ const CreateProblem = ({ vectorColor, setCurrentScreen }) => {
       resizeMode="cover"
       style={styles.image}
     >
-      <Pressable onPress={handlePress} style={styles.viewContainer}>
-        {savedVectors}
-      </Pressable>
+    {savedVectors}
     </ImageBackground>
   );
 };
