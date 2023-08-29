@@ -109,7 +109,6 @@ const CreateProblem = ({ vectorColor }) => {
   );
 
   return (
-    <TapGestureHandler onHandlerStateChange={onSingleTap}>
       <>
         <Text>Double and Single Tap Gesture Handler</Text>
         <TapGestureHandler
@@ -133,7 +132,6 @@ const CreateProblem = ({ vectorColor }) => {
           </TapGestureHandler>
         </TapGestureHandler>
       </>
-    </TapGestureHandler>
   );
 };
 
