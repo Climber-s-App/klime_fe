@@ -77,7 +77,6 @@ const CreateProblem = ({ vectorColor }) => {
     );
   });
 
-  const [likeColour, setLikeColour] = useState("#28b5b5");
   const doubleTapRef = useRef(null);
 
   const onDoubleTapEvent = (event) => {
@@ -96,15 +95,7 @@ const CreateProblem = ({ vectorColor }) => {
     },
   });
 
-  const backgroundImage = (
-    <ImageBackground
-      source={require("../assets/pexels-allan-mas-5383501.jpg")}
-      resizeMode="cover"
-      style={styles.image}
-    >
-      <View>{savedVectors}</View>
-    </ImageBackground>
-  );
+  
 
   return (
     <>
