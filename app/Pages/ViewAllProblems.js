@@ -6,17 +6,12 @@ import { useNavigation } from '@react-navigation/native';
 export default function ViewAllProblems({route}) {
   const [problems, setSavedProblems] = useState([])
 
-function getProblemsAll() {
-  getAllProblems(route.params.id).then(
-    data => {
-      const modifiedData = data.data.map((data) => ({ id: data.id, ...data.attributes }))
-      setSavedProblems(modifiedData)
-    }
-  )
-}
-
   useEffect(() => {
-    getProblemsAll()
+    (async () => {
+      const data = await getAllProblems(route.params.id);
+      const modifiedData = data.data.map((data) => ({ id: data.id, ...data.attributes }));
+      setSavedProblems(modifiedData);
+    })()
   }, [])
 
   const userProblem = problems.map((problem) => {
