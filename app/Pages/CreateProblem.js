@@ -4,20 +4,23 @@ import {
   View,
   ImageBackground,
   StyleSheet,
-  Pressable,
   Animated,
-  Image
+  Image,
 } from "react-native";
 import AddVectors from "../Components/AddVectors";
 import { v4 as uuid } from "uuid";
-import { State, TapGestureHandler, PanGestureHandler } from "react-native-gesture-handler";
+import {
+  State,
+  TapGestureHandler,
+  PanGestureHandler,
+} from "react-native-gesture-handler";
 
 const CreateProblem = ({ vectorColor }) => {
   const [newVectors, setNewVectors] = useState([]);
 
   useEffect(() => {
-    console.log('newVectors: ', newVectors)
-  }, [newVectors])
+    console.log("newVectors: ", newVectors);
+  }, [newVectors]);
 
   const onSingleTap = (event) => {
     // alert("hi");
@@ -25,17 +28,17 @@ const CreateProblem = ({ vectorColor }) => {
       // alert("tap!");
       console.log("here");
       const { x, y } = event.nativeEvent;
-      console.log('native event: ', event.nativeEvent)
+      console.log("native event: ", event.nativeEvent);
       const addVector = {
         color: `#${vectorColor}`,
         x: x - 15,
         y: y - 15,
         id: uuid(),
       };
-  
+
       setNewVectors((prevVectors) => [...prevVectors, addVector]);
-      console.log(newVectors)
-      alert('newVectors')
+      console.log(newVectors);
+      alert("newVectors");
     }
   };
 
@@ -43,17 +46,17 @@ const CreateProblem = ({ vectorColor }) => {
     const { translationX, translationY } = event.nativeEvent;
 
     const updatedVector = {
-      ...vector, 
+      ...vector,
       x: vector.x + translationX,
-      y: vector.y + translationY
+      y: vector.y + translationY,
     };
 
-    const updatedVectors = newVectors.map(v => 
+    const updatedVectors = newVectors.map((v) =>
       v.id === updatedVector.id ? updatedVector : v
     );
 
     setNewVectors(updatedVectors);
-  }
+  };
 
   const savedVectors = newVectors.map((vector) => {
     const { color, x, y, id } = vector;
@@ -63,11 +66,6 @@ const CreateProblem = ({ vectorColor }) => {
     };
 
     return (
-      // <TapGestureHandler
-      //   onHandlerStateChange={onSingleTap}
-      //   numberOfTaps={1}
-      //   style={styles.viewContainer}
-      // >
       <PanGestureHandler
         key={id}
         onGestureEvent={(event) => onPanGestureEvent(event, vector)}
@@ -84,16 +82,7 @@ const CreateProblem = ({ vectorColor }) => {
 
   const onDoubleTapEvent = (event) => {
     if (event.nativeEvent.state === State.ACTIVE) {
-      alert('double tapped!')
-      likeColour === "#28b5b5"
-        ? setLikeColour("red")
-        : setLikeColour("#28b5b5");
-    }
-  };
-
-  const onLongPress = (event) => {
-    if (event.nativeEvent.state === State.ACTIVE) {
-      alert("Hey long press!");
+      alert("double tapped!");
     }
   };
 
@@ -101,17 +90,9 @@ const CreateProblem = ({ vectorColor }) => {
     image: {
       flex: 1,
       width: "100%",
-      // height: "100%",
     },
     viewContainer: {
       flex: 1,
-    },
-    square: {
-      width: 150,
-      height: 150,
-      backgroundColor: `${likeColour}`,
-      marginTop: 22,
-      marginBottom: 22,
     },
   });
 
@@ -126,29 +107,28 @@ const CreateProblem = ({ vectorColor }) => {
   );
 
   return (
-      <>
-        <Text>Double and Single Tap Gesture Handler</Text>
+    <>
+      <Text>Double and Single Tap Gesture Handler</Text>
+      <TapGestureHandler
+        onHandlerStateChange={onSingleTap}
+        waitFor={doubleTapRef}
+      >
         <TapGestureHandler
-          onHandlerStateChange={onSingleTap}
-          waitFor={doubleTapRef}
+          ref={doubleTapRef}
+          onHandlerStateChange={onDoubleTapEvent}
+          numberOfTaps={2}
         >
-          <TapGestureHandler
-            ref={doubleTapRef}
-            onHandlerStateChange={onDoubleTapEvent}
-            numberOfTaps={2}
-          >
-            {/* <View style={styles.square} /> */}
-            <View style={{height: '100%', width: '100%'}}>
-              <Image
-                source={require("../assets/pexels-allan-mas-5383501.jpg")}
-                resizeMode="cover"
-                style={styles.image}
-              />
-              {savedVectors}
-            </View>
-          </TapGestureHandler>
+          <View style={{ height: "100%", width: "100%" }}>
+            <Image
+              source={require("../assets/pexels-allan-mas-5383501.jpg")}
+              resizeMode="cover"
+              style={styles.image}
+            />
+            {savedVectors}
+          </View>
         </TapGestureHandler>
-      </>
+      </TapGestureHandler>
+    </>
   );
 };
 
