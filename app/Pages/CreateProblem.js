@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
   Text,
   View,
@@ -15,20 +15,26 @@ import { State, TapGestureHandler } from "react-native-gesture-handler";
 const CreateProblem = ({ vectorColor }) => {
   const [newVectors, setNewVectors] = useState([]);
 
+  useEffect(() => {
+    console.log('newVectors: ', newVectors)
+  }, [newVectors])
+
   const onSingleTap = (event) => {
     // alert("hi");
     if (event.nativeEvent.state === State.ACTIVE) {
       // alert("tap!");
       console.log("here");
-      const { locationX, locationY } = event.nativeEvent;
+      const { x, y } = event.nativeEvent;
+      console.log('native event: ', event.nativeEvent)
       const addVector = {
         color: `#${vectorColor}`,
-        x: locationX - 15,
-        y: locationY - 15,
+        x: x - 15,
+        y: y - 15,
         id: uuid(),
       };
   
       setNewVectors((prevVectors) => [...prevVectors, addVector]);
+      console.log(newVectors)
       alert('newVectors')
     }
   };
@@ -36,7 +42,7 @@ const CreateProblem = ({ vectorColor }) => {
   const savedVectors = newVectors.map((vector) => {
     const { color, x, y, id } = vector;
     const vectorStyle = {
-      transform: [{ translateX: 0 }, { translateY: 0 }],
+      transform: [{ translateX: x }, { translateY: y }],
       position: "absolute",
     };
 
