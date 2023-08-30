@@ -1,34 +1,45 @@
 import { Text, StyleSheet, View, Pressable } from 'react-native';
 import {getAllProblems} from '../Components/apiCalls'
-import { useState, useEffect } from 'react';
-import { useNavigation } from '@react-navigation/native';
+import { useState, useEffect, useContext } from 'react';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import RouteContext from '../Components/RouteContext';
 
 export default function ViewAllProblems({route}) {
   const [problems, setSavedProblems] = useState([])
-
-function getProblemsAll() {
-  getAllProblems(route.params.id).then(
-    data => {
-      const modifiedData = data.data.map((data) => ({ id: data.id, ...data.attributes }))
-      setSavedProblems(modifiedData)
-    }
-  )
-}
+  const { setCurrentRoute } = useContext(RouteContext);
+  const currentScreen = useRoute();
+  const navigation = useNavigation();
 
   useEffect(() => {
-    getProblemsAll()
+    const unsubscribeFocus = navigation.addListener('focus', () => {
+      setCurrentRoute(currentScreen.name);
+    });
+
+    return () => {
+      unsubscribeFocus();
+    };
+  }, [navigation, currentScreen, setCurrentRoute]);
+
+  useEffect(() => {
+    (async () => {
+      const data = await getAllProblems(route.params.id);
+      const modifiedData = data.data.map((data) => ({ id: data.id, ...data.attributes }));
+      setSavedProblems(modifiedData);
+    })()
   }, [])
 
-  const userProblem = problems.map((problem) => {
-    const navigation = useNavigation();
+  const handleProblemNavigation = (problem) => {
+    navigation.navigate('View Problem', {
+      id: problem.id,
+      image: route.params.image,
+      grade: problem.grade,
+      name: problem.name
+    });
+  }
 
+  const userProblem = problems.map((problem) => {
     return (
-      <Pressable onPress={() => navigation.navigate('View Problem', {
-        id: problem.id,
-        image: route.params.image,
-        grade: problem.grade,
-        name: problem.name
-      })}>
+      <Pressable key={problem.id} onPress={() => handleProblemNavigation(problem)}>
         <View style={styles.problemView} key={problem.wall_id} id={problem.wall_id}>
           <Text style={styles.routeInformation}>{problem.name}</Text>
           <Text style={styles.routeInformation}>{problem.grade}</Text>
