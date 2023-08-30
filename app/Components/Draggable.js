@@ -40,12 +40,10 @@ export default function Draggable({
   const pan = Gesture.Pan()
     .onBegin((event) => {})
     .onChange((event) => {
-      console.log(event);
       handleChange(event);
     })
     .onFinalize((event) => {
       handleFinalize(event)
-      alert("end");
     });
 
   return (

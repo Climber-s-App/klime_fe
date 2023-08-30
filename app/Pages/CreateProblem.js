@@ -2,12 +2,8 @@ import { useState, useContext, useEffect } from "react";
 import {
   View,
   Image,
-  ImageBackground,
   StyleSheet,
-  Pressable,
-  Animated,
 } from "react-native";
-import AddVectors from "../Components/AddVectors";
 import { v4 as uuid } from "uuid";
 import RouteContext from "../Components/RouteContext";
 import { useRoute, useNavigation } from "@react-navigation/native";
