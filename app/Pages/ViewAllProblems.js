@@ -1,10 +1,26 @@
 import { Text, StyleSheet, View, Pressable } from 'react-native';
 import {getAllProblems} from '../Components/apiCalls'
-import { useState, useEffect } from 'react';
-import { useNavigation } from '@react-navigation/native';
+import { useState, useEffect, useContext } from 'react';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import RouteContext from '../Components/RouteContext';
 
 export default function ViewAllProblems({route}) {
   const [problems, setSavedProblems] = useState([])
+  const { currentRoute, setCurrentRoute } = useContext(RouteContext);
+  console.log(currentRoute, 'Current ROute!!! view all problems')
+  console.log(currentScreen, 'ROute!!! view all problems')
+  const currentScreen = useRoute();
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    const unsubscribeFocus = navigation.addListener('focus', () => {
+      setCurrentRoute(currentScreen.name);
+    });
+
+    return () => {
+      unsubscribeFocus();
+    };
+  }, [navigation, currentScreen, setCurrentRoute]);
 
   useEffect(() => {
     (async () => {

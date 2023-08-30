@@ -1,11 +1,25 @@
 import { StyleSheet, View, Image } from 'react-native';
 import SavedWalls from '../Components/SavedWalls';
 import { getUserWalls } from '../Components/apiCalls';
-import { useState, useEffect } from 'react';
-
+import { useState, useEffect, useContext } from 'react';
+import RouteContext from '../Components/RouteContext';
+import { useRoute, useNavigation } from '@react-navigation/native';
 
 export default function Home() {
   const [savedWalls, setSavedWalls] = useState([])
+  const { setCurrentRoute } = useContext(RouteContext);
+  const currentScreen = useRoute();
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    const unsubscribeFocus = navigation.addListener('focus', () => {
+      setCurrentRoute(currentScreen.name);
+    });
+
+    return () => {
+      unsubscribeFocus();
+    };
+  }, [navigation, currentScreen, setCurrentRoute]);
 
   useEffect(() => {
     (async () => {

@@ -1,8 +1,8 @@
 import { Text, View, Image, ScrollView, StyleSheet, Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-export default function SavedWalls({ savedWalls }) {
 
+export default function SavedWalls({ savedWalls }) {
   const userWalls = savedWalls.map((wall) => {
     const { id, title, photo_url } = wall;
     const navigation = useNavigation();

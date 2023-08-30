@@ -1,11 +1,26 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import { ImageBackground, StyleSheet, Pressable, Animated } from "react-native";
 import AddVectors from "../Components/AddVectors";
 import { v4 as uuid } from 'uuid';
+import RouteContext from "../Components/RouteContext";
+import { useRoute, useNavigation } from '@react-navigation/native';
 
 const CreateProblem = ({vectorColor}) => {
   const [newVectors, setNewVectors] = useState([])
-  
+  const { setCurrentRoute } = useContext(RouteContext)
+  const currentScreen = useRoute();
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    const unsubscribeFocus = navigation.addListener('focus', () => {
+      setCurrentRoute(currentScreen.name);
+    });
+
+    return () => {
+      unsubscribeFocus();
+    };
+  }, [navigation, currentScreen, setCurrentRoute]);
+
   const handlePress = (event) => {
     const { locationX, locationY } = event.nativeEvent;
     const addVector = { color: `#${vectorColor}`, x: locationX - 15, y: locationY - 15, id: uuid() };
@@ -42,7 +57,6 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     width: '100%',
-    // height: "100%",
   },
   viewContainer: {
     flex: 1, 
