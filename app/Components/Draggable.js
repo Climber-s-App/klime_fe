@@ -27,7 +27,7 @@ export default function Draggable({
     updateNewVectors(updatedVector);
   };
 
-  const handleFinalize = (event) => {
+  const handleFinalize = () => {
     const { x, y } = vector;
     const updatedVector = {
       ...vector,
@@ -38,12 +38,11 @@ export default function Draggable({
   };
 
   const pan = Gesture.Pan()
-    .onBegin((event) => {})
     .onChange((event) => {
       handleChange(event);
     })
-    .onFinalize((event) => {
-      handleFinalize(event)
+    .onFinalize(() => {
+      handleFinalize();
     });
 
   return (
