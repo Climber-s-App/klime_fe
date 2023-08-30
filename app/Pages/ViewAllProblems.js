@@ -6,9 +6,7 @@ import RouteContext from '../Components/RouteContext';
 
 export default function ViewAllProblems({route}) {
   const [problems, setSavedProblems] = useState([])
-  const { currentRoute, setCurrentRoute } = useContext(RouteContext);
-  console.log(currentRoute, 'Current ROute!!! view all problems')
-  console.log(currentScreen, 'ROute!!! view all problems')
+  const {  setCurrentRoute } = useContext(RouteContext);
   const currentScreen = useRoute();
   const navigation = useNavigation();
 
