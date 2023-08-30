@@ -36,7 +36,6 @@ const CreateProblem = ({ vectorColor }) => {
     }
   };
 
-  const panState = useRef(new Animated.Value(State.UNDETERMINED)).current;
   const panValue = useRef(new Animated.ValueXY()).current;
 
   const onPanGestureEvent = Animated.event(
@@ -45,7 +44,9 @@ const CreateProblem = ({ vectorColor }) => {
   );
 
   const onPanHandlerStateChange = (event, vector) => {
+    console.log(event.nativeEvent.state)
     if (event.nativeEvent.oldState === State.ACTIVE) {
+      console.log('active')
       const { translationX, translationY } = event.nativeEvent;
       const updatedVector = {
         ...vector,
