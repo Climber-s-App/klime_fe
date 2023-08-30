@@ -11,11 +11,8 @@ import AddVectors from "../Components/AddVectors";
 import { v4 as uuid } from "uuid";
 import RouteContext from "../Components/RouteContext";
 import { useRoute, useNavigation } from "@react-navigation/native";
-import {
-  Gesture,
-  GestureDetector,
-  State
-} from "react-native-gesture-handler";
+import { Gesture, GestureDetector, State } from "react-native-gesture-handler";
+import Draggable from "../Components/Draggable";
 
 const CreateProblem = () => {
   const [newVectors, setNewVectors] = useState([]);
@@ -34,7 +31,7 @@ const CreateProblem = () => {
   }, [navigation, currentScreen, setCurrentRoute]);
 
   const handleSingleTap = (event) => {
-    console.log(event)
+    console.log(event);
     if (event.state === State.ACTIVE) {
       const { x, y } = event;
       const addVector = {
@@ -43,7 +40,6 @@ const CreateProblem = () => {
         y: y - 15,
         id: uuid(),
       };
-
       setNewVectors((prevVectors) => [...prevVectors, addVector]);
     }
   };
@@ -61,11 +57,7 @@ const CreateProblem = () => {
       position: "absolute",
     };
 
-    return (
-      <Animated.View style={vectorStyle} key={id}>
-        <AddVectors vectorColor={color} />
-      </Animated.View>
-    );
+    return <Draggable vectorStyle={vectorStyle} vectorColor={color} key={id} />;
   });
 
   return (
