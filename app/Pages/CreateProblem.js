@@ -31,13 +31,14 @@ const CreateProblem = () => {
   }, [navigation, currentScreen, setCurrentRoute]);
 
   const handleSingleTap = (event) => {
-    console.log(event);
     if (event.state === State.ACTIVE) {
       const { x, y } = event;
       const addVector = {
         color: `#${vectorColor}`,
         x: x - 15,
         y: y - 15,
+        initialX: x - 15,
+        initialY: y - 15,
         id: uuid(),
       };
       setNewVectors((prevVectors) => [...prevVectors, addVector]);
@@ -56,8 +57,7 @@ const CreateProblem = () => {
       transform: [{ translateX: x }, { translateY: y }],
       position: "absolute",
     };
-
-    return <Draggable vectorStyle={vectorStyle} vectorColor={color} key={id} />;
+    return <Draggable vectorStyle={vectorStyle} vectorColor={color} vector={vector} newVectors={newVectors} setNewVectors={setNewVectors} key={id} />;
   });
 
   return (
