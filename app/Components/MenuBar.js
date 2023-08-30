@@ -1,11 +1,11 @@
-import { View, StyleSheet } from 'react-native';
-import { Pressable } from 'react-native';
+import { View, StyleSheet, Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Svg, {  Path } from 'react-native-svg';
 import RouteContext from './RouteContext';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 
 export default function MenuBar({ vectorColor, handleVectorColor }) {
+  const [screenInfo, setScreenInfo] = useState()
   const { currentRoute } = useContext(RouteContext);
   const navigation = useNavigation();
   const infoIcon = <Svg height="42" viewBox="0 -960 960 960" width="42">
@@ -62,11 +62,11 @@ export default function MenuBar({ vectorColor, handleVectorColor }) {
 
   return (
     <View style={styles.menuContainer}>
-       {currentRoute === 'View All Problems' && <Pressable style={styles.infoStyle} onPress={() => {
-
+       <Pressable style={styles.infoStyle} onPress={() => {
+         
        }}>
         {infoIcon}
-      </Pressable >}
+      </Pressable >
       <Pressable style={styles.image} onPress={() => navigation.navigate('Create Problem', {
         vectorColors: vectorColor
       })}>
