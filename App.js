@@ -31,6 +31,7 @@ export default function App() {
   };
 
   return (
+    <GestureHandlerRootView style={{flex: 1}}>
     <RouteContext.Provider
       value={{ currentRoute, setCurrentRoute, vectorColor }}
     >
@@ -43,7 +44,7 @@ export default function App() {
           <Stack.Screen name="View Problem" component={ViewProblem} />
           <Stack.Screen name="Create Problem" component={CreateProblem} />
         </Stack.Navigator>
-        <GestureHandlerRootView>
+      
           <SafeAreaView>
             <StatusBar />
             <View style={styles.contentContainer} />
@@ -54,9 +55,10 @@ export default function App() {
               />
             </View>
           </SafeAreaView>
-        </GestureHandlerRootView>
+      
       </NavigationContainer>
     </RouteContext.Provider>
+    </GestureHandlerRootView>
   );
 }
 
