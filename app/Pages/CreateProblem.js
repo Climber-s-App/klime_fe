@@ -91,8 +91,4 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
   },
-  viewContainer: {
-    flex: 1,
-    zIndex: 2,
-  },
 });
