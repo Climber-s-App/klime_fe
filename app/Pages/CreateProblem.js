@@ -5,9 +5,9 @@ import { v4 as uuid } from 'uuid';
 import RouteContext from "../Components/RouteContext";
 import { useRoute, useNavigation } from '@react-navigation/native';
 
-const CreateProblem = ({vectorColor}) => {
+const CreateProblem = () => {
   const [newVectors, setNewVectors] = useState([])
-  const { setCurrentRoute } = useContext(RouteContext)
+  const { setCurrentRoute, vectorColor } = useContext(RouteContext)
   const currentScreen = useRoute();
   const navigation = useNavigation();
 

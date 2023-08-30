@@ -57,7 +57,7 @@ export default function MenuBar({ vectorColor, handleVectorColor }) {
         <InfoModal isVisible={isInfoModalVisible} currentRoute={currentRoute} handleInfoModal={handleInfoModal} />
       </Pressable >
       <Pressable style={styles.image} onPress={() => navigation.navigate('Create Problem', {
-        vectorColors: vectorColor
+        vectorColor: vectorColor
       })}>
         {addIcon}
       </Pressable >

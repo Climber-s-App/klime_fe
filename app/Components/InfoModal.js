@@ -9,9 +9,25 @@ const InfoModal = ({isVisible, currentRoute, handleInfoModal}) => {
   return (
     <Modal isVisible={isVisible} style={styles.container}>
       <View style={styles.modal}>
-          <Text style={styles.text}>Select your choices to navigate to a specific wall's problems</Text>
-          <Button title="CLOSE" onPress={handleInfoModal} />
+        <Text style={styles.title}>KLIME INFO</Text>
+        <Text style={styles.text}>Select your wall and navigate to a specific wall's problems</Text>
+        <View style={styles.vectorContainer}>
+          <Text style={styles.text}>Click the color circle to toggle between colors:</Text>
+          <View style={styles.vectorIdContainer}>
+            <View style={styles.vectorColor} />
+            <Text style={[styles.text, {marginLeft: 10}]}>Green signifies a start hold</Text>
+          </View>
+          <View style={styles.vectorIdContainer}>
+            <View style={[styles.vectorColor, { borderColor: '#16e8f7' }]} />
+            <Text style={[styles.text, {marginLeft: 10}]}>Blue holds are in</Text>
         </View>
+          <View style={styles.vectorIdContainer}>
+            <View style={[styles.vectorColor, { borderColor: '#f72556' }]} />
+            <Text style={[styles.text, {marginLeft: 10}]}>Red signifies a finish hold</Text>
+          </View>
+        </View>
+        <Button color={'#2A6620'} title="CLOSE" onPress={handleInfoModal} />
+      </View>
     </Modal>
 
   )
@@ -27,10 +43,15 @@ const styles = StyleSheet.create({
     
     // height:30,
   },
+  title: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginBottom: 8,
+  },
   text: {
     paddingTop: 10,
     // textAlign: "center",
-    // fontSize: 16,
+    fontSize: 16,
   },
   body: {
     justifyContent: "center",
@@ -42,6 +63,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 10,
     flexDirection: "row",
+  },
+  button: {
+    flexDirection: "row",
+    flex: 1,
+    justifyContent: "center",
+    backgroundColor: 'red',
+    color: 'red'
   },
   modal: {
     // height: "90%",
@@ -56,5 +84,29 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#000",
     borderStyle: "solid",
+  },
+  vectorColor: {
+    borderWidth: 5,
+    borderColor: `#60FF46`,
+    // position: 'absolute',
+    width: 35,
+    height: 35,
+    backgroundColor: 'transparent',
+    borderRadius: 30,
+    alignSelf: "left",
+    marginTop: 6
+    // right: 10,
+  },  
+  vectorContainer: {
+    alignSelf: "left",
+    // marginTop: 6,
+  },
+  vectorIdContainer: {
+    // alignSelf: "center",
+    alignContent: 'center',
+    alignItems: 'center',
+    // justifyContent: 'center', 
+    marginTop: 6,
+    flexDirection: 'row'
   },
 });

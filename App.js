@@ -12,9 +12,9 @@ import ViewAllProblems from '../klime_fe/app/Pages/ViewAllProblems'
 
 
 export default function App() {
-  const [vectorColor, setVectorColor] = useState('60FF46')
   const Stack = createNativeStackNavigator()
   const [currentRoute, setCurrentRoute] = useState('Home')
+  const [vectorColor, setVectorColor] = useState('60FF46')
 
   const handleVectorColor = (color) => {
     switch (color) {
@@ -31,7 +31,7 @@ export default function App() {
   }  
 
   return (
-    <RouteContext.Provider value={{currentRoute, setCurrentRoute}}>
+    <RouteContext.Provider value={{currentRoute, setCurrentRoute, vectorColor}}>
       <NavigationContainer style={{ ...styles.container, ...styles.androidSafeArea }}>
         <Stack.Navigator>
             <Stack.Screen name='Home' component={Home} />

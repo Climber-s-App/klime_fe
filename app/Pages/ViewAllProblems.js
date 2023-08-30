@@ -6,7 +6,7 @@ import RouteContext from '../Components/RouteContext';
 
 export default function ViewAllProblems({route}) {
   const [problems, setSavedProblems] = useState([])
-  const {  setCurrentRoute } = useContext(RouteContext);
+  const { setCurrentRoute } = useContext(RouteContext);
   const currentScreen = useRoute();
   const navigation = useNavigation();
 
@@ -29,10 +29,8 @@ export default function ViewAllProblems({route}) {
   }, [])
 
   const userProblem = problems.map((problem) => {
-    const navigation = useNavigation();
-
     return (
-      <Pressable onPress={() => navigation.navigate('View Problem', {
+      <Pressable key={problem.id} onPress={() => navigation.navigate('View Problem', {
         id: problem.id,
         image: route.params.image,
         grade: problem.grade,
