@@ -22,9 +22,8 @@ const CreateProblem = ({ vectorColor }) => {
     // console.log("newVectors: ", newVectors);
   }, [newVectors]);
     
-
   const onSingleTap = (event) => {
-    // alert("hi");
+  
     if (event.nativeEvent.state === State.ACTIVE) {
       // alert("tap!");
       console.log("here");
@@ -37,7 +36,6 @@ const CreateProblem = ({ vectorColor }) => {
         initialPositionX: x - 15,
         initialPositionY: y - 15,
         id: uuid(),
-        // animatedStartingPoint: new Animated.ValueXY({x, y})
       };
 
       // console.log('animated starting point: ', addVector.animatedStartingPoint)
@@ -48,11 +46,28 @@ const CreateProblem = ({ vectorColor }) => {
     }
   };
 
-  onPanGestureEvent = (event, vector) => {
-    // console.log(typeof event.nativeEvent.state)
+  const onEndOfPan = (event, vector, index) => {
+    console.log(event.nativeEvent.state)
+    if (event.nativeEvent.state === State.ACTIVE) {
+      console.log('come here')
+      const { x, y } = vector;
+      const updatedVector = {
+        ...vector,
+        initialPositionX: x,
+        initialPositionY: y
+      };
+      setNewVectors(newVectors.splice(index, 1, updatedVector));
+    }
+  }
+
+  const onPanGestureEvent = (event, vector, index) => {
+    console.log('=======>pan event state: ', event.nativeEvent.state)
     if (event.nativeEvent.state === State.END) {
       alert('end!')
     }
+
+   
+    // onEndOfPan(event, vector, index);
     const { translationX, translationY } = event.nativeEvent;
     console.log('translationX, translationY', translationX, translationY)
   
@@ -67,6 +82,7 @@ const CreateProblem = ({ vectorColor }) => {
     );
 
     setNewVectors(updatedVectors);
+    
   };
 
   const savedVectors = newVectors.map((vector, index) => {
@@ -79,19 +95,9 @@ const CreateProblem = ({ vectorColor }) => {
     return (
       <PanGestureHandler
         key={id}
-        onGestureEvent={(event) => onPanGestureEvent(event, vector)}
+        onGestureEvent={(event) => onPanGestureEvent(event, vector, index)}
         onPanHandlerStateChange={(event) => {
-          console.log(event.nativeEvent.state)
-          if (event.nativeEvent.state === State.ACTIVE) {
-            console.log('come here')
-            const { x, y } = vector;
-            const updatedVector = {
-              ...vector,
-              initialPositionX: x,
-              initialPositionY: y
-            };
-            setNewVectors(newVectors.splice(index, 1, updatedVector));
-          }
+      
         }}
       >
         <Animated.View key={id} style={vectorStyle}>
