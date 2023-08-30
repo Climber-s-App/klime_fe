@@ -49,17 +49,17 @@ export default function MenuBar({ vectorColor, handleVectorColor }) {
       left: 10,
     }
   });
-
+  
   return (
     <View style={styles.menuContainer}>
        <Pressable style={styles.infoStyle} onPress={handleInfoModal}>
         {infoIcon}
-        <InfoModal isVisible={isInfoModalVisible} currentRoute={currentRoute} handleInfoModal={handleInfoModal} />
+        <InfoModal isVisible={isInfoModalVisible} currentRoute={currentRoute} handleInfoModal={handleInfoModal} addIcon={addIcon} />
       </Pressable >
       <Pressable style={styles.image} onPress={() => navigation.navigate('Create Problem', {
         vectorColor: vectorColor
       })}>
-        {addIcon}
+        {(currentRoute === 'View All Problems' || currentRoute === 'Create Problem') && addIcon}
       </Pressable >
       <Pressable onPress={() => handleVectorColor(vectorColor)} style={styles.vectorColor} />
     </View >

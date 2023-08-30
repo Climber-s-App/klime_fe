@@ -2,7 +2,7 @@ import  Modal  from "react-native-modal";
 import { useState } from 'react';
 import { Text, View, StyleSheet, Button } from "react-native";
 
-const InfoModal = ({isVisible, currentRoute, handleInfoModal}) => {
+const InfoModal = ({isVisible, currentRoute, handleInfoModal, addIcon}) => {
   const [CurrentInfo, setCurrentInfo] = useState()
  
 
@@ -13,17 +13,21 @@ const InfoModal = ({isVisible, currentRoute, handleInfoModal}) => {
         <Text style={styles.text}>Select your wall and navigate to a specific wall's problems</Text>
         <View style={styles.vectorContainer}>
           <Text style={styles.text}>Click the color circle to toggle between colors:</Text>
-          <View style={styles.vectorIdContainer}>
+          <View style={styles.iconContainer}>
             <View style={styles.vectorColor} />
             <Text style={[styles.text, {marginLeft: 10}]}>Green signifies a start hold</Text>
           </View>
-          <View style={styles.vectorIdContainer}>
+          <View style={styles.iconContainer}>
             <View style={[styles.vectorColor, { borderColor: '#16e8f7' }]} />
             <Text style={[styles.text, {marginLeft: 10}]}>Blue holds are in</Text>
         </View>
-          <View style={styles.vectorIdContainer}>
+          <View style={styles.iconContainer}>
             <View style={[styles.vectorColor, { borderColor: '#f72556' }]} />
             <Text style={[styles.text, {marginLeft: 10}]}>Red signifies a finish hold</Text>
+          </View>
+          <View style={[styles.iconContainer, {marginBottom: 20, right: 3}]}>
+            {addIcon}
+            <Text style={[styles.text, {marginLeft: 10}]}>Push to add and save a new problem</Text>
           </View>
         </View>
         <Button color={'#2A6620'} title="CLOSE" onPress={handleInfoModal} />
@@ -101,7 +105,7 @@ const styles = StyleSheet.create({
     alignSelf: "left",
     // marginTop: 6,
   },
-  vectorIdContainer: {
+  iconContainer: {
     // alignSelf: "center",
     alignContent: 'center',
     alignItems: 'center',
