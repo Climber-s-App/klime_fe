@@ -21,6 +21,14 @@ export default function Draggable({
     setNewVectors(updatedVectors);
   };
 
+  const deleteVector = (event, selectedItem) => {
+    const updatedVectors = newVectors.filter((v) => 
+      v.id !== selectedItem.id
+    )
+
+    setNewVectors(updatedVectors)
+  }
+
   const handleChange = (event) => {
     const { translationX, translationY } = event;
     const updatedVector = {
@@ -55,7 +63,8 @@ export default function Draggable({
 
   const longPressGesture = Gesture.LongPress().onEnd((e, success) => {
     if (success) {
-      alert(`Do you want to delete this circle?`);
+      alert(`Do you want to delete this circle? Have to be yes now`);
+      deleteVector(e, selectedItem)
     }
     console.log('long press event', e)
     console.log('long press selectedCircle: ', selectedCircle)
