@@ -45,20 +45,26 @@ export default function Draggable({
       handleFinalize();
     });
 
-    const longPressGesture = Gesture.LongPress().onEnd((e, success) => {
-      if (success) {
-        alert(`Long pressed for ${e.duration} ms!`);
-      }
-    });
+  const longPressGesture = Gesture.LongPress().onEnd((e, success) => {
+    if (success) {
+      alert(`Long pressed for ${e.duration} ms!`);
+    }
+  });
 
-    
+  const singleTap = Gesture.Tap()
+    .maxDuration(250)
+    .onStart((event) => {
+      alert("singleTap");
+    });
 
   return (
     <GestureDetector gesture={pan}>
       <GestureDetector gesture={longPressGesture}>
-      <Animated.View style={vectorStyle}>
-        <AddVectors vectorColor={vectorColor} />
-      </Animated.View>
+        <GestureDetector gesture={singleTap}>
+          <Animated.View style={vectorStyle}>
+            <AddVectors vectorColor={vectorColor} />
+          </Animated.View>
+        </GestureDetector>
       </GestureDetector>
     </GestureDetector>
   );
