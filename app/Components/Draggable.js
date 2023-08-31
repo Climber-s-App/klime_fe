@@ -1,6 +1,7 @@
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import { Animated } from "react-native";
 import AddVectors from "../Components/AddVectors";
+import { useState } from 'react';
 
 export default function Draggable({
   vectorStyle,
@@ -9,6 +10,9 @@ export default function Draggable({
   newVectors,
   setNewVectors,
 }) {
+  const [circleToDelete, setCircleToDelete] = useState({});
+  const [selectedCircle, setSelectedCircle] = useState({})
+
   const updateNewVectors = (updatedVector) => {
     const updatedVectors = newVectors.map((v) =>
       v.id === updatedVector.id ? updatedVector : v
@@ -27,28 +31,34 @@ export default function Draggable({
     updateNewVectors(updatedVector);
   };
 
-  const handleFinalize = () => {
+  const handleFinalize = (event) => {
     const { x, y } = vector;
     const updatedVector = {
       ...vector,
       initialX: x,
       initialY: y,
     };
+    console.log('pan finalize updatedVector: ', updatedVector)
+    selectedItem = {id: vector.id};
     updateNewVectors(updatedVector);
+    setSelectedCircle({id: vector.id, eventX: event.x, eventY: event.y})
   };
 
   const pan = Gesture.Pan()
     .onChange((event) => {
       handleChange(event);
     })
-    .onFinalize(() => {
-      handleFinalize();
+    .onFinalize((event) => {
+      handleFinalize(event);
+      console.log('pan finalize event: ', event)
     });
 
   const longPressGesture = Gesture.LongPress().onEnd((e, success) => {
     if (success) {
-      alert(`Long pressed for ${e.duration} ms!`);
+      alert(`Do you want to delete this circle?`);
     }
+    console.log('long press event', e)
+    console.log('long press selectedCircle: ', selectedCircle)
   });
 
   const singleTap = Gesture.Tap()
@@ -56,6 +66,16 @@ export default function Draggable({
     .onStart((event) => {
       alert("singleTap");
     });
+
+  // circleToDelete structure: {updatedVector id, pan finialize event x y}
+  // long press
+  // confirmation alert box
+  // if clicked ok, delete
+    // get selected circle position
+    // find in new vectors
+    // delete from new vectors
+    // update new vectors state
+  // if clicked cancel, close alert box and do nothing
 
   return (
     <GestureDetector gesture={pan}>
