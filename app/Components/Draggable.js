@@ -1,7 +1,7 @@
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import { Animated } from "react-native";
 import AddVectors from "../Components/AddVectors";
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function Draggable({
   vectorStyle,
@@ -10,8 +10,7 @@ export default function Draggable({
   newVectors,
   setNewVectors,
 }) {
-  const [circleToDelete, setCircleToDelete] = useState({});
-  const [selectedCircle, setSelectedCircle] = useState({})
+  const [targetId, setTargetId] = useState({});
 
   const updateNewVectors = (updatedVector) => {
     const updatedVectors = newVectors.map((v) =>
@@ -21,13 +20,11 @@ export default function Draggable({
     setNewVectors(updatedVectors);
   };
 
-  const deleteVector = (event, selectedItem) => {
-    const updatedVectors = newVectors.filter((v) => 
-      v.id !== selectedItem.id
-    )
+  const deleteVector = (selectedId) => {
+    const updatedVectors = newVectors.filter((v) => v.id !== selectedId);
 
-    setNewVectors(updatedVectors)
-  }
+    setNewVectors(updatedVectors);
+  };
 
   const handleChange = (event) => {
     const { translationX, translationY } = event;
@@ -39,17 +36,16 @@ export default function Draggable({
     updateNewVectors(updatedVector);
   };
 
-  const handleFinalize = (event) => {
+  const handleFinalize = () => {
     const { x, y } = vector;
     const updatedVector = {
       ...vector,
       initialX: x,
       initialY: y,
     };
-    console.log('pan finalize updatedVector: ', updatedVector)
-    selectedItem = {id: vector.id};
+    selectedItem = { id: vector.id };
     updateNewVectors(updatedVector);
-    setSelectedCircle({id: vector.id, eventX: event.x, eventY: event.y})
+    setTargetId(vector.id);
   };
 
   const pan = Gesture.Pan()
@@ -58,21 +54,18 @@ export default function Draggable({
     })
     .onFinalize((event) => {
       handleFinalize(event);
-      console.log('pan finalize event: ', event)
     });
 
   const longPressGesture = Gesture.LongPress().onEnd((e, success) => {
     if (success) {
       alert(`Do you want to delete this circle? Have to be yes now`);
-      deleteVector(e, selectedItem)
+      deleteVector(targetId);
     }
-    console.log('long press event', e)
-    console.log('long press selectedCircle: ', selectedCircle)
   });
 
   const singleTap = Gesture.Tap()
     .maxDuration(250)
-    .onStart((event) => {
+    .onStart(() => {
       alert("singleTap");
     });
 
@@ -80,10 +73,10 @@ export default function Draggable({
   // long press
   // confirmation alert box
   // if clicked ok, delete
-    // get selected circle position
-    // find in new vectors
-    // delete from new vectors
-    // update new vectors state
+  // get selected circle position
+  // find in new vectors
+  // delete from new vectors
+  // update new vectors state
   // if clicked cancel, close alert box and do nothing
 
   return (
