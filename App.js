@@ -14,18 +14,18 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 export default function App() {
   const Stack = createNativeStackNavigator();
   const [currentRoute, setCurrentRoute] = useState("Home");
-  const [vectorColor, setVectorColor] = useState("60FF46");
+  const [vectorColor, setVectorColor] = useState("#60FF46");
 
   const handleVectorColor = (color) => {
     switch (color) {
-      case "60FF46":
-        setVectorColor("16e8f7");
+      case "#60FF46":
+        setVectorColor("#16e8f7");
         break;
-      case "16e8f7":
-        setVectorColor("f72556");
+      case "#16e8f7":
+        setVectorColor("#f72556");
         break;
-      case "f72556":
-        setVectorColor("60FF46");
+      case "#f72556":
+        setVectorColor("#60FF46");
         break;
     }
   };

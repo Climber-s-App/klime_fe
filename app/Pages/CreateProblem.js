@@ -30,7 +30,7 @@ const CreateProblem = () => {
     if (event.state === State.ACTIVE) {
       const { x, y } = event;
       const addVector = {
-        color: `#${vectorColor}`,
+        color: `${vectorColor}`,
         x: x - 15,
         y: y - 15,
         initialX: x - 15,

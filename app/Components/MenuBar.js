@@ -36,7 +36,7 @@ export default function MenuBar({ vectorColor, handleVectorColor }) {
     },
     vectorColor: {
       borderWidth: 5,
-      borderColor: `#${vectorColor}`,
+      borderColor: `${vectorColor}`,
       position: 'absolute',
       width: 35,
       height: 35,
