@@ -6,7 +6,7 @@ import RouteContext from '../Components/RouteContext';
 
 export default function ViewAllProblems({route}) {
   const [problems, setSavedProblems] = useState([])
-  const { setCurrentRoute } = useContext(RouteContext);
+  const { setCurrentRoute, setWallId } = useContext(RouteContext);
   const currentScreen = useRoute();
   const navigation = useNavigation();
 
@@ -25,6 +25,7 @@ export default function ViewAllProblems({route}) {
       const data = await getAllProblems(route.params.id);
       const modifiedData = data.data.map((data) => ({ id: data.id, ...data.attributes }));
       setSavedProblems(modifiedData);
+      setWallId(route.params.id);
     })()
   }, [])
 
@@ -33,11 +34,12 @@ export default function ViewAllProblems({route}) {
       id: problem.id,
       image: route.params.image,
       grade: problem.grade,
-      name: problem.name
+      name: problem.name,
     });
   }
 
   const userProblem = problems.map((problem) => {
+    console.log('RPOBLEM', problem)
     return (
       <Pressable key={problem.id} onPress={() => handleProblemNavigation(problem)}>
         <View style={styles.problemView} key={problem.wall_id} id={problem.wall_id}>

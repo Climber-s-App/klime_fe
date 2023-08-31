@@ -26,6 +26,7 @@ export default function Home() {
       const data = await getUserWalls();
       const modifiedData = data.data.map((data) => ({ id: data.id, ...data.attributes }))
       setSavedWalls(modifiedData)
+ 
     })();
   }, [])
 

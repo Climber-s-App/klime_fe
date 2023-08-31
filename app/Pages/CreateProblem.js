@@ -12,7 +12,7 @@ import Draggable from "../Components/Draggable";
 
 const CreateProblem = () => {
   const [newVectors, setNewVectors] = useState([]);
-  const { setCurrentRoute, vectorColor } = useContext(RouteContext);
+  const { setCurrentRoute, vectorColor, wallId } = useContext(RouteContext);
   const currentScreen = useRoute();
   const navigation = useNavigation();
 

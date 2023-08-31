@@ -15,6 +15,7 @@ export default function App() {
   const Stack = createNativeStackNavigator();
   const [currentRoute, setCurrentRoute] = useState("Home");
   const [vectorColor, setVectorColor] = useState("#60FF46");
+  const [wallId, setWallId] = useState()
 
   const handleVectorColor = (color) => {
     switch (color) {
@@ -33,7 +34,7 @@ export default function App() {
   return (
     <GestureHandlerRootView style={{flex: 1}}>
     <RouteContext.Provider
-      value={{ currentRoute, setCurrentRoute, vectorColor }}
+      value={{ currentRoute, setCurrentRoute, vectorColor, wallId, setWallId }}
     >
       <NavigationContainer
         style={{ ...styles.container, ...styles.androidSafeArea }}
