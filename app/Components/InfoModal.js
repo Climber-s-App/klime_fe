@@ -1,10 +1,7 @@
 import  Modal  from "react-native-modal";
-import { useState } from 'react';
 import { Text, View, StyleSheet, Button } from "react-native";
 
-const InfoModal = ({isVisible, currentRoute, handleInfoModal, addIcon}) => {
-  const [CurrentInfo, setCurrentInfo] = useState()
- 
+const InfoModal = ({isVisible, handleInfoModal, addIcon}) => {
 
   return (
     <Modal isVisible={isVisible} style={styles.container}>
@@ -33,7 +30,6 @@ const InfoModal = ({isVisible, currentRoute, handleInfoModal, addIcon}) => {
         <Button color={'#2A6620'} title="CLOSE" onPress={handleInfoModal} />
       </View>
     </Modal>
-
   )
 }
 
@@ -41,11 +37,8 @@ export default InfoModal;
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    
-    // height:30,
   },
   title: {
     fontSize: 20,
@@ -54,7 +47,6 @@ const styles = StyleSheet.create({
   },
   text: {
     paddingTop: 10,
-    // textAlign: "center",
     fontSize: 16,
   },
   body: {
@@ -68,15 +60,7 @@ const styles = StyleSheet.create({
     padding: 10,
     flexDirection: "row",
   },
-  button: {
-    flexDirection: "row",
-    flex: 1,
-    justifyContent: "center",
-    backgroundColor: 'red',
-    color: 'red'
-  },
   modal: {
-    // height: "90%",
     width: '95%',
     backgroundColor: 'white',
     alignItems: "center",
@@ -92,24 +76,19 @@ const styles = StyleSheet.create({
   vectorColor: {
     borderWidth: 5,
     borderColor: `#60FF46`,
-    // position: 'absolute',
     width: 35,
     height: 35,
     backgroundColor: 'transparent',
     borderRadius: 30,
     alignSelf: "left",
     marginTop: 6
-    // right: 10,
   },  
   vectorContainer: {
     alignSelf: "left",
-    // marginTop: 6,
   },
   iconContainer: {
-    // alignSelf: "center",
     alignContent: 'center',
     alignItems: 'center',
-    // justifyContent: 'center', 
     marginTop: 6,
     flexDirection: 'row'
   },
