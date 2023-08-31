@@ -3,6 +3,7 @@ import {getAllProblems} from '../Components/apiCalls'
 import { useState, useEffect, useContext } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import RouteContext from '../Components/RouteContext';
+import SavedWalls from '../Components/SavedWalls';
 
 export default function ViewAllProblems({route}) {
   const [problems, setSavedProblems] = useState([])
@@ -35,11 +36,11 @@ export default function ViewAllProblems({route}) {
       image: route.params.image,
       grade: problem.grade,
       name: problem.name,
+      vectors: problem.vectors
     });
   }
 
   const userProblem = problems.map((problem) => {
-    console.log('RPOBLEM', problem)
     return (
       <Pressable key={problem.id} onPress={() => handleProblemNavigation(problem)}>
         <View style={styles.problemView} key={problem.wall_id} id={problem.wall_id}>

@@ -1,15 +1,74 @@
 import  Modal  from "react-native-modal";
 import { Text, View, StyleSheet, Button, TextInput } from "react-native";
+import { useState } from "react";
+import RNPickerSelect from "react-native-picker-select";
 
 const CreateProblemModal = ({isVisible, handleCreateProblemModal}) => {
+  const [name, setName] = useState('');
+  const [grade, setGrade] = useState('');
+  const [nameError, setNameError] = useState("");
+  const availableGrades = [
+    { label: "V0", value: "V0" },
+    { label: "V1", value: "V1" },
+    { label: "V2", value: "V2" },
+    { label: "V3", value: "V3" },
+    { label: "V4", value: "V4" },
+    { label: "V5", value: "V5" },
+    { label: "V6", value: "V6" },
+    { label: "V7", value: "V7" },
+    { label: "V8", value: "V8" },
+    { label: "V9", value: "V9" },
+    { label: "V10", value: "V10" },
+    { label: "V11", value: "V11" },
+    { label: "V12", value: "V12" },
+    { label: "V13", value: "V13" },
+    { label: "V14", value: "V14" },
+    { label: "V15", value: "V15" },
+]
+
+  const clearForm = () => {
+    setGrade('')
+    setName('')
+    setGradeError('');
+    setNameError('');
+  }
+
+  const handleSave = () => {
+    let isValid = true;
+
+    if (name.trim() === "") {
+      setNameError("PLEASE ENTER A NAME TO CONTINUE");
+      isValid = false;
+    } else {
+      setNameError("");
+    }
+
+    if (isValid) {
+      clearForm();
+      handleCreateProblemModal();
+    }
+  };
 
   return (
     <Modal isVisible={isVisible} style={styles.container}>
       <View style={styles.modal}>
-        <TextInput style={styles.title}>Name</TextInput>
+        <Text style={styles.title}>ENTER PROBLEM INFO</Text>
+        <TextInput style={styles.input} placeholder={nameError || "ENTER NAME"} onChangeText={setName} value={name} keyboardType="default" />
+        <RNPickerSelect
+                placeholder={{ label: "SELECT A GRADE: V0", value: 'V0' }}
+                style={{ ...pickerSelectStyles }}
+                onValueChange={(event) => setGrade(event)}
+                items={availableGrades}
+             />
         <View style={styles.buttonContainer}>
-        <Button color={'#2A6620'} title="SAVE" onPress={handleCreateProblemModal} />
-        <Button color={'#2A6620'} title="CLOSE" onPress={handleCreateProblemModal} />
+          <Button color={'#2A6620'} title="SAVE" onPress={handleSave} />
+          <Button 
+              color={'#2A6620'} 
+              title="CLOSE" 
+              onPress={() => {
+                handleCreateProblemModal();
+                clearForm();
+          }} />
         </View>
       </View>
     </Modal>
@@ -22,6 +81,15 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     justifyContent: "center",
+  },
+  input: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    borderRadius: 4,
+    borderColor: '#bbcfb8',
+    padding: 10,
+    width: '90%',
   },
   title: {
     fontSize: 20,
@@ -45,7 +113,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: 'row',
-    gap: 6
+    gap: 23
   },
   modal: {
     width: '95%',
@@ -80,3 +148,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
 });
+
+const pickerSelectStyles = StyleSheet.create({
+  inputIOS: {
+      paddingTop: 10,
+      paddingHorizontal: 10,
+      paddingBottom: 10,
+      borderWidth: 1,
+      borderColor: '#bbcfb8',
+      borderRadius: 4,
+      backgroundColor: 'white',
+      color: 'black',
+      width: '90%',
+      alignSelf: 'center'
+  },
+}); 

@@ -7,10 +7,14 @@ import RouteContext from "../Components/RouteContext";
 
 const ViewProblem = ({ route }) => {
   const newImage = route.params.image
-  const [vectors, setVectors] = useState([{ color: '#16e8f7', x: 40, y: 37, id: 1 }, { color: '#60FF46', x: 155, y: 190, id: 2 }])
+  const [vectors, setVectors] = useState([])
   const currentScreen = useRoute();
   const navigation = useNavigation();
   const { setCurrentRoute } = useContext(RouteContext);
+  
+  useEffect(() => {
+    setVectors(route.params.vectors)
+  }, [])
 
   useEffect(() => {
     const unsubscribeFocus = navigation.addListener('focus', () => {
