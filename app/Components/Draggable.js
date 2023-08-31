@@ -56,12 +56,15 @@ export default function Draggable({
       handleFinalize(event);
     });
 
-  const longPressGesture = Gesture.LongPress().onEnd((e, success) => {
-    if (success) {
-      alert(`Do you want to delete this circle? Have to be yes now`);
-      deleteVector(targetId);
-    }
-  });
+  
+
+  const longPressGesture = Gesture.LongPress()
+    .onEnd((e, success) => {
+      if (success) {
+        alert(`Do you want to delete this circle? Have to be yes now`);
+        deleteVector(targetId);
+      }
+    });
 
   const singleTap = Gesture.Tap()
     .maxDuration(250)
@@ -80,14 +83,12 @@ export default function Draggable({
   // if clicked cancel, close alert box and do nothing
 
   return (
-    <GestureDetector gesture={pan}>
-      <GestureDetector gesture={longPressGesture}>
+      <GestureDetector gesture={Gesture.Exclusive(pan, longPressGesture)}>
         <GestureDetector gesture={singleTap}>
           <Animated.View style={vectorStyle}>
             <AddVectors vectorColor={vectorColor} />
           </Animated.View>
         </GestureDetector>
       </GestureDetector>
-    </GestureDetector>
   );
 }
