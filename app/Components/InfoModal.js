@@ -26,6 +26,7 @@ const InfoModal = ({isVisible, handleInfoModal, addIcon}) => {
             {addIcon}
             <Text style={[styles.text, {marginLeft: 10}]}>Push to add and save a new problem</Text>
           </View>
+        <Text style={[styles.text, {marginBottom: 10}]}> 👋🏻 Long press the circle to delete</Text>
         </View>
         <Button color={'#2A6620'} title="CLOSE" onPress={handleInfoModal} />
       </View>
