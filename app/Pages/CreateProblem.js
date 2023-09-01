@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   View,
   Image,
@@ -12,8 +12,7 @@ import Draggable from "../Components/Draggable";
 import AlertBox from '../Components/AlertBox';
 
 const CreateProblem = () => {
-  const [newVectors, setNewVectors] = useState([]);
-  const { setCurrentRoute, vectorColor } = useContext(RouteContext);
+  const { setCurrentRoute, vectorColor, newVectors, setNewVectors, wallInfo } = useContext(RouteContext);
   const currentScreen = useRoute();
   const navigation = useNavigation();
   const [alertVisible, setAlertVisible] = useState(false);
@@ -33,7 +32,7 @@ const CreateProblem = () => {
     if (event.state === State.ACTIVE) {
       const { x, y } = event;
       const addVector = {
-        color: `#${vectorColor}`,
+        color: `${vectorColor}`,
         x: x - 15,
         y: y - 15,
         initialX: x - 15,
@@ -70,8 +69,8 @@ const CreateProblem = () => {
         <View style={{ height: "100%", width: "100%" }}>
           <AlertBox alertVisible={alertVisible} setAlertVisible={setAlertVisible} deleteVector={deleteVector} targetId={targetId} />
           <Image
-            source={require("../assets/pexels-allan-mas-5383501.jpg")}
-            resizeMode="cover"
+            source={{ uri: wallInfo.image }}
+            resizeMode="contain"
             style={styles.image}
           />
           {savedVectors}

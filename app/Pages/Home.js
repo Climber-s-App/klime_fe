@@ -1,4 +1,4 @@
-import { StyleSheet, View, Image } from 'react-native';
+import { StyleSheet, View, Image, Text } from 'react-native';
 import SavedWalls from '../Components/SavedWalls';
 import { getUserWalls } from '../Components/apiCalls';
 import { useState, useEffect, useContext } from 'react';
@@ -7,7 +7,7 @@ import { useRoute, useNavigation } from '@react-navigation/native';
 
 export default function Home() {
   const [savedWalls, setSavedWalls] = useState([])
-  const { setCurrentRoute } = useContext(RouteContext);
+  const { setCurrentRoute, networkErrors, handleNetworkErrors } = useContext(RouteContext);
   const currentScreen = useRoute();
   const navigation = useNavigation();
 
@@ -23,13 +23,18 @@ export default function Home() {
 
   useEffect(() => {
     (async () => {
-      const data = await getUserWalls();
-      const modifiedData = data.data.map((data) => ({ id: data.id, ...data.attributes }))
-      setSavedWalls(modifiedData)
+      try {
+        const data = await getUserWalls();
+        const modifiedData = data.data.map((data) => ({ id: data.id, ...data.attributes }))
+        setSavedWalls(modifiedData)
+      } catch (error) {
+        handleNetworkErrors(error)
+      }
+ 
     })();
   }, [])
 
-  return (
+  return (  
     <View style={styles.viewContainer}>
       <View style={styles.imageContainer}>
         <Image
@@ -37,7 +42,9 @@ export default function Home() {
           style={styles.image}
         />
       </View>
+      {!networkErrors ? 
       <SavedWalls savedWalls={savedWalls}/>
+      : <Text style={styles.text} >{networkErrors || 'Something went wrong, please try again later'}</Text>}
     </View>
   )
 }
@@ -60,5 +67,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#d7dbdb',
     width: '100%',
   },
+  text: {
+    marginLeft: 30,
+    marginRight: 30,
+    marginTop: 10,
+    fontSize: 24
+  }
 })
 

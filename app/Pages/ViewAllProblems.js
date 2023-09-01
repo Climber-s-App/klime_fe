@@ -3,10 +3,11 @@ import {getAllProblems} from '../Components/apiCalls'
 import { useState, useEffect, useContext } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import RouteContext from '../Components/RouteContext';
+import SavedWalls from '../Components/SavedWalls';
 
 export default function ViewAllProblems({route}) {
   const [problems, setSavedProblems] = useState([])
-  const { setCurrentRoute } = useContext(RouteContext);
+  const { setCurrentRoute, setWallInfo } = useContext(RouteContext);
   const currentScreen = useRoute();
   const navigation = useNavigation();
 
@@ -25,6 +26,7 @@ export default function ViewAllProblems({route}) {
       const data = await getAllProblems(route.params.id);
       const modifiedData = data.data.map((data) => ({ id: data.id, ...data.attributes }));
       setSavedProblems(modifiedData);
+      setWallInfo(route.params);
     })()
   }, [])
 
@@ -33,7 +35,8 @@ export default function ViewAllProblems({route}) {
       id: problem.id,
       image: route.params.image,
       grade: problem.grade,
-      name: problem.name
+      name: problem.name,
+      vectors: problem.vectors
     });
   }
 

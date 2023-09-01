@@ -6,34 +6,75 @@ import CreateProblem from "./app/Pages/CreateProblem";
 import Home from "./app/Pages/Home";
 import MenuBar from "./app/Components/MenuBar";
 import RouteContext from "./app/Components/RouteContext";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ViewAllProblems from "../klime_fe/app/Pages/ViewAllProblems";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { postProblem } from "./app/Components/apiCalls";
+import Toast  from 'react-native-toast-message';
 
 export default function App() {
   const Stack = createNativeStackNavigator();
   const [currentRoute, setCurrentRoute] = useState("Home");
-  const [vectorColor, setVectorColor] = useState("60FF46");
+  const [vectorColor, setVectorColor] = useState("#60FF46");
+  const [wallInfo, setWallInfo] = useState();
+  const [newVectors, setNewVectors] = useState([]);
+  const [networkErrors, setNetworkErrors] = useState(null)
+
+
+  const handleNetworkErrors = (error) => {
+    setNetworkErrors(error.message);
+  }
+
+  const showToast = (name) => {
+    Toast.show({
+      position: 'bottom',
+      text1: `Saved ${name}`,
+    });
+  }
+
+  const showErrorToast = (error) => {
+    Toast.show({
+      type: 'error',
+      position: 'bottom',
+      text1: error || 'Error, please try later',
+    });
+  }
 
   const handleVectorColor = (color) => {
     switch (color) {
-      case "60FF46":
-        setVectorColor("16e8f7");
+      case "#60FF46":
+        setVectorColor("#16e8f7");
         break;
-      case "16e8f7":
-        setVectorColor("f72556");
+      case "#16e8f7":
+        setVectorColor("#f72556");
         break;
-      case "f72556":
-        setVectorColor("60FF46");
+      case "#f72556":
+        setVectorColor("#60FF46");
         break;
     }
   };
 
+  const handlePostProblem = async (problemName, grade) => {
+    try {
+      const newProblem = {
+        "name": problemName,
+        "vectors": newVectors,
+        "wall_id": wallInfo.id,
+        "grade": grade
+      }
+      await postProblem(newProblem, wallInfo.id);
+      showToast(newProblem.name)
+    } catch (error) {
+      handleNetworkErrors(error.message)
+      showErrorToast(error.message)
+    }
+  } 
+
   return (
     <GestureHandlerRootView style={{flex: 1}}>
     <RouteContext.Provider
-      value={{ currentRoute, setCurrentRoute, vectorColor }}
+      value={{ currentRoute, setCurrentRoute, vectorColor, wallInfo, setWallInfo, newVectors, setNewVectors, networkErrors, handleNetworkErrors }}
     >
       <NavigationContainer
         style={{ ...styles.container, ...styles.androidSafeArea }}
@@ -47,16 +88,19 @@ export default function App() {
       
           <SafeAreaView>
             <StatusBar />
-            <View style={styles.contentContainer} />
+            <View style={styles.contentContainer}>
+            </View>
             <View style={styles.menuContainer}>
               <MenuBar
                 vectorColor={vectorColor}
                 handleVectorColor={handleVectorColor}
+                handlePostProblem={handlePostProblem}
               />
             </View>
           </SafeAreaView>
       
       </NavigationContainer>
+      <Toast bottomOffset={76} />
     </RouteContext.Provider>
     </GestureHandlerRootView>
   );
