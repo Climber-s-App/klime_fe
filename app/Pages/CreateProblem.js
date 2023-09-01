@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import {
   View,
   Image,
@@ -11,8 +11,7 @@ import { Gesture, GestureDetector, State } from "react-native-gesture-handler";
 import Draggable from "../Components/Draggable";
 
 const CreateProblem = () => {
-  const [newVectors, setNewVectors] = useState([]);
-  const { setCurrentRoute, vectorColor, wallId } = useContext(RouteContext);
+  const { setCurrentRoute, vectorColor, newVectors, setNewVectors } = useContext(RouteContext);
   const currentScreen = useRoute();
   const navigation = useNavigation();
 

@@ -1,12 +1,14 @@
 import  Modal  from "react-native-modal";
 import { Text, View, StyleSheet, Button, TextInput } from "react-native";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import RNPickerSelect from "react-native-picker-select";
+import RouteContext from "./RouteContext";
 
-const CreateProblemModal = ({isVisible, handleCreateProblemModal}) => {
-  const [name, setName] = useState('');
-  const [grade, setGrade] = useState('');
+const CreateProblemModal = ({isVisible, toggleCreateProblemModal, handlePostProblem}) => {
+  const [problemName, setProblemName] = useState('');
+  const [problemGrade, setProblemGrade] = useState('');
   const [nameError, setNameError] = useState("");
+  const { setNewVectors } = useContext(RouteContext);
   const availableGrades = [
     { label: "V0", value: "V0" },
     { label: "V1", value: "V1" },
@@ -27,16 +29,15 @@ const CreateProblemModal = ({isVisible, handleCreateProblemModal}) => {
 ]
 
   const clearForm = () => {
-    setGrade('')
-    setName('')
-    setGradeError('');
+    setProblemGrade('')
+    setProblemName('')
     setNameError('');
   }
 
   const handleSave = () => {
     let isValid = true;
 
-    if (name.trim() === "") {
+    if (problemName.trim() === "") {
       setNameError("PLEASE ENTER A NAME TO CONTINUE");
       isValid = false;
     } else {
@@ -45,7 +46,9 @@ const CreateProblemModal = ({isVisible, handleCreateProblemModal}) => {
 
     if (isValid) {
       clearForm();
-      handleCreateProblemModal();
+      setNewVectors([])
+      toggleCreateProblemModal();
+      handlePostProblem(problemName, problemGrade);
     }
   };
 
@@ -53,20 +56,20 @@ const CreateProblemModal = ({isVisible, handleCreateProblemModal}) => {
     <Modal isVisible={isVisible} style={styles.container}>
       <View style={styles.modal}>
         <Text style={styles.title}>ENTER PROBLEM INFO</Text>
-        <TextInput style={styles.input} placeholder={nameError || "ENTER NAME"} onChangeText={setName} value={name} keyboardType="default" />
+        <TextInput style={styles.input} placeholder={nameError || 'ENTER NAME'} onChangeText={setProblemName} value={problemName} />
         <RNPickerSelect
-                placeholder={{ label: "SELECT A GRADE: V0", value: 'V0' }}
+                placeholder={{ label: 'SELECT A GRADE: V0', value: 'V0' }}
                 style={{ ...pickerSelectStyles }}
-                onValueChange={(event) => setGrade(event)}
+                onValueChange={(event) => setProblemGrade(event)}
                 items={availableGrades}
              />
         <View style={styles.buttonContainer}>
-          <Button color={'#2A6620'} title="SAVE" onPress={handleSave} />
+          <Button color={'#2A6620'} title='SAVE' onPress={handleSave} />
           <Button 
               color={'#2A6620'} 
               title="CLOSE" 
               onPress={() => {
-                handleCreateProblemModal();
+                toggleCreateProblemModal();
                 clearForm();
           }} />
         </View>

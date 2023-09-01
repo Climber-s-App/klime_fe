@@ -7,7 +7,7 @@ import { useRoute, useNavigation } from '@react-navigation/native';
 
 export default function Home() {
   const [savedWalls, setSavedWalls] = useState([])
-  const { setCurrentRoute } = useContext(RouteContext);
+  const { setCurrentRoute, handleNetworkErrors } = useContext(RouteContext);
   const currentScreen = useRoute();
   const navigation = useNavigation();
 
@@ -23,9 +23,13 @@ export default function Home() {
 
   useEffect(() => {
     (async () => {
-      const data = await getUserWalls();
-      const modifiedData = data.data.map((data) => ({ id: data.id, ...data.attributes }))
-      setSavedWalls(modifiedData)
+      try {
+        const data = await getUserWalls();
+        const modifiedData = data.data.map((data) => ({ id: data.id, ...data.attributes }))
+        setSavedWalls(modifiedData)
+      } catch (error) {
+        handleNetworkErrors(error)
+      }
  
     })();
   }, [])

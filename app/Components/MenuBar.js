@@ -6,7 +6,7 @@ import { useContext, useState } from 'react';
 import InfoModal from './InfoModal';
 import CreateProblemModal from './CreateProblemModal';
 
-export default function MenuBar({ vectorColor, handleVectorColor }) {
+export default function MenuBar({ vectorColor, handleVectorColor, handlePostProblem }) {
   const [isInfoModalVisible, setIsInfoModalVisible] = useState(false);
   const [isCreateProblemModalVisible, setIsCreateProblemInfoModalVisible] = useState(false);
   const { currentRoute } = useContext(RouteContext);
@@ -26,8 +26,12 @@ export default function MenuBar({ vectorColor, handleVectorColor }) {
     setIsInfoModalVisible(prev => !prev)
   }
 
-  const handleCreateProblemModal = () => {
-    setIsCreateProblemInfoModalVisible(prev => !prev)
+  const toggleCreateProblemModal = () => {
+    setIsCreateProblemInfoModalVisible(prev => !prev);
+  }
+
+  const handleSaveProblem = () => {
+    toggleCreateProblemModal();
   }
   
   const styles = StyleSheet.create({
@@ -63,23 +67,28 @@ export default function MenuBar({ vectorColor, handleVectorColor }) {
   
   return (
     <View style={styles.menuContainer}>
-      <CreateProblemModal isVisible={isCreateProblemModalVisible} handleCreateProblemModal={handleCreateProblemModal} />
-       <Pressable style={styles.infoStyle} onPress={handleInfoModal}>
+      <CreateProblemModal 
+        isVisible={isCreateProblemModalVisible} 
+        toggleCreateProblemModal={toggleCreateProblemModal}
+        handlePostProblem={handlePostProblem}
+      />
+      <Pressable style={styles.infoStyle} onPress={handleInfoModal}>
         {infoIcon}
         <InfoModal isVisible={isInfoModalVisible} currentRoute={currentRoute} handleInfoModal={handleInfoModal} addIcon={addIcon} />
       </Pressable >
-        {currentRoute === 'View All Problems' && 
-        <Pressable style={styles.image} onPress={() => navigation.navigate('Create Problem', {
+      {currentRoute === 'View All Problems' && 
+        <Pressable style={styles.image} onPress={() => {
+          navigation.navigate('Create Problem', {
           vectorColor: vectorColor
-        })}>
-        {addIcon}
+        })}}>
+          {addIcon}
         </Pressable >
-        }
-        {currentRoute === 'Create Problem' && 
-          <Pressable style={styles.image} onPress={handleCreateProblemModal}>
-            {saveIcon}
-          </Pressable >
-        }
+      }
+      {currentRoute === 'Create Problem' && 
+        <Pressable style={styles.image} onPress={handleSaveProblem}>
+          {saveIcon}
+        </Pressable >
+      }
       {currentRoute === 'Create Problem' && <Pressable onPress={() => handleVectorColor(vectorColor)} style={styles.vectorColor} />}
     </View >
   )

@@ -18,8 +18,8 @@ export const getAllProblems = async (id) => {
   return data;
 };
 
-export const postProblem = async (newProblem) => {
-  const response = await fetch("https://23065c27-5c81-4a37-9fb7-59f7742c76cb.mock.pstmn.io/api/vo/users/1/walls/1/problems/1", {
+export const postProblem = async (newProblem, wallId) => {
+  const response = await fetch(`https://23065c27-5c81-4a37-9fb7-59f7742c76cb.mock.pstmn.io/api/v0/users/1/walls/${wallId}/problems`, {
     method: 'POST',
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify(newProblem)
@@ -27,3 +27,5 @@ export const postProblem = async (newProblem) => {
   const data = await handleErrors(response);
   return data;
 };
+
+// https://klime-be.onrender.com/users/1/walls/1/problems

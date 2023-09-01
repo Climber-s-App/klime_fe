@@ -10,12 +10,19 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ViewAllProblems from "../klime_fe/app/Pages/ViewAllProblems";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { postProblem } from "./app/Components/apiCalls";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
   const [currentRoute, setCurrentRoute] = useState("Home");
   const [vectorColor, setVectorColor] = useState("#60FF46");
-  const [wallId, setWallId] = useState()
+  const [wallId, setWallId] = useState();
+  const [newVectors, setNewVectors] = useState([]);
+  const [networkErrors, setNetworkErrors] = useState(null)
+
+  const handleNetworkErrors = (error) => {
+    setNetworkErrors(error.message);
+  }
 
   const handleVectorColor = (color) => {
     switch (color) {
@@ -31,10 +38,24 @@ export default function App() {
     }
   };
 
+  const handlePostProblem = async (problemName, grade) => {
+    try {
+      const newProblem = {
+        "name": problemName,
+        "vectors": newVectors,
+        "wall_id": wallId,
+        "grade": grade
+      }
+      await postProblem(newProblem, wallId);
+    } catch (error) {
+      handleNetworkErrors(error.message)
+    }
+  } 
+
   return (
     <GestureHandlerRootView style={{flex: 1}}>
     <RouteContext.Provider
-      value={{ currentRoute, setCurrentRoute, vectorColor, wallId, setWallId }}
+      value={{ currentRoute, setCurrentRoute, vectorColor, wallId, setWallId, newVectors, setNewVectors, handleNetworkErrors }}
     >
       <NavigationContainer
         style={{ ...styles.container, ...styles.androidSafeArea }}
@@ -53,6 +74,7 @@ export default function App() {
               <MenuBar
                 vectorColor={vectorColor}
                 handleVectorColor={handleVectorColor}
+                handlePostProblem={handlePostProblem}
               />
             </View>
           </SafeAreaView>
