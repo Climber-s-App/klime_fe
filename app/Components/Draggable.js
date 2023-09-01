@@ -1,7 +1,8 @@
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
-import { Animated } from "react-native";
+import { Animated, Alert } from "react-native";
 import AddVectors from "../Components/AddVectors";
 import { useState } from "react";
+
 
 export default function Draggable({
   vectorStyle,
@@ -24,6 +25,20 @@ export default function Draggable({
     const updatedVectors = newVectors.filter((v) => v.id !== selectedId);
 
     setNewVectors(updatedVectors);
+  };
+
+  const alertDelete = () => {
+    Alert.alert('Do you want to Delete this circle?', 'My Alert Msg', [
+      {
+        text: 'CANCEL',
+        style: 'cancel'
+      },
+      {
+        text: 'DELETE',
+        onPress: () => deleteVector(targetId)
+
+      }
+    ])
   };
 
   const handleChange = (event) => {
@@ -56,13 +71,11 @@ export default function Draggable({
       handleFinalize(event);
     });
 
-  
-
   const longPressGesture = Gesture.LongPress()
     .onEnd((e, success) => {
       if (success) {
-        alert(`Do you want to delete this circle? Have to be yes now`);
-        deleteVector(targetId);
+        alertDelete()
+        // deleteVector(targetId);
       }
     });
 
