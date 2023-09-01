@@ -6,7 +6,7 @@ import CreateProblem from "./app/Pages/CreateProblem";
 import Home from "./app/Pages/Home";
 import MenuBar from "./app/Components/MenuBar";
 import RouteContext from "./app/Components/RouteContext";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ViewAllProblems from "../klime_fe/app/Pages/ViewAllProblems";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
@@ -17,9 +17,10 @@ export default function App() {
   const Stack = createNativeStackNavigator();
   const [currentRoute, setCurrentRoute] = useState("Home");
   const [vectorColor, setVectorColor] = useState("#60FF46");
-  const [wallId, setWallId] = useState();
+  const [wallInfo, setWallInfo] = useState();
   const [newVectors, setNewVectors] = useState([]);
   const [networkErrors, setNetworkErrors] = useState(null)
+
 
   const handleNetworkErrors = (error) => {
     setNetworkErrors(error.message);
@@ -59,10 +60,10 @@ export default function App() {
       const newProblem = {
         "name": problemName,
         "vectors": newVectors,
-        "wall_id": wallId,
+        "wall_id": wallInfo.id,
         "grade": grade
       }
-      await postProblem(newProblem, wallId);
+      await postProblem(newProblem, wallInfo.id);
       showToast(newProblem.name)
     } catch (error) {
       handleNetworkErrors(error.message)
@@ -73,7 +74,7 @@ export default function App() {
   return (
     <GestureHandlerRootView style={{flex: 1}}>
     <RouteContext.Provider
-      value={{ currentRoute, setCurrentRoute, vectorColor, wallId, setWallId, newVectors, setNewVectors, networkErrors, handleNetworkErrors }}
+      value={{ currentRoute, setCurrentRoute, vectorColor, wallInfo, setWallInfo, newVectors, setNewVectors, networkErrors, handleNetworkErrors }}
     >
       <NavigationContainer
         style={{ ...styles.container, ...styles.androidSafeArea }}

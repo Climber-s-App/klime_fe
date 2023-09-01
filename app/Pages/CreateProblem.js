@@ -11,7 +11,7 @@ import { Gesture, GestureDetector, State } from "react-native-gesture-handler";
 import Draggable from "../Components/Draggable";
 
 const CreateProblem = () => {
-  const { setCurrentRoute, vectorColor, newVectors, setNewVectors } = useContext(RouteContext);
+  const { setCurrentRoute, vectorColor, newVectors, setNewVectors, wallInfo } = useContext(RouteContext);
   const currentScreen = useRoute();
   const navigation = useNavigation();
 
@@ -60,8 +60,8 @@ const CreateProblem = () => {
       <GestureDetector gesture={singleTap}>
         <View style={{ height: "100%", width: "100%" }}>
           <Image
-            source={require("../assets/pexels-allan-mas-5383501.jpg")}
-            resizeMode="cover"
+            source={{ uri: wallInfo.image }}
+            resizeMode="contain"
             style={styles.image}
           />
           {savedVectors}

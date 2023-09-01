@@ -3,11 +3,13 @@ import { Text, View, StyleSheet, Button, TextInput } from "react-native";
 import { useState, useContext } from "react";
 import RNPickerSelect from "react-native-picker-select";
 import RouteContext from "./RouteContext";
+import { useNavigation } from '@react-navigation/native';
 
 const CreateProblemModal = ({isVisible, toggleCreateProblemModal, handlePostProblem}) => {
   const [problemName, setProblemName] = useState('');
   const [problemGrade, setProblemGrade] = useState('');
   const [nameError, setNameError] = useState("");
+  const navigation = useNavigation();
   const { setNewVectors } = useContext(RouteContext);
   const availableGrades = [
     { label: "V0", value: "V0" },
@@ -49,6 +51,7 @@ const CreateProblemModal = ({isVisible, toggleCreateProblemModal, handlePostProb
       setNewVectors([])
       toggleCreateProblemModal();
       handlePostProblem(problemName, problemGrade);
+      navigation.navigate('View All Problems')
     }
   };
 

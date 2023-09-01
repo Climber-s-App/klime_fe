@@ -7,7 +7,7 @@ import SavedWalls from '../Components/SavedWalls';
 
 export default function ViewAllProblems({route}) {
   const [problems, setSavedProblems] = useState([])
-  const { setCurrentRoute, setWallId } = useContext(RouteContext);
+  const { setCurrentRoute, setWallInfo } = useContext(RouteContext);
   const currentScreen = useRoute();
   const navigation = useNavigation();
 
@@ -26,7 +26,7 @@ export default function ViewAllProblems({route}) {
       const data = await getAllProblems(route.params.id);
       const modifiedData = data.data.map((data) => ({ id: data.id, ...data.attributes }));
       setSavedProblems(modifiedData);
-      setWallId(route.params.id);
+      setWallInfo(route.params);
     })()
   }, [])
 
