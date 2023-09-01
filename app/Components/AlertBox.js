@@ -1,72 +1,49 @@
-import { View, Pressable, Modal, StyleSheet, Text } from 'react-native';
-import { useState } from 'react';
+import { View, Pressable, Modal, StyleSheet, Text, Button } from "react-native";
+import { useState } from "react";
 
-const AlertBox = ({alertVisible}) => {
-  
+const AlertBox = ({ alertVisible, setAlertVisible }) => {
   return (
-    <View>
-      <Modal
-        visible={alertVisible}
-        animationType="fade"
-        transparent={true}
-        onRequestClose={() => {
-          setModalVisible(!modalVisible);
-        }}
-      >
-        <Pressable style={[Platform.OS === "ios" ? styles.iOSBackdrop : styles.androidBackdrop, styles.backdrop]} onPress={() => setModalVisible(false)} />
-        <View>
-        
+    <Modal
+      style={styles.modal}
+      isVisible={true}
+      transparent={true}
+      animationType="fade"
+    >
+      <View style={styles.box}>
+        <Text style={{fontSize: 20, textAlign: 'center'}}>Do you want to delete this circle?</Text>
+        <View style={styles.buttonContainer}>
+          <Button color='#2A6620' title="DELETE" />
+          <Button color='#2A6620' title="CANCLE" />
         </View>
-      </Modal>
-
-      <View>
-        <Pressable
-          style={[styles.button, styles.buttonOpen]}
-          onPress={() => setModalVisible(true)}
-        >
-          <Text style={styles.textStyle}>Show Modal</Text>
-        </Pressable>
       </View>
-    </View>
+    </Modal>
   );
 };
 
 const styles = StyleSheet.create({
-  centeredView: {
-    flex: 1,
+  modal: {
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 22
   },
 
-  button: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2
-  },
-  buttonOpen: {
-    backgroundColor: "#F194FF",
-  },
-  textStyle: {
-    color: "white",
-    fontWeight: "bold",
-    textAlign: "center"
+  box: {
+    marginLeft: "20%",
+    width: "60%",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 30,
+    borderRadius: 25,
+    borderWidth: 1,
+    borderColor: "#000",
+    borderStyle: "solid",
+    marginTop: 300,
+    backgroundColor: 'white',
   },
 
-  iOSBackdrop: {
-    backgroundColor: "#000000",
-    opacity: 0.3
-  },
-  androidBackdrop: {
-    backgroundColor: "#232f34",
-    opacity: 0.32
-  },
-  backdrop: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
+  buttonContainer: {
+    flexDirection: "row",
+    gap: 40,
+    marginTop: 20
   }
 });
 
