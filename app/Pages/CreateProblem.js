@@ -9,12 +9,15 @@ import RouteContext from "../Components/RouteContext";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import { Gesture, GestureDetector, State } from "react-native-gesture-handler";
 import Draggable from "../Components/Draggable";
+import AlertBox from '../Components/AlertBox';
 
 const CreateProblem = () => {
   const [newVectors, setNewVectors] = useState([]);
   const { setCurrentRoute, vectorColor } = useContext(RouteContext);
   const currentScreen = useRoute();
   const navigation = useNavigation();
+  const [alertVisible, setAlertVisible] = useState(false);
+  const [targetId, setTargetId] = useState({});
 
   useEffect(() => {
     const unsubscribeFocus = navigation.addListener("focus", () => {
@@ -53,13 +56,19 @@ const CreateProblem = () => {
       transform: [{ translateX: x }, { translateY: y }],
       position: "absolute",
     };
-    return <Draggable vectorStyle={vectorStyle} vectorColor={color} vector={vector} newVectors={newVectors} setNewVectors={setNewVectors} key={id} />;
+    return <Draggable vectorStyle={vectorStyle} vectorColor={color} vector={vector} newVectors={newVectors} setNewVectors={setNewVectors} key={id} deleteVector={deleteVector} alertVisible={alertVisible} setAlertVisible={setAlertVisible} targetId={targetId} setTargetId={setTargetId}/>;
   });
+
+  const deleteVector = (selectedId) => {
+    const updatedVectors = newVectors.filter((v) => v.id !== selectedId);
+    setNewVectors(updatedVectors);
+  };
 
   return (
     <View style={styles.image}>
       <GestureDetector gesture={singleTap}>
         <View style={{ height: "100%", width: "100%" }}>
+          <AlertBox alertVisible={alertVisible} setAlertVisible={setAlertVisible} deleteVector={deleteVector} targetId={targetId} />
           <Image
             source={require("../assets/pexels-allan-mas-5383501.jpg")}
             resizeMode="cover"
@@ -78,5 +87,5 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     width: "100%",
-  },
+  }
 });

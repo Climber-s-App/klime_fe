@@ -8,12 +8,13 @@ export default function Draggable({
   vector,
   newVectors,
   setNewVectors,
+  setAlertVisible,
+  setTargetId,
 }) {
   const updateNewVectors = (updatedVector) => {
     const updatedVectors = newVectors.map((v) =>
       v.id === updatedVector.id ? updatedVector : v
     );
-
     setNewVectors(updatedVectors);
   };
 
@@ -34,19 +35,27 @@ export default function Draggable({
       initialX: x,
       initialY: y,
     };
+    selectedItem = { id: vector.id };
     updateNewVectors(updatedVector);
+    setTargetId(vector.id);
   };
 
   const pan = Gesture.Pan()
     .onChange((event) => {
       handleChange(event);
     })
-    .onFinalize(() => {
-      handleFinalize();
+    .onFinalize((event) => {
+      handleFinalize(event);
     });
 
+  const longPressGesture = Gesture.LongPress().onEnd((e, success) => {
+    if (success) {
+      setAlertVisible(true);
+    }
+  });
+
   return (
-    <GestureDetector gesture={pan}>
+    <GestureDetector gesture={Gesture.Exclusive(pan, longPressGesture)}>
       <Animated.View style={vectorStyle}>
         <AddVectors vectorColor={vectorColor} />
       </Animated.View>
