@@ -1,7 +1,7 @@
 import  Modal  from "react-native-modal";
 import { Text, View, StyleSheet, Button } from "react-native";
 
-const InfoModal = ({isVisible, handleInfoModal, addIcon}) => {
+const InfoModal = ({isVisible, handleInfoModal, addIcon, saveIcon}) => {
 
   return (
     <Modal isVisible={isVisible} style={styles.container}>
@@ -22,11 +22,18 @@ const InfoModal = ({isVisible, handleInfoModal, addIcon}) => {
             <View style={[styles.vectorColor, { borderColor: '#f72556' }]} />
             <Text style={[styles.text, {marginLeft: 10}]}>Red signifies a finish hold</Text>
           </View>
-          <View style={[styles.iconContainer, {marginBottom: 20, right: 3}]}>
+          <Text style={[styles.text, {marginBottom: 10, fontSize:20, marginTop:20}]}> On create a problem page: </Text>
+          <Text style={[styles.text, {marginBottom: 10}]}> 👋🏻 Tap screen to add circles </Text>
+          <Text style={[styles.text, {marginBottom: 10}]}> 👋🏻 Touch and drag circles to move them</Text>
+          <Text style={[styles.text, {marginBottom: 10}]}> 👋🏻 Long press the circle to delete</Text>
+          <View style={[styles.iconContainer, { right: 3}]}>
             {addIcon}
-            <Text style={[styles.text, {marginLeft: 10}]}>Push to add and save a new problem</Text>
+            <Text style={[styles.text, {marginLeft: 10}]}>Push to add a new problem</Text>
           </View>
-        <Text style={[styles.text, {marginBottom: 10}]}> 👋🏻 Long press the circle to delete</Text>
+          <View style={[styles.iconContainer, {marginBottom: 20, right: 3}]}>
+            {saveIcon}
+            <Text style={[styles.text, {marginLeft: 10}]}>Push to save a new problem</Text>
+          </View>
         </View>
         <Button color={'#2A6620'} title="CLOSE" onPress={handleInfoModal} />
       </View>
@@ -91,6 +98,6 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     alignItems: 'center',
     marginTop: 6,
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
 });

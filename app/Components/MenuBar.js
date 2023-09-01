@@ -70,7 +70,7 @@ export default function MenuBar({ vectorColor, handleVectorColor, handlePostProb
       />
       <Pressable style={styles.infoStyle} onPress={handleInfoModal}>
         {infoIcon}
-        <InfoModal isVisible={isInfoModalVisible} currentRoute={currentRoute} handleInfoModal={handleInfoModal} addIcon={addIcon} />
+        <InfoModal isVisible={isInfoModalVisible} currentRoute={currentRoute} handleInfoModal={handleInfoModal} addIcon={addIcon} saveIcon={saveIcon} />
       </Pressable >
       {currentRoute === 'View All Problems' && 
         <Pressable style={styles.image} onPress={() => {
