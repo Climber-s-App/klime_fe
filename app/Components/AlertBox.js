@@ -1,8 +1,16 @@
-import { View, Pressable, Modal, StyleSheet, Text, Button } from "react-native";
-import { useState } from "react";
+import { View, Modal, StyleSheet, Text, Button } from "react-native";
 
-const AlertBox = ({ alertVisible, setAlertVisible }) => {
-  console.log(alertVisible)
+const AlertBox = ({
+  alertVisible,
+  setAlertVisible,
+  deleteVector,
+  targetId,
+}) => {
+  const handleDelete = () => {
+    setTimeout(() => setAlertVisible(false), "500");
+    deleteVector(targetId);
+  };
+
   return (
     <Modal
       style={styles.modal}
@@ -15,8 +23,16 @@ const AlertBox = ({ alertVisible, setAlertVisible }) => {
           Do you want to delete this circle?
         </Text>
         <View style={styles.buttonContainer}>
-          <Button color="#2A6620" title="DELETE" />
-          <Button color="#2A6620" title="CANCLE" />
+          <Button
+            color="#2A6620"
+            title="DELETE"
+            onPress={() => handleDelete()}
+          />
+          <Button
+            color="#2A6620"
+            title="CANCLE"
+            onPress={() => setAlertVisible(false)}
+          />
         </View>
       </View>
     </Modal>

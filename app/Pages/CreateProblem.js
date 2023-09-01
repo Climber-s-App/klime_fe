@@ -17,6 +17,7 @@ const CreateProblem = () => {
   const currentScreen = useRoute();
   const navigation = useNavigation();
   const [alertVisible, setAlertVisible] = useState(false);
+  const [targetId, setTargetId] = useState({});
 
   useEffect(() => {
     const unsubscribeFocus = navigation.addListener("focus", () => {
@@ -55,7 +56,7 @@ const CreateProblem = () => {
       transform: [{ translateX: x }, { translateY: y }],
       position: "absolute",
     };
-    return <Draggable vectorStyle={vectorStyle} vectorColor={color} vector={vector} newVectors={newVectors} setNewVectors={setNewVectors} key={id} deleteVector={deleteVector} alertVisible={alertVisible} setAlertVisible={setAlertVisible}/>;
+    return <Draggable vectorStyle={vectorStyle} vectorColor={color} vector={vector} newVectors={newVectors} setNewVectors={setNewVectors} key={id} deleteVector={deleteVector} alertVisible={alertVisible} setAlertVisible={setAlertVisible} targetId={targetId} setTargetId={setTargetId}/>;
   });
 
   const deleteVector = (selectedId) => {
@@ -67,7 +68,7 @@ const CreateProblem = () => {
     <View style={styles.image}>
       <GestureDetector gesture={singleTap}>
         <View style={{ height: "100%", width: "100%" }}>
-          <AlertBox alertVisible={alertVisible} setAlertVisible={setAlertVisible} deleteVector={deleteVector}/>
+          <AlertBox alertVisible={alertVisible} setAlertVisible={setAlertVisible} deleteVector={deleteVector} targetId={targetId} />
           <Image
             source={require("../assets/pexels-allan-mas-5383501.jpg")}
             resizeMode="cover"
