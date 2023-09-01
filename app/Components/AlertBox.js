@@ -10,10 +10,12 @@ const AlertBox = ({ alertVisible, setAlertVisible }) => {
       animationType="fade"
     >
       <View style={styles.box}>
-        <Text style={{fontSize: 20, textAlign: 'center'}}>Do you want to delete this circle?</Text>
+        <Text style={{ fontSize: 20, textAlign: "center" }}>
+          Do you want to delete this circle?
+        </Text>
         <View style={styles.buttonContainer}>
-          <Button color='#2A6620' title="DELETE" />
-          <Button color='#2A6620' title="CANCLE" />
+          <Button color="#2A6620" title="DELETE" />
+          <Button color="#2A6620" title="CANCLE" />
         </View>
       </View>
     </Modal>
@@ -34,17 +36,23 @@ const styles = StyleSheet.create({
     padding: 30,
     borderRadius: 25,
     borderWidth: 1,
-    borderColor: "#000",
-    borderStyle: "solid",
     marginTop: 300,
-    backgroundColor: 'white',
+    backgroundColor: "white",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 10,
+    },
+    shadowOpacity: 0.53,
+    shadowRadius: 13.97,
+    elevation: 21,
   },
 
   buttonContainer: {
     flexDirection: "row",
     gap: 40,
-    marginTop: 20
-  }
+    marginTop: 20,
+  },
 });
 
 export default AlertBox;
