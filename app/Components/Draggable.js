@@ -10,6 +10,7 @@ export default function Draggable({
   vector,
   newVectors,
   setNewVectors,
+  setAlertVisible
 }) {
   const [targetId, setTargetId] = useState({});
 
@@ -21,11 +22,11 @@ export default function Draggable({
     setNewVectors(updatedVectors);
   };
 
-  const deleteVector = (selectedId) => {
-    const updatedVectors = newVectors.filter((v) => v.id !== selectedId);
+  // const deleteVector = (selectedId) => {
+  //   const updatedVectors = newVectors.filter((v) => v.id !== selectedId);
 
-    setNewVectors(updatedVectors);
-  };
+  //   setNewVectors(updatedVectors);
+  // };
 
   const alertDelete = () => {
     Alert.alert('Do you want to Delete this circle?', 'My Alert Msg', [
@@ -74,8 +75,9 @@ export default function Draggable({
   const longPressGesture = Gesture.LongPress()
     .onEnd((e, success) => {
       if (success) {
-        alertDelete()
+        // alertDelete()
         // deleteVector(targetId);
+        setAlertVisible(true);
       }
     });
 

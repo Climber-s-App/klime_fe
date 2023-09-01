@@ -2,10 +2,11 @@ import { View, Pressable, Modal, StyleSheet, Text, Button } from "react-native";
 import { useState } from "react";
 
 const AlertBox = ({ alertVisible, setAlertVisible }) => {
+  console.log(alertVisible)
   return (
     <Modal
       style={styles.modal}
-      isVisible={true}
+      visible={alertVisible}
       transparent={true}
       animationType="fade"
     >
