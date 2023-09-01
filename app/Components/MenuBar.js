@@ -42,7 +42,7 @@ export default function MenuBar({ vectorColor, handleVectorColor, handlePostProb
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'center',
-      height: 40,
+      height: 50,
       padding: 6,
     },
     vectorColor: {

@@ -10,7 +10,7 @@ const CreateProblemModal = ({isVisible, toggleCreateProblemModal, handlePostProb
   const [problemGrade, setProblemGrade] = useState('');
   const [nameError, setNameError] = useState("");
   const navigation = useNavigation();
-  const { setNewVectors } = useContext(RouteContext);
+  const { setNewVectors, wallInfo } = useContext(RouteContext);
   const availableGrades = [
     { label: "V0", value: "V0" },
     { label: "V1", value: "V1" },
@@ -51,7 +51,10 @@ const CreateProblemModal = ({isVisible, toggleCreateProblemModal, handlePostProb
       setNewVectors([])
       toggleCreateProblemModal();
       handlePostProblem(problemName, problemGrade);
-      navigation.navigate('View All Problems')
+      navigation.navigate('View All Problems', {
+        id: wallInfo.id,
+        image: wallInfo.image
+      })
     }
   };
 
