@@ -1,0 +1,31 @@
+{
+  "data": [
+    {
+      "id": "1",
+      "type": "wall",
+      "attributes": {
+        "title": "Wall 1",
+        "photo_url": "https://gordonlesti.com/media/post/my-home-climbing-wall-upgrade/layout.jpg",
+        "user_id": 186
+      }
+    },
+    {
+      "id": "2",
+      "type": "wall",
+      "attributes": {
+        "title": "Wall 2",
+        "photo_url": "https://i.imgur.com/9obcx6T.jpeg",
+        "user_id": 186
+      }
+    },
+    {
+      "id": "3",
+      "type": "wall",
+      "attributes": {
+        "title": "Wall 3",
+        "photo_url": "https://i.imgur.com/AxRl2PH.jpeg",
+        "user_id": 186
+      }
+    }
+  ]
+}

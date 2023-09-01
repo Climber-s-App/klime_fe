@@ -38,6 +38,7 @@ export default function Home() {
     <View style={styles.viewContainer}>
       <View style={styles.imageContainer}>
         <Image
+          testID='site-logo'
           source={require('../assets/Klime.png')}
           style={styles.image}
         />
