@@ -1,4 +1,4 @@
-import { View, Modal, StyleSheet, Text, Button } from "react-native";
+import { View, Modal, StyleSheet, Text, Button, Pressable } from "react-native";
 
 const AlertBox = ({
   alertVisible,
@@ -7,7 +7,7 @@ const AlertBox = ({
   targetId,
 }) => {
   const handleDelete = () => {
-    setTimeout(() => setAlertVisible(false), "500");
+    setAlertVisible(false);
     deleteVector(targetId);
   };
 
@@ -18,6 +18,7 @@ const AlertBox = ({
       transparent={true}
       animationType="fade"
     >
+      <Pressable style={styles.backdrop}/>
       <View style={styles.box}>
         <Text style={{ fontSize: 20, textAlign: "center" }}>
           Do you want to delete this circle?
@@ -70,6 +71,16 @@ const styles = StyleSheet.create({
     gap: 40,
     marginTop: 20,
   },
+
+  backdrop: {
+    backgroundColor: "#000000",
+    opacity: 0.3,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  }
 });
 
 export default AlertBox;

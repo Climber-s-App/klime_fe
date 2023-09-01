@@ -66,7 +66,6 @@ const CreateProblem = () => {
 
   return (
     <View style={styles.image}>
-      <GestureDetector gesture={singleTap}>
         <View style={{ height: "100%", width: "100%" }}>
           <AlertBox alertVisible={alertVisible} setAlertVisible={setAlertVisible} deleteVector={deleteVector} targetId={targetId} />
           <Image
@@ -76,7 +75,6 @@ const CreateProblem = () => {
           />
           {savedVectors}
         </View>
-      </GestureDetector>
     </View>
   );
 };
@@ -87,5 +85,5 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     width: "100%",
-  },
+  }
 });
