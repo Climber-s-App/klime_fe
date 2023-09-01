@@ -29,10 +29,6 @@ export default function MenuBar({ vectorColor, handleVectorColor, handlePostProb
   const toggleCreateProblemModal = () => {
     setIsCreateProblemInfoModalVisible(prev => !prev);
   }
-
-  const handleSaveProblem = () => {
-    toggleCreateProblemModal();
-  }
   
   const styles = StyleSheet.create({
     image: {
@@ -85,7 +81,7 @@ export default function MenuBar({ vectorColor, handleVectorColor, handlePostProb
         </Pressable >
       }
       {currentRoute === 'Create Problem' && 
-        <Pressable style={styles.image} onPress={handleSaveProblem}>
+        <Pressable style={styles.image} onPress={toggleCreateProblemModal}>
           {saveIcon}
         </Pressable >
       }

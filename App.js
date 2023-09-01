@@ -11,6 +11,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ViewAllProblems from "../klime_fe/app/Pages/ViewAllProblems";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { postProblem } from "./app/Components/apiCalls";
+import Toast  from 'react-native-toast-message';
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -46,7 +47,7 @@ export default function App() {
         "wall_id": wallId,
         "grade": grade
       }
-      await postProblem(newProblem, wallId);
+      const data = await postProblem(newProblem, wallId);
     } catch (error) {
       handleNetworkErrors(error.message)
     }
@@ -69,7 +70,8 @@ export default function App() {
       
           <SafeAreaView>
             <StatusBar />
-            <View style={styles.contentContainer} />
+            <View style={styles.contentContainer}>
+            </View>
             <View style={styles.menuContainer}>
               <MenuBar
                 vectorColor={vectorColor}
@@ -80,6 +82,7 @@ export default function App() {
           </SafeAreaView>
       
       </NavigationContainer>
+      <Toast bottomOffset={76} />
     </RouteContext.Provider>
     </GestureHandlerRootView>
   );
