@@ -25,6 +25,21 @@ export default function App() {
     setNetworkErrors(error.message);
   }
 
+  const showToast = (name) => {
+    Toast.show({
+      position: 'bottom',
+      text1: `Saved ${name}`,
+    });
+  }
+
+  const showErrorToast = (error) => {
+    Toast.show({
+      type: 'error',
+      position: 'bottom',
+      text1: error || 'Error, please try later',
+    });
+  }
+
   const handleVectorColor = (color) => {
     switch (color) {
       case "#60FF46":
@@ -47,16 +62,18 @@ export default function App() {
         "wall_id": wallId,
         "grade": grade
       }
-      const data = await postProblem(newProblem, wallId);
+      await postProblem(newProblem, wallId);
+      showToast(newProblem.name)
     } catch (error) {
       handleNetworkErrors(error.message)
+      showErrorToast(error.message)
     }
   } 
 
   return (
     <GestureHandlerRootView style={{flex: 1}}>
     <RouteContext.Provider
-      value={{ currentRoute, setCurrentRoute, vectorColor, wallId, setWallId, newVectors, setNewVectors, handleNetworkErrors }}
+      value={{ currentRoute, setCurrentRoute, vectorColor, wallId, setWallId, newVectors, setNewVectors, networkErrors, handleNetworkErrors }}
     >
       <NavigationContainer
         style={{ ...styles.container, ...styles.androidSafeArea }}

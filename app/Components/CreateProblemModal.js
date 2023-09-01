@@ -3,7 +3,6 @@ import { Text, View, StyleSheet, Button, TextInput } from "react-native";
 import { useState, useContext } from "react";
 import RNPickerSelect from "react-native-picker-select";
 import RouteContext from "./RouteContext";
-import Toast from 'react-native-toast-message';
 
 const CreateProblemModal = ({isVisible, toggleCreateProblemModal, handlePostProblem}) => {
   const [problemName, setProblemName] = useState('');
@@ -29,14 +28,6 @@ const CreateProblemModal = ({isVisible, toggleCreateProblemModal, handlePostProb
     { label: "V15", value: "V15" },
 ];
 
-const showToast = () => {
-  Toast.show({
-    type: 'success',
-    position: 'bottom',
-    text1: 'PROBLEM SAVED',
-  });
-}
-
   const clearForm = () => {
     setProblemGrade('')
     setProblemName('')
@@ -56,7 +47,6 @@ const showToast = () => {
     if (isValid) {
       clearForm();
       setNewVectors([])
-      showToast()
       toggleCreateProblemModal();
       handlePostProblem(problemName, problemGrade);
     }
