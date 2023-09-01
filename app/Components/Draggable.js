@@ -54,19 +54,11 @@ export default function Draggable({
     }
   });
 
-  const singleTap = Gesture.Tap()
-    .maxDuration(250)
-    .onStart(() => {
-      alert("singleTap");
-    });
-
   return (
     <GestureDetector gesture={Gesture.Exclusive(pan, longPressGesture)}>
-      <GestureDetector gesture={singleTap}>
-        <Animated.View style={vectorStyle}>
-          <AddVectors vectorColor={vectorColor} />
-        </Animated.View>
-      </GestureDetector>
+      <Animated.View style={vectorStyle}>
+        <AddVectors vectorColor={vectorColor} />
+      </Animated.View>
     </GestureDetector>
   );
 }
