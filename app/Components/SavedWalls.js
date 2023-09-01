@@ -9,7 +9,7 @@ export default function SavedWalls({ savedWalls }) {
     const navigation = useNavigation();
 
     return (
-      <Pressable key={id} onPress={() => navigation.navigate('View All Problems', {
+      <Pressable testID='saved-container' key={id} onPress={() => navigation.navigate('View All Problems', {
         id: id,
         image: photo_url
       })}>

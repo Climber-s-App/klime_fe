@@ -10,5 +10,6 @@ describe('user should see a home page with proper elements', () => {
     cy.visit('http://localhost:8081/')
     cy.wait('@walls')
     cy.get('[data-testid="site-logo"]').should('be.visible')
+    cy.get('[data-testid="saved-container"]').children().should('have.length', 3)
   })
 })
