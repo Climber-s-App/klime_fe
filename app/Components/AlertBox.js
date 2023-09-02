@@ -18,7 +18,7 @@ const AlertBox = ({
       transparent={true}
       animationType="fade"
     >
-      <Pressable style={styles.backdrop}/>
+      <Pressable testID='alert-box' style={styles.backdrop}/>
       <View style={styles.box}>
         <Text style={{ fontSize: 20, textAlign: "center" }}>
           Do you want to delete this circle?
@@ -31,7 +31,7 @@ const AlertBox = ({
           />
           <Button
             color="#2A6620"
-            title="CANCLE"
+            title="CANCEL"
             onPress={() => setAlertVisible(false)}
           />
         </View>
