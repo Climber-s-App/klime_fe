@@ -42,10 +42,10 @@ export default function ViewAllProblems({route}) {
 
   const userProblem = problems.map((problem) => {
     return (
-      <Pressable key={problem.id} onPress={() => handleProblemNavigation(problem)}>
-        <View style={styles.problemView} key={problem.wall_id} id={problem.wall_id}>
-          <Text style={styles.routeInformation}>{problem.name}</Text>
-          <Text style={styles.routeInformation}>{problem.grade}</Text>
+      <Pressable testID='view-problems' key={problem.id} onPress={() => handleProblemNavigation(problem)}>
+        <View testID='problem' style={styles.problemView} key={problem.wall_id} id={problem.wall_id}>
+          <Text testID='problem-name' style={styles.routeInformation}>{problem.name}</Text>
+          <Text testID='problem-grade' style={styles.routeInformation}>{problem.grade}</Text>
         </View>
       </Pressable>
     );

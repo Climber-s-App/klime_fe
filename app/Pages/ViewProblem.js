@@ -41,12 +41,12 @@ const ViewProblem = ({ route }) => {
 
   return (
     <View resizeMode="cover" style={styles.image} >
-      <ImageBackground source={{ uri: newImage }} resizeMode="cover" style={styles.image} >
+      <ImageBackground testID='view-problem' source={{ uri: newImage }} resizeMode="cover" style={styles.image} >
         {addedVectors}
       </ImageBackground>
       <View style={styles.routeInfo}>
-        <Text style={styles.routeInfoText}>{route.params.name}</Text>
-        <Text style={styles.routeInfoText}>{route.params.grade}</Text>
+        <Text testID='view-problem-name' style={styles.routeInfoText}>{route.params.name}</Text>
+        <Text testID='view-problem-grade' style={styles.routeInfoText}>{route.params.grade}</Text>
       </View>
     </View>
   );
