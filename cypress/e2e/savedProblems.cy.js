@@ -10,7 +10,7 @@ beforeEach(() => {
 })
 
 describe('user should see a page of saved problem when clicking on a wall', () => {
-  it('should take user to the home page and see proper elements', () => {
+  it('should take user to the problems page and see proper elements', () => {
     cy.visit('http://localhost:8081/')
       .wait('@walls')
       .get('[data-testid="saved-container"]').click({ force: true , multiple: true})
