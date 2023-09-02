@@ -13,12 +13,13 @@ export default function SavedWalls({ savedWalls }) {
         id: id,
         image: photo_url
       })}>
-        <View style={styles.view} key={Date.now() + savedWalls.indexOf(wall)} id={id}>
+        <View testID='wall' style={styles.view} key={Date.now() + savedWalls.indexOf(wall)} id={id}>
           <Image
+            testID='wall-image'
             source={{ uri: photo_url }}
             style={styles.image}
           />
-          <Text style={styles.text}>{title}</Text>
+          <Text testID='wall-text' style={styles.text}>{title}</Text>
         </View>
       </Pressable>
     );

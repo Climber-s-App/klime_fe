@@ -35,7 +35,7 @@ const InfoModal = ({isVisible, handleInfoModal, addIcon, saveIcon}) => {
             <Text style={[styles.text, {marginLeft: 10}]}>Push to save a new problem</Text>
           </View>
         </View>
-        <Button color={'#2A6620'} title="CLOSE" onPress={handleInfoModal} />
+        <Button testID='close-button' color={'#2A6620'} title="CLOSE" onPress={handleInfoModal} />
       </View>
     </Modal>
   )
