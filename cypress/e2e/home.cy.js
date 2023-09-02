@@ -6,10 +6,12 @@ beforeEach(() => {
 })
 
 describe('user should see a home page with proper elements', () => {
-  it('should take user to the home page and see proper header elements', () => {
+  it('should take user to the home page and see proper elements', () => {
     cy.visit('http://localhost:8081/')
     cy.wait('@walls')
     cy.get('[data-testid="site-logo"]').should('be.visible')
     cy.get('[data-testid="saved-container"]').children().should('have.length', 3)
+    cy.get('[data-testid="menu-bar"]').should('be.visible')
+    cy.get('[data-testid="info-button"]').should('be.visible')
   })
 })

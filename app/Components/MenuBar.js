@@ -62,13 +62,13 @@ export default function MenuBar({ vectorColor, handleVectorColor, handlePostProb
   });
   
   return (
-    <View style={styles.menuContainer}>
+    <View testID='menu-bar' style={styles.menuContainer}>
       <CreateProblemModal 
         isVisible={isCreateProblemModalVisible} 
         toggleCreateProblemModal={toggleCreateProblemModal}
         handlePostProblem={handlePostProblem}
       />
-      <Pressable style={styles.infoStyle} onPress={handleInfoModal}>
+      <Pressable testID='info-button' style={styles.infoStyle} onPress={handleInfoModal}>
         {infoIcon}
         <InfoModal isVisible={isInfoModalVisible} currentRoute={currentRoute} handleInfoModal={handleInfoModal} addIcon={addIcon} saveIcon={saveIcon} />
       </Pressable >
