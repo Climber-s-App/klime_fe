@@ -70,7 +70,6 @@ export default function App() {
 
       data.data.map(data => {
         console.log('After post problem', data.attributes)
-        console.log('After post problem vector', data.attributes.vectors)
       })
       const modifiedData = data.data.map((data) => ({ id: data.id, ...data.attributes }));
       setSavedProblems(modifiedData);
