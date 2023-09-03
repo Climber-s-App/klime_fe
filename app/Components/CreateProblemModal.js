@@ -66,6 +66,7 @@ const CreateProblemModal = ({ isVisible, toggleCreateProblemModal, handlePostPro
         <View>
           <Text>Select a Grade</Text>
           <Picker
+            testID='picker-drop'
             selectedValue={problemGrade}
             style={{ height: 200, width: 100 }}
             onValueChange={(event) => setProblemGrade(event)}

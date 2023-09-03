@@ -84,21 +84,6 @@ describe('user should be taken to a page to create a problem', () => {
       .get('[style="background-color: rgb(242, 242, 242); display: flex;"] > :nth-child(2) > [style="height: 64px;"] > .r-alignItems-1oszu61 > .r-marginInline-1xpp3t0 > .css-text-146c3p1')
       .should('be.visible')
   })
-  // it.only('should allow a user to delete a circle and see an alert', () => {
-  //   cy.visit('http://localhost:8081/')
-  //     .wait('@walls')
-  //   cy.intercept("GET", 'https://23065c27-5c81-4a37-9fb7-59f7742c76cb.mock.pstmn.io/api/v0/users/1/walls/1/problems', {
-  //     statusCode: 200,
-  //     fixture: "problems-fixture.json"
-  //   }).as('problems')
-  //     .get('[data-testid="saved-container"]').click({ force: true, multiple: true })
-  //     .get('[data-testid="create-button"]').click()
-  //     .get('[data-testid="create-problem"]').click()
-  //     .get('[data-testid="circle-icon"]').should('be.visible')
-  //     .get('[data-testid="circle-icon"]').trigger('mouseleave')
-  //     .trigger('mousemove')
-  //     .get('[data-testid="alert-box"]').should('be.visible')
-  // })
   it('should allow a user to save a problem', () => {
     cy.visit('http://localhost:8081/')
       .wait('@walls')
@@ -111,7 +96,14 @@ describe('user should be taken to a page to create a problem', () => {
       .get('[data-testid="create-problem"]').click()
       .get('[style="background-color: rgb(242, 242, 242); display: flex;"] > :nth-child(2) > [style="height: 64px;"] > .r-alignItems-1oszu61 > .r-marginInline-1xpp3t0 > .css-text-146c3p1')
       .should('be.visible')
-      // .get('[data-testid="save-button"]').click()
-      //rest of post tests
+      .get('[data-testid="save-button"]').click()
+      .get('[data-testid="form-name"]').should('be.visible')
+      .get('.r-fontSize-adyw6z').invoke('text').should('contain', "ENTER PROBLEM INFO")
+      .get('[data-testid="form-name"]').type('Dyno Nation')
+      .get('[data-testid="picker-drop"]').select(9)
+      .get('[data-testid="save-save-button"]').click()
+      .get('[data-testid="view-problems"]').should('be.visible')
+      // when post is finished, the line below can be uncommented out 
+      // .get('[data-testid="view-problems"]').children().should('have.lengthOf', 4)
   })
 })
