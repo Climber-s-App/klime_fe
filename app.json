@@ -1,7 +1,6 @@
 {
   "expo": {
     "name": "klime_fe",
-    "slug": "klime_fe",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -15,7 +14,6 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {

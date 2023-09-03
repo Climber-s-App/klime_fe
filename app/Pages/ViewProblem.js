@@ -40,14 +40,14 @@ const ViewProblem = ({ route }) => {
   });
 
   return (
-    <View resizeMode="cover" style={styles.image} >
-      <ImageBackground source={{ uri: newImage }} resizeMode="cover" style={styles.image} >
+    <View  style={styles.image} >
+      <ImageBackground source={{ uri: newImage }} resizeMode="contain" style={styles.image} >
         {addedVectors}
       </ImageBackground>
-      <View style={styles.routeInfo}>
+      {/* <View style={styles.routeInfo}>
         <Text style={styles.routeInfoText}>{route.params.name}</Text>
         <Text style={styles.routeInfoText}>{route.params.grade}</Text>
-      </View>
+      </View> */}
     </View>
   );
 }
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     top: 0,
     position: 'relative',
     width: '100%',
-    height: "95%"
+    height: "100%"
   },
   viewContainer: {
     flex: 1,

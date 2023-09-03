@@ -1,7 +1,7 @@
-const domain = '23065c27-5c81-4a37-9fb7-59f7742c76cb.mock.pstmn.io';
+const domain = 'klime-be.onrender.com';
 
 export const getUserWalls = async () => {
-  const response = await fetch(`https://${domain}/api/v0/users/1/walls`);
+  const response = await fetch(`https://${domain}/api/v0/users/1/walls/`);
   const data = await handleErrors(response);
   return data;
 };
@@ -15,13 +15,13 @@ const handleErrors = (response) => {
 }
 
 export const getAllProblems = async (id) => {
-  const response = await fetch(`https://${domain}/api/v0/users/1/walls/${id}/problems`);
+  const response = await fetch(`https://${domain}/api/v0/users/1/walls/${id}/problems/`);
   const data = await handleErrors(response);
   return data;
 };
 
 export const postProblem = async (newProblem, wallId) => {
-  const response = await fetch(`https://${domain}/api/v0/users/1/walls/${wallId}/problems`, {
+  const response = await fetch(`https://${domain}/api/v0/users/1/walls/${wallId}/problems/`, {
     method: 'POST',
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify(newProblem)
@@ -29,5 +29,3 @@ export const postProblem = async (newProblem, wallId) => {
   const data = await handleErrors(response);
   return data;
 };
-
-// https://klime-be.onrender.com/users/1/walls/1/problems
