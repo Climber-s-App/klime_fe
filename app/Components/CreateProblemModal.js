@@ -62,12 +62,12 @@ const CreateProblemModal = ({ isVisible, toggleCreateProblemModal, handlePostPro
     <Modal isVisible={isVisible} style={styles.container}>
       <View style={styles.modal}>
         <Text style={styles.title}>ENTER PROBLEM INFO</Text>
-        <TextInput style={styles.input} placeholder={nameError || 'ENTER NAME'} onChangeText={setProblemName} value={problemName} />
+        <TextInput testID='form-name' style={styles.input} placeholder={nameError || 'ENTER NAME'} onChangeText={setProblemName} value={problemName} />
         <View>
           <Text>Select a Grade</Text>
           <Picker
             selectedValue={problemGrade}
-            style={{ height: 200, width: 100}}
+            style={{ height: 200, width: 100 }}
             onValueChange={(event) => setProblemGrade(event)}
           >
             <Picker.Item label="V0" value="V0" />
@@ -90,8 +90,9 @@ const CreateProblemModal = ({ isVisible, toggleCreateProblemModal, handlePostPro
           </Picker>
         </View>
         <View style={styles.buttonContainer}>
-          <Button color={'#2A6620'} title='SAVE' onPress={handleSave} />
+          <Button testID="save-save-button" color={'#2A6620'} title='SAVE' onPress={handleSave} />
           <Button
+            testID="save-close-button"
             color={'#2A6620'}
             title="CLOSE"
             onPress={() => {
