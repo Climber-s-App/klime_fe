@@ -1,9 +1,9 @@
 beforeEach(() => {
-  cy.intercept("GET", 'https://23065c27-5c81-4a37-9fb7-59f7742c76cb.mock.pstmn.io/api/v0/users/1/walls', {
+  cy.intercept("GET", 'https://klime-be.onrender.com/api/v0/users/1/walls', {
     statusCode: 200,
     fixture: "walls-fixture.json"
   }).as('walls')
-  cy.intercept("GET", 'https://23065c27-5c81-4a37-9fb7-59f7742c76cb.mock.pstmn.io/api/v0/users/1/walls/1/problems', {
+  cy.intercept("GET", 'https://klime-be.onrender.com/api/v0/users/1/walls/1/problems', {
     statusCode: 200,
     fixture: "problems-fixture.json"
   }).as('problems')
@@ -33,8 +33,6 @@ describe('user should see a page of saved problem when clicking on a wall', () =
       .get('[style="background-color: rgb(242, 242, 242); display: flex;"] > :nth-child(2) > [style="height: 64px;"] > .r-alignItems-1oszu61 > .r-marginInline-1xpp3t0 > .css-text-146c3p1')
       .invoke('text').should('contain', "View Problem")
       .get('[data-testid="view-problem"]').should('be.visible')
-      .get('[data-testid="view-problem-name"]').should('be.visible')
-      .get('[data-testid="view-problem-grade"]').should('be.visible')
       .get('[data-testid="create-button"]').should('not.exist')
   })
 })

@@ -11,25 +11,7 @@ const CreateProblemModal = ({ isVisible, toggleCreateProblemModal, handlePostPro
   const [nameError, setNameError] = useState("");
   const navigation = useNavigation();
   const { setNewVectors, wallInfo } = useContext(RouteContext);
-  // const availableGrades = [
-  //   { label: "V0", value: "V0" },
-  //   { label: "V1", value: "V1" },
-  //   { label: "V2", value: "V2" },
-  //   { label: "V3", value: "V3" },
-  //   { label: "V4", value: "V4" },
-  //   { label: "V5", value: "V5" },
-  //   { label: "V6", value: "V6" },
-  //   { label: "V7", value: "V7" },
-  //   { label: "V8", value: "V8" },
-  //   { label: "V9", value: "V9" },
-  //   { label: "V10", value: "V10" },
-  //   { label: "V11", value: "V11" },
-  //   { label: "V12", value: "V12" },
-  //   { label: "V13", value: "V13" },
-  //   { label: "V14", value: "V14" },
-  //   { label: "V15", value: "V15" },
-  // ];
-
+ 
   const clearForm = () => {
     setProblemGrade('')
     setProblemName('')
