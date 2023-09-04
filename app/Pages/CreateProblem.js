@@ -53,7 +53,7 @@ const CreateProblem = () => {
     const { color, x, y, id } = vector;
     const vectorStyle = {
       transform: [{ translateX: x }, { translateY: y }],
-      position: "absolute",
+      position: 'absolute'
     };
     return <Draggable vectorStyle={vectorStyle} vectorColor={color} vector={vector} newVectors={newVectors} setNewVectors={setNewVectors} key={id} deleteVector={deleteVector} alertVisible={alertVisible} setAlertVisible={setAlertVisible} targetId={targetId} setTargetId={setTargetId}/>;
   });

@@ -30,6 +30,7 @@ const ViewProblem = ({ route }) => {
     const { color, x, y, id } = vector;
     const vectorStyle = {
       transform: [{ translateX: x }, { translateY: y }],
+      position: 'absolute'
     };
 
     return (
@@ -44,10 +45,6 @@ const ViewProblem = ({ route }) => {
       <ImageBackground source={{ uri: newImage }} resizeMode="contain" style={styles.image} >
         {addedVectors}
       </ImageBackground>
-      {/* <View style={styles.routeInfo}>
-        <Text style={styles.routeInfoText}>{route.params.name}</Text>
-        <Text style={styles.routeInfoText}>{route.params.grade}</Text>
-      </View> */}
     </View>
   );
 }

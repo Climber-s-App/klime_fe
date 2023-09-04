@@ -63,14 +63,9 @@ export default function App() {
         "wall": wallInfo.id,
         "grade": grade || 'V0'
       }
-      console.log('BEFORE POST', newProblem)
-      const post = await postProblem(newProblem, wallInfo.id);
+      await postProblem(newProblem, wallInfo.id);
       showToast(newProblem.name)
       const data = await getAllProblems(wallInfo.id);
-
-      data.data.map(data => {
-        console.log('After post problem', data.attributes)
-      })
       const modifiedData = data.data.map((data) => ({ id: data.id, ...data.attributes }));
       setSavedProblems(modifiedData);
 
