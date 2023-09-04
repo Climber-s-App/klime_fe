@@ -2,8 +2,10 @@ version: 2.1
 orbs:
   node: circleci/node@5.1.0
 jobs:
-  build and test: # this can be any name you choose
-    executor: node/default # use the default executor defined within the orb
+  build and test:
+    executor: node/default
+    docker:
+      - image: cypress/base:16
     steps:
       - checkout
       - node/install-packages:
@@ -13,15 +15,12 @@ jobs:
           name: install dependencies 
       - run:
           command: ./node_modules/.bin/cypress run
-
           name: run cypress tests
       - persist_to_workspace:
           root: ~/project
           paths:
             - .
-
 workflows:
   test_my_app:
     jobs:
       - build and test
-     
