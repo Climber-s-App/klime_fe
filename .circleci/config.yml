@@ -14,7 +14,7 @@ jobs:
           command: npm install
           name: install dependencies 
       - run:
-#           command: npm test
+          command: npx cypress open
           name: run cypress tests
       - persist_to_workspace:
           root: ~/project
