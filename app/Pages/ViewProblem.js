@@ -41,8 +41,8 @@ const ViewProblem = ({ route }) => {
   });
 
   return (
-    <View  style={styles.image} >
-      <ImageBackground source={{ uri: newImage }} resizeMode="contain" style={styles.image} >
+    <View style={styles.image} >
+      <ImageBackground testID='view-problem' source={{ uri: newImage }} resizeMode="contain" style={styles.image} >
         {addedVectors}
       </ImageBackground>
     </View>

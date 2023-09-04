@@ -62,18 +62,18 @@ export default function MenuBar({ vectorColor, handleVectorColor, handlePostProb
   });
   
   return (
-    <View style={styles.menuContainer}>
+    <View testID='menu-bar' style={styles.menuContainer}>
       <CreateProblemModal 
         isVisible={isCreateProblemModalVisible} 
         toggleCreateProblemModal={toggleCreateProblemModal}
         handlePostProblem={handlePostProblem}
       />
-      <Pressable style={styles.infoStyle} onPress={handleInfoModal}>
+      <Pressable testID='info-button' style={styles.infoStyle} onPress={handleInfoModal}>
         {infoIcon}
         <InfoModal isVisible={isInfoModalVisible} currentRoute={currentRoute} handleInfoModal={handleInfoModal} addIcon={addIcon} saveIcon={saveIcon} />
       </Pressable >
       {currentRoute === 'View All Problems' && 
-        <Pressable style={styles.image} onPress={() => {
+        <Pressable testID='create-button' style={styles.image} onPress={() => {
           navigation.navigate('Create Problem', {
           vectorColor: vectorColor
         })}}>
@@ -81,11 +81,11 @@ export default function MenuBar({ vectorColor, handleVectorColor, handlePostProb
         </Pressable >
       }
       {currentRoute === 'Create Problem' && 
-        <Pressable style={styles.image} onPress={toggleCreateProblemModal}>
+        <Pressable testID='save-button' style={styles.image} onPress={toggleCreateProblemModal}>
           {saveIcon}
         </Pressable >
       }
-      {currentRoute === 'Create Problem' && <Pressable onPress={() => handleVectorColor(vectorColor)} style={styles.vectorColor} />}
+      {currentRoute === 'Create Problem' && <Pressable testID='color-button' onPress={() => handleVectorColor(vectorColor)} style={styles.vectorColor} />}
     </View >
   )
 }
