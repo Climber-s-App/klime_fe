@@ -3,10 +3,16 @@ beforeEach(() => {
     statusCode: 200,
     fixture: "walls-fixture.json"
   }).as('walls')
+
   cy.intercept("GET", 'https://klime-be.onrender.com/api/v0/users/1/walls/1/problems/', {
     statusCode: 200,
     fixture: "problems-fixture.json"
   }).as('problems')
+
+  cy.intercept("GET", 'https://klime-be.onrender.com/api/v0/users/1/walls/1/problems/', {
+    statusCode: 200,
+    fixture: "post-problems-fixture.json",
+  }).as('post-problems');
 })
 
 describe('user should be taken to a page to create a problem', () => {
@@ -28,6 +34,7 @@ describe('user should be taken to a page to create a problem', () => {
       .get('[style="background-color: rgb(242, 242, 242); display: flex;"] > :nth-child(2) > [style="height: 64px;"] > .r-alignItems-1oszu61 > .r-marginInline-1xpp3t0 > .css-text-146c3p1')
       .should('be.visible')
   })
+
   it('should allow a user to save a problem', () => {
     cy.visit('http://localhost:8081/')
       .get('[data-testid="saved-container"]').click({ force: true, multiple: true })
@@ -40,6 +47,7 @@ describe('user should be taken to a page to create a problem', () => {
       .get('.r-fontSize-adyw6z').invoke('text').should('contain', "ENTER PROBLEM INFO")
       .get('[data-testid="form-name"]').type('Dyno Nation')
       .get('[data-testid="picker-drop"]').select(9)
+
     cy.intercept("POST", 'https://klime-be.onrender.com/api/v0/users/1/walls/1/problems/', {
       statusCode: 201,
       body: {
@@ -86,22 +94,12 @@ describe('user should be taken to a page to create a problem', () => {
         }
       }
     }).as('post')
-      .get('[data-testid="save-save-button"]').click()
-      cy.wait('@post').then(() => {
-        cy.intercept("GET", 'https://klime-be.onrender.com/api/v0/users/1/walls/', {
-          statusCode: 200,
-          fixture: "walls-fixture.json"
-        }).as('walls')
-        cy.wait('@walls').then(() => {
-          cy.intercept("GET", 'https://klime-be.onrender.com/api/v0/users/1/walls/1/problems/', {
-            statusCode: 200,
-            fixture: "post-problems-fixture.json"
-          }).as('post-problems')
-        cy.wait('@post-problems').then(() => {
-          cy.get('[data-testid="view-problems"]').should('be.visible')
-          cy.get('[data-testid="view-problems"]').children().should('have.lengthOf', 4)
-        })
-    })
-        })
-  })
-})
+    cy.get('[data-testid="save-save-button"]').click();
+    cy.wait('@post').then(() => {
+      cy.wait('@post-problems').then(() => {
+        cy.get('[data-testid="view-problems"]').should('be.visible');
+        cy.get('[data-testid="view-problems"]').children().should('have.lengthOf', 4);
+      });
+    });
+  });
+});
