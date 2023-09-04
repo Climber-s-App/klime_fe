@@ -21,7 +21,6 @@ export default function App() {
   const [newVectors, setNewVectors] = useState([]);
   const [networkErrors, setNetworkErrors] = useState(null)
 
-
   const handleNetworkErrors = (error) => {
     setNetworkErrors(error.message);
   }

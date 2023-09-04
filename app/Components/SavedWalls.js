@@ -9,16 +9,17 @@ export default function SavedWalls({ savedWalls }) {
     const navigation = useNavigation();
 
     return (
-      <Pressable key={id} onPress={() => navigation.navigate('View All Problems', {
+      <Pressable testID='saved-container' key={id} onPress={() => navigation.navigate('View All Problems', {
         id: id,
         image: photo_url
       })}>
-        <View style={styles.view} key={Date.now() + savedWalls.indexOf(wall)} id={id}>
+        <View testID='wall' style={styles.view} key={Date.now() + savedWalls.indexOf(wall)} id={id}>
           <Image
+            testID='wall-image'
             source={{ uri: photo_url }}
             style={styles.image}
           />
-          <Text style={styles.text}>{title}</Text>
+          <Text testID='wall-text' style={styles.text}>{title}</Text>
         </View>
       </Pressable>
     );

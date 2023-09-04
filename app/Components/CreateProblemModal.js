@@ -1,34 +1,34 @@
-import  Modal  from "react-native-modal";
+import Modal from "react-native-modal";
 import { Text, View, StyleSheet, Button, TextInput } from "react-native";
 import { useState, useContext } from "react";
-import RNPickerSelect from "react-native-picker-select";
+import { Picker } from '@react-native-picker/picker';
 import RouteContext from "./RouteContext";
 import { useNavigation } from '@react-navigation/native';
 
-const CreateProblemModal = ({isVisible, toggleCreateProblemModal, handlePostProblem}) => {
+const CreateProblemModal = ({ isVisible, toggleCreateProblemModal, handlePostProblem }) => {
   const [problemName, setProblemName] = useState('');
   const [problemGrade, setProblemGrade] = useState('');
   const [nameError, setNameError] = useState("");
   const navigation = useNavigation();
   const { setNewVectors, wallInfo } = useContext(RouteContext);
-  const availableGrades = [
-    { label: "V0", value: "V0" },
-    { label: "V1", value: "V1" },
-    { label: "V2", value: "V2" },
-    { label: "V3", value: "V3" },
-    { label: "V4", value: "V4" },
-    { label: "V5", value: "V5" },
-    { label: "V6", value: "V6" },
-    { label: "V7", value: "V7" },
-    { label: "V8", value: "V8" },
-    { label: "V9", value: "V9" },
-    { label: "V10", value: "V10" },
-    { label: "V11", value: "V11" },
-    { label: "V12", value: "V12" },
-    { label: "V13", value: "V13" },
-    { label: "V14", value: "V14" },
-    { label: "V15", value: "V15" },
-];
+  // const availableGrades = [
+  //   { label: "V0", value: "V0" },
+  //   { label: "V1", value: "V1" },
+  //   { label: "V2", value: "V2" },
+  //   { label: "V3", value: "V3" },
+  //   { label: "V4", value: "V4" },
+  //   { label: "V5", value: "V5" },
+  //   { label: "V6", value: "V6" },
+  //   { label: "V7", value: "V7" },
+  //   { label: "V8", value: "V8" },
+  //   { label: "V9", value: "V9" },
+  //   { label: "V10", value: "V10" },
+  //   { label: "V11", value: "V11" },
+  //   { label: "V12", value: "V12" },
+  //   { label: "V13", value: "V13" },
+  //   { label: "V14", value: "V14" },
+  //   { label: "V15", value: "V15" },
+  // ];
 
   const clearForm = () => {
     setProblemGrade('')
@@ -62,22 +62,44 @@ const CreateProblemModal = ({isVisible, toggleCreateProblemModal, handlePostProb
     <Modal isVisible={isVisible} style={styles.container}>
       <View style={styles.modal}>
         <Text style={styles.title}>ENTER PROBLEM INFO</Text>
-        <TextInput style={styles.input} placeholder={nameError || 'ENTER NAME'} onChangeText={setProblemName} value={problemName} />
-        <RNPickerSelect
-                placeholder={{ label: 'SELECT A GRADE: V0', value: 'V0' }}
-                style={{ ...pickerSelectStyles }}
-                onValueChange={(event) => setProblemGrade(event)}
-                items={availableGrades}
-             />
+        <TextInput testID='form-name' style={styles.input} placeholder={nameError || 'ENTER NAME'} onChangeText={setProblemName} value={problemName} />
+        <View>
+          <Text>Select a Grade</Text>
+          <Picker
+            testID='picker-drop'
+            selectedValue={problemGrade}
+            style={{ height: 200, width: 100 }}
+            onValueChange={(event) => setProblemGrade(event)}
+          >
+            <Picker.Item label="V0" value="V0" />
+            <Picker.Item label="V1" value="V1" />
+            <Picker.Item label="V2" value="V2" />
+            <Picker.Item label="V3" value="V3" />
+            <Picker.Item label="V4" value="V4" />
+            <Picker.Item label="V5" value="V5" />
+            <Picker.Item label="V6" value="V6" />
+            <Picker.Item label="V7" value="V7" />
+            <Picker.Item label="V8" value="V8" />
+            <Picker.Item label="V9" value="V9" />
+            <Picker.Item label="V10" value="V10" />
+            <Picker.Item label="V11" value="V11" />
+            <Picker.Item label="V12" value="V12" />
+            <Picker.Item label="V13" value="V13" />
+            <Picker.Item label="V14" value="V14" />
+            <Picker.Item label="V15" value="V15" />
+            <Picker.Item label="V16" value="V16" />
+          </Picker>
+        </View>
         <View style={styles.buttonContainer}>
-          <Button color={'#2A6620'} title='SAVE' onPress={handleSave} />
-          <Button 
-              color={'#2A6620'} 
-              title="CLOSE" 
-              onPress={() => {
-                toggleCreateProblemModal();
-                clearForm();
-          }} />
+          <Button testID="save-save-button" color={'#2A6620'} title='SAVE' onPress={handleSave} />
+          <Button
+            testID="save-close-button"
+            color={'#2A6620'}
+            title="CLOSE"
+            onPress={() => {
+              toggleCreateProblemModal();
+              clearForm();
+            }} />
         </View>
       </View>
     </Modal>
@@ -129,7 +151,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     alignItems: "center",
     justifyContent: "center",
-    padding:10,
+    padding: 10,
     paddingTop: 30,
     paddingBottom: 30,
     borderRadius: 25,
@@ -146,7 +168,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     alignSelf: "left",
     marginTop: 6
-  },  
+  },
   vectorContainer: {
     alignSelf: "left",
   },
@@ -158,17 +180,17 @@ const styles = StyleSheet.create({
   },
 });
 
-const pickerSelectStyles = StyleSheet.create({
-  inputIOS: {
-      paddingTop: 10,
-      paddingHorizontal: 10,
-      paddingBottom: 10,
-      borderWidth: 1,
-      borderColor: '#bbcfb8',
-      borderRadius: 4,
-      backgroundColor: 'white',
-      color: 'black',
-      width: '90%',
-      alignSelf: 'center'
-  },
-}); 
+// const itemStyle = StyleSheet.create({
+//   inputIOS: {
+//     paddingTop: 10,
+//     paddingHorizontal: 10,
+//     paddingBottom: 10,
+//     borderWidth: 1,
+//     borderColor: '#bbcfb8',
+//     borderRadius: 4,
+//     backgroundColor: 'white',
+//     color: 'black',
+//     width: '90%',
+//     // alignSelf: 'center'
+//   },
+// }); 
