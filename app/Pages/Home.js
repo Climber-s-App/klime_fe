@@ -26,7 +26,8 @@ export default function Home() {
       try {
         const data = await getUserWalls();
         const modifiedData = data.data.map((data) => ({ id: data.id, ...data.attributes }))
-        setSavedWalls(modifiedData)
+        setSavedWalls(modifiedData);
+        
       } catch (error) {
         handleNetworkErrors(error)
       }

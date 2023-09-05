@@ -89,4 +89,3 @@ export default function MenuBar({ vectorColor, handleVectorColor, handlePostProb
     </View >
   )
 }
-

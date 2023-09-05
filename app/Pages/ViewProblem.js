@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState, useContext } from "react";
-import { ImageBackground, StyleSheet, Animated, View, Text } from "react-native";
+import { ImageBackground, StyleSheet, Animated, View } from "react-native";
 import AddVectors from "../Components/AddVectors";
 import { useRoute, useNavigation } from '@react-navigation/native';
 import RouteContext from "../Components/RouteContext";
@@ -30,6 +30,7 @@ const ViewProblem = ({ route }) => {
     const { color, x, y, id } = vector;
     const vectorStyle = {
       transform: [{ translateX: x }, { translateY: y }],
+      position: 'absolute'
     };
 
     return (
@@ -40,14 +41,10 @@ const ViewProblem = ({ route }) => {
   });
 
   return (
-    <View resizeMode="cover" style={styles.image} >
-      <ImageBackground testID='view-problem' source={{ uri: newImage }} resizeMode="cover" style={styles.image} >
+    <View style={styles.image} >
+      <ImageBackground testID='view-problem' source={{ uri: newImage }} resizeMode="contain" style={styles.image} >
         {addedVectors}
       </ImageBackground>
-      <View style={styles.routeInfo}>
-        <Text testID='view-problem-name' style={styles.routeInfoText}>{route.params.name}</Text>
-        <Text testID='view-problem-grade' style={styles.routeInfoText}>{route.params.grade}</Text>
-      </View>
     </View>
   );
 }
@@ -62,7 +59,7 @@ const styles = StyleSheet.create({
     top: 0,
     position: 'relative',
     width: '100%',
-    height: "95%"
+    height: "100%"
   },
   viewContainer: {
     flex: 1,

@@ -10,7 +10,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ViewAllProblems from "./app/Pages/ViewAllProblems";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { postProblem } from "./app/Components/apiCalls";
+import { postProblem, getAllProblems } from "./app/Components/apiCalls";
 import Toast  from 'react-native-toast-message';
 
 export default function App() {
@@ -20,6 +20,7 @@ export default function App() {
   const [wallInfo, setWallInfo] = useState();
   const [newVectors, setNewVectors] = useState([]);
   const [networkErrors, setNetworkErrors] = useState(null)
+  const [problems, setSavedProblems] = useState([])
 
   const handleNetworkErrors = (error) => {
     setNetworkErrors(error.message);
@@ -59,11 +60,15 @@ export default function App() {
       const newProblem = {
         "name": problemName,
         "vectors": newVectors,
-        "wall_id": wallInfo.id,
-        "grade": grade
+        "wall": wallInfo.id,
+        "grade": grade || 'V0'
       }
       await postProblem(newProblem, wallInfo.id);
       showToast(newProblem.name)
+      const data = await getAllProblems(wallInfo.id);
+      const modifiedData = data.data.map((data) => ({ id: data.id, ...data.attributes }));
+      setSavedProblems(modifiedData);
+
     } catch (error) {
       handleNetworkErrors(error.message)
       showErrorToast(error.message)
@@ -73,7 +78,7 @@ export default function App() {
   return (
     <GestureHandlerRootView style={{flex: 1}}>
     <RouteContext.Provider
-      value={{ currentRoute, setCurrentRoute, vectorColor, wallInfo, setWallInfo, newVectors, setNewVectors, networkErrors, handleNetworkErrors }}
+      value={{ currentRoute, setCurrentRoute, vectorColor, wallInfo, setWallInfo, newVectors, setNewVectors, networkErrors, handleNetworkErrors, problems, setSavedProblems }}
     >
       <NavigationContainer
         style={{ ...styles.container, ...styles.androidSafeArea }}

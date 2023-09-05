@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 export default function SavedWalls({ savedWalls }) {
   
   const userWalls = savedWalls.map((wall) => {
-    const { id, title, photo_url } = wall;
+    const { id, name, photo_url } = wall;
     const navigation = useNavigation();
 
     return (
@@ -19,7 +19,7 @@ export default function SavedWalls({ savedWalls }) {
             source={{ uri: photo_url }}
             style={styles.image}
           />
-          <Text testID='wall-text' style={styles.text}>{title}</Text>
+          <Text testID='wall-text' style={styles.text}>{name}</Text>
         </View>
       </Pressable>
     );

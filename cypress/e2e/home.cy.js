@@ -1,5 +1,5 @@
 beforeEach(() => {
-  cy.intercept("GET", 'https://23065c27-5c81-4a37-9fb7-59f7742c76cb.mock.pstmn.io/api/v0/users/1/walls', {
+  cy.intercept("GET", 'https://klime-be.onrender.com/api/v0/users/1/walls', {
     statusCode: 200,
     fixture: "walls-fixture.json"
   }).as('walls')
