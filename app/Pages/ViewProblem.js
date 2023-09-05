@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState, useContext } from "react";
-import { ImageBackground, StyleSheet, Animated, View, Text } from "react-native";
+import { ImageBackground, StyleSheet, Animated, View } from "react-native";
 import AddVectors from "../Components/AddVectors";
 import { useRoute, useNavigation } from '@react-navigation/native';
 import RouteContext from "../Components/RouteContext";
