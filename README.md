@@ -10,7 +10,10 @@
 ## Installation
 These instructions will help you set up and run the Klime app on your iOS device or simulator.
 
-**Choice 1:** Using your iOS device to visit our deployed site **[TO DO: add hyperlink]**, or scan this QR code **[TO DO: add QR code]**
+**Choice 1:** Using your iOS device, to visit our deployed site. Download [Expo Go](https://apps.apple.com/ca/app/expo-go/id982107779) and then scan this QR code after making an account with them
+
+![image](https://github.com/Climber-s-App/klime_fe/assets/123283073/e34dc514-4e9f-4bbc-ad58-7b8555e7c16f)
+
 
 **Choice 2:** Install Klime on your local machine. Before you begin, ensure you have the following tools and dependencies installed:
 
