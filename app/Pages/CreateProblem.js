@@ -69,7 +69,7 @@ const CreateProblem = () => {
         <View style={{ height: "100%", width: "100%" }}>
           <AlertBox alertVisible={alertVisible} setAlertVisible={setAlertVisible} deleteVector={deleteVector} targetId={targetId} />
           <Image
-            source={{ uri: wallInfo.image }}
+            source={{ uri: wallInfo ? wallInfo.image : require('../assets/stockImages/climbingWall1.jpeg') }}
             resizeMode="contain"
             style={styles.image}
           />

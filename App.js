@@ -8,7 +8,7 @@ import MenuBar from "./app/Components/MenuBar";
 import RouteContext from "./app/Components/RouteContext";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import ViewAllProblems from "../klime_fe/app/Pages/ViewAllProblems";
+import ViewAllProblems from "./app/Pages/ViewAllProblems";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { postProblem, getAllProblems } from "./app/Components/apiCalls";
 import Toast  from 'react-native-toast-message';
